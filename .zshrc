@@ -54,6 +54,7 @@ alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
 alias ran='ranger'
 alias fzf='fzf --preview="head -$LINES {}"'
 alias :q='exit'
+alias sus='suspend.sh'
 
 # DEFINE FUNCTIONS
 combine_search(){
@@ -75,47 +76,30 @@ vsearch(){
 
 source ~/git_prompt_status.sh
 
-source ~/.zsh-async/async.zsh
-
-function prompt_time() {
-	sleep 1
-} 
-
-function completion_cb() {
-	# P_TIME=$(date +%H:%M:%S)
-	# PROMPT="%F{blue}%1~%f %F{yellow}$P_TIME%f %F{green}»%f "
-	zle reset-prompt
-}
-
-async init
-async_start_worker prompt_time_worker -n
-async_register_callback prompt_time_worker completion_cb
-async_job prompt_time_worker prompt_time
-
-TMOUT=1
-TRAPALRM() {
-	async_job prompt_time_worker prompt_time
- }
+# source fancy_prompt.sh
 
 precmd() {
-	P_TIME=$(date +%H:%M:%S)
-	# check for git repo
 	if $(git_repo); then
-		# Prompt for git repos
 		PROMPT="%F{yellow}$(git_current_branch)%f%F{red}∷%f%F{blue}%1~(%f$(git_prompt_status)%F{blue})%f %F{green}»%f "
 		RPROMPT="%F{red}%?%f %F{yellow}%T%f"
 	else
-		PROMPT="%F{blue}%1~%f %F{yellow}$P_TIME%f %F{green}»%f "
+		PROMPT="%F{blue}%1~%f %F{yellow}%T%f %F{green}»%f "
 		RPROMPT="%(?.%F{green}%?%f.%F{red}%?%f"
 	fi
 }
 
-# the callback function has to update the prompt, because the worker function runs in a pseudoshell
-# zle and prompt= commands for some reason always together, probably because my precmd forks up assignment
-# timing is off, because async isn't punctual!
-#
-# Now it only makes one friggin async call, where'd the others go? WHAT?
-# OK, so TMOUT needs to be short enough, for this mess to work... IDK
-#
-# And for some reason I have to assign prompt and zle update in the same function, AND it has to be IN the function.
-# otherwise it just doesn't work...
+
+alias g='git'
+alias ga='git add'
+alias gp='git push'
+alias gc='git commit'
+alias gm='git commit -m'
+alias gpu='git pull'
+alias gf='git fetch'
+alias gs='git status'
+alias cr='cargo run'
+alias cb='cargo build'
+alias cdoc='cargo doc'
+
+alias dp='PROMPT="%F{cyan}» "'	# this one doesn't work with precmd
+alias qdp='source ~/.zshrc'
