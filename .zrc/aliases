@@ -1,0 +1,53 @@
+# DEFINE ALIASES
+
+# General Aliases
+alias ranger='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"; ls;'
+alias wtouch='wacom-toggle_touch.sh'
+alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
+alias fzf='fzf --multi --preview="highlight --force -O ansi {} | head -$LINES --silent"'
+alias chmodx='chmod +x'
+alias ran='ranger'
+alias :q='exit'
+alias asciib='asciib.sh'
+alias sus='suspend.sh'
+
+# Search Function
+alias s='search'
+alias cds='cd_search'
+alias vims='vim_search'
+alias sless='less_search'
+alias cats='content_search_exact'
+alias cs='select_and_search'
+
+# Git
+alias g='git'
+alias ga='git add'
+alias gp='git push'
+alias gc='git commit'
+alias gm='git commit -m'
+alias gpu='git pull'
+alias gf='git fetch'
+alias gs='git status'
+alias gl='git log'
+
+# Cargo
+alias cr='cargo run'
+alias cb='cargo build'
+alias cdoc='cargo doc'
+
+# Tmux
+alias ta='tmux a -t'
+
+# Linux Specific
+if [ $(uname -s) = "Linux" ]; then
+
+	alias ls='ls --color -F'
+
+fi
+
+# Mac Specific
+if [ $(uname -s) = "Darwin" ]; then
+
+	alias ls='ls -G -L'
+
+fi

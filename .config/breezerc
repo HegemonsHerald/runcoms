@@ -1,0 +1,13 @@
+[Common]
+ShadowStrength=89
+
+[Style]
+MenuOpacity=70
+
+[Windeco Exception 0]
+BorderSize=1
+Enabled=false
+ExceptionPattern=Firefox
+ExceptionType=0
+HideTitleBar=true
+Mask=0

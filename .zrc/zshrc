@@ -1,0 +1,52 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd extendedglob nomatch
+# End of lines configured by zsh-newuser-install
+
+# The completion doesn't want to work on the mac and I can't be asked to fix it
+if [ $(uname -s) = "Linux" ]
+then
+	# The following lines were added by compinstall
+	zstyle :compinstall filename '/home/admin/.zshrc'
+
+	autoload -Uz compinit
+	compinit
+	# End of lines added by compinstall
+fi
+
+# == MY OWN CHANGES ===================================================
+
+# Zsh settings
+# make completion be case-insensitive
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+#  zstyle defines lookup styles for zsh.
+#  These are context-related and change the behaviour of shell
+#  functions, that look, which styles are defined.
+#  The completion system uses styles for its completion behaviour and
+#  output.
+#  The context for the compsys is ':completion:', ':completion:*'
+#  matches all other fields of the zstyle commands, for you can get
+#  awfully specific using those…
+#  The 'matcher-list' is a set of style-rules applied to all completers
+#  whenever a completion takes place. 'm:{a-z}={A-Z}' matches lowercase
+#  letters to their uppercase counterparts, when the lowercase letters
+#  don't return a match. '+m:{A-Z}={a-z}' does the same in the other
+#  direction, the '+' adds this rule to the previous instead of
+#  overwriting it.
+
+# Set default editor to Vim
+EDITOR=/usr/bin/vim
+VISUAL=/usr/bin/vim
+
+# Make use Vi-like keybindings
+set -o vi
+
+# Ranger Config
+RANGER_LOAD_DEFAULT_RC=false
+
+# Source other things
+source ~/.zrc/aliases
+source ~/.zrc/prompt
+source ~/.zrc/functions

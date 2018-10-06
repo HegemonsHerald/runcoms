@@ -1,0 +1,14 @@
+# DEFINE PROMPTS
+
+# Work User Prompt
+if [ $(whoami) = "work" ]; then
+	PROMPT="%F{blue}%1~%f %F{yellow}%T%f %F{green}»%f "
+	RPROMPT="%(?.%F{green}%?%f.%F{red}%?%f"
+fi
+
+# Admin User Prompt
+# Root User Prompt
+
+# Aliases
+alias dp='PROMPT="%F{blue}» %f"'
+alias qdp='source ~/.zshrc'

@@ -1,0 +1,178 @@
+[colors]
+background	= #cc171717
+;background	= #00ffffff
+foreground	= #f8f8f8
+blue		= #16b1fb
+blue_a		= #3316b1fb
+yellow		= #ffa800
+yellow_a	= #33ffa800
+red		= #d81765
+red_a		= #33d81765
+green		= #97d01a
+green_a		= #3397d01a
+grey		= #38252c
+silver		= #ebebeb
+silver_a	= #33ebebeb
+
+[bar/base]
+monitor-strict	= true
+
+bottom		= true
+
+width		= 100%
+height		= 40px
+
+background	= ${colors.background}
+foreground	= ${colors.foreground}
+
+line-size	= 2
+
+border-top-size	= 2
+border-color	= ${colors.yellow}
+
+;override-redirect	= true
+margin-top	= 41
+padding-right	= 1
+
+font-0		= Hack:size=12;3
+font-1		= Hack:size=12;1
+font-2		= MaterialIcons:size=16;6
+font-3		= Hack:size=12;2
+
+modules-left	= i3_workspaces
+
+separator	= │
+
+module-margin	= 1
+
+[bar/left]
+inherit		= bar/base
+monitor		= HDMI-0
+modules-right	= date_small
+padding-left	= 1
+
+[bar/right]
+inherit		= bar/base
+monitor		= DP-2
+modules-right	= date_small
+
+[bar/middle]
+inherit		= bar/base
+monitor		= DP-0
+modules-right	= wlan eth memory cpu volume xkeyboard battery date
+tray-position	= right
+
+[module/i3_workspaces]
+type		= internal/i3
+pin-workspaces	= true
+strip-wsnumbers	= true
+
+label-focused			= %name%
+label-focused-underline		= ${colors.blue}
+label-focused-background	= ${colors.blue_a}
+label-focused-padding		= 1
+
+label-unfocused		= %name%
+label-unfocused-padding	= 1
+
+label-urgent		= %name%
+label-urgent-background	= ${colors.red_a}
+label-urgent-padding	= 1
+
+label-visible		= %name%
+label-visible-padding	= 1
+
+label-mode		= %mode%
+label-mode-underline	= ${colors.green}
+label-mode-background	= ${colors.green_a}
+label-mode-padding	= 1
+
+[module/volume]
+type		= internal/alsa
+
+master-soundcard	= default
+speaker-soundcard	= default
+headphone-soundcard	= default
+
+format-volume	= <ramp-volume> <label-volume>
+format-muted	= <label-muted>
+
+label-volume	= %percentage%%
+label-muted	= %{T3}
+ramp-volume-0	= %{T3}
+ramp-volume-1	= %{T3}
+ramp-volume-2	= %{T3}
+
+[module/xkeyboard]
+type		= internal/xkeyboard
+blacklist-0	= scroll lock
+
+[module/memory]
+type		= internal/memory
+label		= RAM %gb_used%
+
+[module/cpu]
+type		= internal/cpu
+label		= CPU %percentage%%
+
+[module/wlan]
+type		= internal/network
+interface	= wls1
+
+;label-connected = %{u#ff2491}%essid%%{u#00ffffff}  %{u#16b1fb}%{T2}▼%{T-} %downspeed:5%%{u#00ffffff}  %{u#ffa800}%{T2}▲%{T-} %upspeed:5%
+label-connected = %essid%  %{F#16b1fb}%{T2}▼%{T-} %downspeed:5%%{F#00ffffff}  %{F#ffa800}%{T2}▲%{T-} %upspeed:5%
+
+label-disconnected		= %{T3}%{T-}
+label-disconnected-background	= ${colors.red_a}
+label-disconnected-underline	= ${colors.red}
+label-disconnected-padding	= 1
+
+[module/eth]
+type		= internal/network
+interface	= enp60s0
+
+;label-connected = %{u#ff2491}Eth: %essid%%{u#00ffffff}  %{u#16b1fb}%{T2}▼%{T-} %downspeed:5%%{u#00ffffff}  %{u#ffa800}%{T2}▲%{T-} %upspeed:5%
+label-connected = Eth: %essid%  %{F#16b1fb}%{T2}▼%{T-} %downspeed:5%%{F#00ffffff}  %{F#ffa800}%{T2}▲%{T-} %upspeed:5%
+
+
+[module/battery]
+type		= internal/battery
+battery		= BAT0
+adapter		= AC0
+
+full-at		= 93
+
+label-full		= %{T3}%{T-} 100%
+;label-full-background	= ${colors.green_a}
+;label-full-underline	= ${colors.green}
+label-full-foreground	= ${colors.green}
+
+label-charging			= %{T3}%{T-} %percentage%% %time%
+label-charging-background	= ${colors.green_a}
+label-charging-underline	= ${colors.green}
+label-charging-padding		= 1
+
+label-discharging		= %{T3}%{T-} %percentage%% %time%
+label-discharging-background	= ${colors.yellow_a}
+label-discharging-underline	= ${colors.yellow}
+label-discharging-padding	= 1
+
+[module/date]
+type		= internal/date
+interval	= 1.0
+date		= %y-%m-%d%
+time		= %H%{T4}:%{T-}%M%{T4}:%{T-}%S
+
+;label		= %{u#f8f8f8}%time%%{u#00ffffff} %{u#99f8f8f8}%{F#99f8f8f8}%date%
+label		= %time% %{F#99f8f8f8}%date%
+label-underline	=
+
+[module/date_small]
+type		= internal/date
+interval	= 1.0
+time		= %H%{T4}:%{T-}%M%{T4}:%{T-}%S
+
+;label		= %{u#f8f8f8}%time%%{u#00ffffff}
+label		= %time%
+label-underline	=
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xbel>
+<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info" xmlns:kdepriv="http://www.kde.org/kdepriv" dbusName="konsole">
+ <bookmark href="file:///home/work/Videos/actors/dolly/Mormon%20Girlz%20-%20Zoe,%20Allison,%20Dolly">
+  <title>Mormon Girlz - Zoe, Allison, Dolly</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="utilities-terminal"/>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/work/Videos/actors/dolly/Mormon%20Girlz%20-%20Zoe,%20Allison,%20Dolly">
+  <title>Mormon Girlz - Zoe, Allison, Dolly</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="utilities-terminal"/>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/work/Videos/actors/dolly/Mormon%20Girlz%20-%20Zoe,%20Allison,%20Dolly">
+  <title>Mormon Girlz - Zoe, Allison, Dolly</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="utilities-terminal"/>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/work/Documents/notes/code/arch">
+  <title>arch</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="utilities-terminal"/>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///home/work/Documents/notes/code/vim">
+  <title>vim</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="utilities-terminal"/>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///mnt/D0846086846070C0">
+  <title>D0846086846070C0</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="utilities-terminal"/>
+   </metadata>
+  </info>
+ </bookmark>
+</xbel>

@@ -1,0 +1,50 @@
+[options]
+font = Hack 20
+
+[colors]
+foreground          = #f8f8f8
+foreground_bold     = #f8f8f8
+cursor              = #f5f4f1
+cursor_foreground   = #272822
+# background          = #171717
+background          = rgba(23,23,23,0.8)
+
+# 16 color space
+
+# Black, Gray, Silver, White
+color0  = #171717
+color8  = #38252c
+color7  = #ebebeb
+color15 = #f8f8f8
+
+# Red
+color1  = #d81765
+color9  = #ff0000
+
+# Green
+color2  = #97d01a
+color10 = #76b639
+
+# Yellow
+color3  = #ffa800
+color11 = #e1a126
+
+# Blue
+color4  = #16b1fb
+color12 = #289cd6
+
+# Magenta
+color5  = #ff2491
+color13 = #ff2491
+
+# Cyan
+color6  = #0fdcb6
+color14 = #0a9b81
+
+# Extra colors
+color16 = #d81765
+color17 = #97d01a
+color18 = #ffa800
+color19 = #16b1fb
+color20 = #ff2491
+color21 = #0fdcb6
