@@ -1,6 +1,12 @@
+; My Polybar Setup
+; Note: sometimes commented duplicate settings are provided; those are alternate theme settings, that also look nice!
+
+
+; COLOR PALETTE DEFINITION
+
 [colors]
 background	= #cc171717
-;background	= #00ffffff
+;background	= #00ffffff	; completely transparent, looks kinda neat with compton kawase blur
 foreground	= #f8f8f8
 blue		= #16b1fb
 blue_a		= #3316b1fb
@@ -13,6 +19,9 @@ green_a		= #3397d01a
 grey		= #38252c
 silver		= #ebebeb
 silver_a	= #33ebebeb
+
+
+; BAR DEFINITION
 
 [bar/base]
 monitor-strict	= true
@@ -30,7 +39,6 @@ line-size	= 2
 border-top-size	= 2
 border-color	= ${colors.yellow}
 
-;override-redirect	= true
 margin-top	= 41
 padding-right	= 1
 
@@ -45,22 +53,28 @@ separator	= │
 
 module-margin	= 1
 
+
 [bar/left]
 inherit		= bar/base
 monitor		= HDMI-0
 modules-right	= date_small
 padding-left	= 1
 
+
 [bar/right]
 inherit		= bar/base
 monitor		= DP-2
 modules-right	= date_small
+
 
 [bar/middle]
 inherit		= bar/base
 monitor		= DP-0
 modules-right	= wlan eth memory cpu volume xkeyboard battery date
 tray-position	= right
+
+
+; MODULE DEFINITION
 
 [module/i3_workspaces]
 type		= internal/i3
@@ -87,6 +101,7 @@ label-mode-underline	= ${colors.green}
 label-mode-background	= ${colors.green_a}
 label-mode-padding	= 1
 
+
 [module/volume]
 type		= internal/alsa
 
@@ -103,17 +118,21 @@ ramp-volume-0	= %{T3}
 ramp-volume-1	= %{T3}
 ramp-volume-2	= %{T3}
 
+
 [module/xkeyboard]
 type		= internal/xkeyboard
 blacklist-0	= scroll lock
+
 
 [module/memory]
 type		= internal/memory
 label		= RAM %gb_used%
 
+
 [module/cpu]
 type		= internal/cpu
 label		= CPU %percentage%%
+
 
 [module/wlan]
 type		= internal/network
@@ -126,6 +145,7 @@ label-disconnected		= %{T3}%{T-}
 label-disconnected-background	= ${colors.red_a}
 label-disconnected-underline	= ${colors.red}
 label-disconnected-padding	= 1
+
 
 [module/eth]
 type		= internal/network
@@ -157,6 +177,7 @@ label-discharging-background	= ${colors.yellow_a}
 label-discharging-underline	= ${colors.yellow}
 label-discharging-padding	= 1
 
+
 [module/date]
 type		= internal/date
 interval	= 1.0
@@ -166,6 +187,7 @@ time		= %H%{T4}:%{T-}%M%{T4}:%{T-}%S
 ;label		= %{u#f8f8f8}%time%%{u#00ffffff} %{u#99f8f8f8}%{F#99f8f8f8}%date%
 label		= %time% %{F#99f8f8f8}%date%
 label-underline	=
+
 
 [module/date_small]
 type		= internal/date
