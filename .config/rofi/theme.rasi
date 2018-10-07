@@ -1,0 +1,55 @@
+* {
+  // Colors
+  main-bg:		#2f343f85;
+  bg:			transparent;
+  fg:			#f3f4f5;
+  hfg:			#9575cd;
+  fontEntry:		"System San Francisco Display 80";
+  fontElement:		"System San Francisco Display 50";
+
+  // Global Config
+  background-color:	@main-bg;
+  text-color:		@fg;
+  border-color:		@fg;
+  font:			"Hack 12";
+}
+
+window {
+  anchor:	center;
+  location:	center;
+  width:	100%;
+  height:	100%;
+  children:	[ searchbox ];
+}
+
+searchbox {
+  orientation:		vertical;
+  margin:		25%;
+  children:		[ entry, listview ];
+  background-color: 	@bg;
+}
+
+listview {
+  background-color:	@bg;
+  expand:		false;
+  lines:		3;
+}
+
+entry {
+  height:		80em;
+  padding:		2% 0;
+  background-color:	@bg;
+  font:			@fontEntry;
+  expand:		false;
+}
+
+element {
+  padding: 		20px 0px;
+  background-color:	@bg;
+  font:			@fontElement;
+}
+
+element selected {
+  text-color:		@hfg;
+}
+
