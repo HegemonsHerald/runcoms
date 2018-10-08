@@ -41,13 +41,13 @@ alias ta='tmux a -t'
 # Linux Specific
 if [ $(uname -s) = "Linux" ]; then
 
-	alias ls='ls --color -F'
+	alias ls='ls --color -F -h'
 
 fi
 
 # Mac Specific
 if [ $(uname -s) = "Darwin" ]; then
 
-	alias ls='ls -G -L'
+	alias ls='ls -G -L -h'
 
 fi
