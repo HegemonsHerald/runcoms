@@ -181,7 +181,7 @@ label-discharging-padding	= 1
 [module/date]
 type		= internal/date
 interval	= 1.0
-date		= %y-%m-%d%
+date		= %Y-%m-%d%
 time		= %H%{T4}:%{T-}%M%{T4}:%{T-}%S
 
 ;label		= %{u#f8f8f8}%time%%{u#00ffffff} %{u#99f8f8f8}%{F#99f8f8f8}%date%
