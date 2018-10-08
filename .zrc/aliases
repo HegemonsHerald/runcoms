@@ -3,7 +3,7 @@
 # General Aliases
 alias ranger='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"; ls;'
 alias wtouch='wacom-toggle_touch.sh'
-alias youtube-dl="youtube-dl -o '%(title)s.%(ext)s'"
+alias youtube-dl="youtube-dl --config-location '~/.config/youtube-dl.conf'"
 alias fzf='fzf --multi --preview="highlight --force -O ansi {} | head -$LINES --silent"'
 alias chmodx='chmod +x'
 alias ran='ranger'
