@@ -107,3 +107,12 @@ command! -nargs=1 FF call FzyCommand(<q-args>, "e", 1) | normal /\c<args>/<CR>gg
 
 " search only for filenames
 command! -nargs=1 Ff call FzyCommand(<q-args>, "e", 0) | normal /\c<args>/<CR>ggn
+
+
+" For creating bindings with custom Mapleaders beyond the regular mapleader:
+" define a custom mapleader
+let mapleader2="whatever"
+
+" :execute executes its argument-string as an ex command, since its arg is a string you can use variable interpolation to change up your mapleaders in it!
+" define your mappings like this:
+execute "nnoremap ".mapleader2."O Owheeee I can do mapleader!<ESC>"
