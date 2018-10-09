@@ -109,6 +109,14 @@ command! -nargs=1 FF call FzyCommand(<q-args>, "e", 1) | normal /\c<args>/<CR>gg
 command! -nargs=1 Ff call FzyCommand(<q-args>, "e", 0) | normal /\c<args>/<CR>ggn
 
 
+function! ToggleList()
+  if &list == 0
+    set list
+  else
+    set nolist
+  endif
+endfunction
+
 " For creating bindings with custom Mapleaders beyond the regular mapleader:
 " define a custom mapleader
 let mapleader2="whatever"
