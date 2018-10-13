@@ -2,10 +2,11 @@
 
 # If no args are provided, print a help
 if [ "$1" = "" ]; then
-	printf "Usage: $0                              show this help
-Usage: $0 list                         list available monitors and tablets
-Usage: $0 <tablet ID> <monitor name>   map the wacom tablet with <tablet ID> to the monitor with <monitor name>
-Usage: $0 <tablet ID> [all]            map the wacom tablet with <tablet ID> to all monitors (assuming your monitors are next to each other and not overlapping)\n\n"
+	printf "Usage: $0                                          show this help
+Usage: $0 list                                     list available monitors and tablets
+Usage: $0 <tablet ID> <monitor name>               map the wacom tablet with <tablet ID> to the monitor with <monitor name>
+Usage: $0 <tablet ID> [all]                        map the wacom tablet with <tablet ID> to all monitors (assuming your monitors are next to each other and not overlapping)
+Usage: $0 <tablet ID> [a[bsolute] | r[elative]]     change the mode of the tablet with <tablet ID> to a[bsolute] or r[elative]\n\n"
 
 	# For convenience also output the list command's output
 	/bin/bash $0 list
@@ -79,12 +80,22 @@ then
 	xsetwacom set "$1" maptooutput "${width}x${height}+0+0"
 fi	
 
+# If the user wants to change tablet mode, do that!
+if [ "$2" = "r" ] || [ "$2" = "relative" ]
+then
+	xsetwacom set "$1" mode relative
+elif [ "$2" = "a" ] || [ "$2" = "absolute" ]
+then
+	xsetwacom set "$1" mode absolute
+fi
+
 # I think the way this script executes is actually quite clever:
 # 
 # 1. check for no args at all, if so exit
 # 2. check for exactly 'list' as an arg, if so exit
 # 3. loop over monitors, if $2 has been provided, it'll match against one of them, if so exit
 # 4. if that didn't work, either the monitor has been mispelled or $2 is empty or equal to 'all', if so map tablet to entire screen and exit
+# 5. if it's non of those, it's probably mode change, check for that and if so exit
 # 
 # The clever thing here is, that by putting the checks in the correct order I never have to do a general check, that $1 or $2 or both are provided and equal to something,
 # that's needed in the current operation. By moving through the checks like this, all possible cases are automatically handled, that's really neat.
