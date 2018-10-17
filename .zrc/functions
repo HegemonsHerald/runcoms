@@ -17,7 +17,7 @@ vim_search(){
 
 # cd to parent directory of search-result
 cd_search(){
-	cd $(dirname $(search $1))
+	cd $(dirname "./$(search $1)")
 }
 
 # open search-result in less
