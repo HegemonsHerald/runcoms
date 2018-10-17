@@ -1,37 +1,9 @@
 # DEFINE FUNCTIONS
 
-# combines content search via ack and filename search via find
+# combines content search via ag and file search via fd
 combine_search(){
-	#OLD_IFS=$IFS
-	#IFS="\n"
-
-	# find all files, that have $1 in their filename
-	# remove the first two bytes from each line of output (that's the './')
-	# files=$(find . -type f -ipath "./**/*$1*" -print | cut -b 3-)
-	# files=$(find . -type f | ag -i --nocolor $1 | cut -b 3-)
-	# files=$(fd -Ht f -c 'never' $1)
-
-	# find all files, that contain $1
-	# contents=$(ack -il $1 ./)
-	# contents=$(grep -rl ./ -e "$1" | cut -b 3-)
-	# contents=$(ag -il $1 ./)
-
-	# put the results together, remove duplicate listings and put them in alphabetical order
-	# echo -e "$files\n$contents" | sed '/^\s*$/d' | sort -u
-	# echo -e "$files\n$contents" | sort -u
-
-	#IFS=$OLD_IFS
-	
 	printf "$(fd -Ht f -c 'never' $1)\n$(ag -il --nocolor $1 ./)\n" | sort -u
 }
-
-# This should be rewritten to have safe guards against large numbers of files in grep
-# If the number of files to be searched is to high, both cut of the recursion at some depth and exclude
-# grep from the search, just use find. Also, make it so certain folders are excluded by default from grep
-# search.
-# Basically: vet the grep input by checking how many files are in it and how deep its dir-structure goes,
-# and exclude a bunch of standard dotdirs from the search entirely (and e.g. the target dir of cargo and .git/
-# don't need to be grepped either, just use find on them)
 
 # pipe combine_search's output into fzf
 search(){
@@ -68,5 +40,3 @@ content_search_exact(){
 select_and_search(){
 	content_search_exact $(search $1)
 }
-
-
