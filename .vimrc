@@ -78,25 +78,9 @@ set guicursor=
 
 
 let g:fzf_layout = { 'down':'~40%' }
-function! FzyCommand(search, vim_command, search_contents)
-  " search for filenames
-  let finder = "find . -type f | ag -i --nocolor " . shellescape(a:search) . " | cut -b 3-"
-  "let finder = "fd " . shellescape(a:search)
-
-  " maybe search in files using ag
-  if a:search_contents == 1
-    let contents = "ag -il --nocolor " . shellescape(a:search) . " ./"
-  else
-    " or don't
-    let contents = ''
-  endif
-  " note: I tried using ripgrep (rg) to search through the files (rg is faster
-  " than ag), but rg and grep both have an input files limit, so I can't use
-  " them
-
-  " to provide fuzzy selection menu...
-  " ... first create a sensible list from the found output
-  let results = uniq(sort(split(system(finder) . system(contents))))
+function! FzyCommand(search, vim_command)
+  " search for a:search in files and filenames ...
+  let results = split(system('printf "$(fd -Ht f -c never ' . shellescape(a:search) . ' )\n$(ag -il --nocolor ' . shellescape(a:search) . ' )\n" | sort -u'))
 
   " ... then pipe it into fzf and enable a preview and multi selection
   let output = fzf#run(fzf#vim#with_preview(fzf#wrap('', {'source':results, 'options':'--multi', 'sink':a:vim_command})))
@@ -104,10 +88,6 @@ endfunction
 
 " search both files and file contents
 command! -nargs=1 FF call FzyCommand(<q-args>, "e", 1) | normal /\c<args>/<CR>ggn
-
-" search only for filenames
-command! -nargs=1 Ff call FzyCommand(<q-args>, "e", 0) | normal /\c<args>/<CR>ggn
-
 
 function! ToggleList()
   if &list == 0
