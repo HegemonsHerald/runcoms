@@ -1,23 +1,13 @@
 # DEFINE FUNCTIONS
 
-# combines content search via ag and file search via fd
-combine_search(){
-	printf "$(fd -Ht f -c 'never' $1)\n$(ag -il --nocolor $1 ./)\n" | sort -u
-}
-
-# pipe combine_search's output into fzf
+# search function, that combines content search via ag and file search via fd, and lets you select via fzf
 search(){
-	combine_search $1 | fzf
+	printf "$(fd -Ht f -c 'never' $1)\n$(ag -il --nocolor $1 ./)\n" | sort -u| fzf
 }
 
 # open search-result in vim
 vim_search(){
 	vim $(search $1)
-}
-
-# cd to parent directory of search-result
-cd_search(){
-	cd $(dirname "./$(search $1)")
 }
 
 # open search-result in less
@@ -39,4 +29,30 @@ content_search_exact(){
 # select a file and search through its contents using the above functions
 select_and_search(){
 	content_search_exact $(search $1)
+}
+
+# cd to parent directory of search-result
+cd_search(){
+	target=$(dirname "./$(search $1)")
+	if [ "$target" != "" ]; then cd "$target"; fi
+	# note: if the user cancels the search, target will be empty. If you cd with no args, you'll move to ~ -- which you don't want, if you cancelled!
+}
+
+# search function, that searches for files and directories, lets you select with fzf and moves you into the parent dir of a selected file or into the selected dir
+cd_search_filename(){
+	target=$(echo -e "$(fd -Ht d -c 'never' $1 -x echo {}/)\n$(fd -Ht f -c 'never' $1)" | fzf | while read dir; do if [ $(echo $dir | sed 's/^.*\(.\)$/\1/') != '/' ]; then dirname $dir; else echo $dir; fi; done)
+	#		get matching dirs, append '/' to their ends
+	#							get matching filenames
+	#										select with fzf
+	#											read the selected;	if the selection isn't a directory, output the parent dir's name
+	#																					if it's a dir, output the dir's name
+	# lastly, cd into what's been output from this long and beautiful mess! (unless the user cancelled)
+	if [ "$target" != "" ]; then cd "$target"; fi
+}
+
+# does the exact same as cd_search_filename, only excludes filenames and ONLY searches for directories
+# this one is useful for insanely large filestructures, eg '/'
+cd_search_directory(){
+	target=$(fd -Ht d -c 'never' $1 | fzf)
+	if [ "$target" != "" ]; then cd "$target"; fi
 }
