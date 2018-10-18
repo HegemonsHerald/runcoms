@@ -2,7 +2,15 @@
 
 # search function, that combines content search via ag and file search via fd, and lets you select via fzf
 search(){
-	printf "$(fd -t f -c 'never' $1)\n$(ag -il --nocolor $1 ./)\n" | sort -u| fzf
+	# if $2 is 'a' or 'all', search hidden files and gitignore files (ag: -a means don't exclude based on extension)
+	# if $2 is 'h' or 'H', search hidden files,
+	# if $2 is 'i' or 'I', search gitignore files
+	if [ "$2" = "a" ] || [ "$2" = "all" ]; then fd_hidden='HI';	ag_hidden='--hidden'; ag_hidden2='ua'
+	elif [ "$2" = "h" ] || [ "$2" = "H" ]; then fd_hidden='H';	ag_hidden='--hidden'
+	elif [ "$2" = "i" ] || [ "$2" = "I" ]; then fd_hidden='I';	ag_hidden2='u'; fi
+
+	printf "fd -${fd_hidden}t f -c 'never' $1\nag ${ag_hidden} -${ag_hidden2}il --nocolor $1 ./\n"
+	printf "$(fd -${fd_hidden}t f -c 'never' $1)\n$(ag ${ag_hidden} -${ag_hidden2}il --nocolor $1 ./)\n" | sort -u | fzf
 }
 
 # open search-result in vim
