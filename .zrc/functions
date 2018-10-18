@@ -2,7 +2,7 @@
 
 # search function, that combines content search via ag and file search via fd, and lets you select via fzf
 search(){
-	printf "$(fd -Ht f -c 'never' $1)\n$(ag -il --nocolor $1 ./)\n" | sort -u| fzf
+	printf "$(fd -t f -c 'never' $1)\n$(ag -il --nocolor $1 ./)\n" | sort -u| fzf
 }
 
 # open search-result in vim
