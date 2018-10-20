@@ -54,12 +54,12 @@ cd_search(){
 
 # search function, that searches for files and directories, lets you select with fzf and moves you into the parent dir of a selected file or into the selected dir
 cd_search_filename(){
-	target=$(echo -e "$(fd -Ht d -c 'never' $1 -x echo {}/)\n$(fd -Ht f -c 'never' $1)" | fzf | while read dir; do if [ $(echo $dir | sed 's/^.*\(.\)$/\1/') != '/' ]; then dirname $dir; else echo $dir; fi; done)
+	target=$( (fd -Ht d -c 'never' $1 -x echo {}/; fd -Ht f -c 'never' $1) | fzf | while read dir; do if [[ ! $dir =~ '^.*/$' ]]; then dirname $dir; else echo $dir; fi; done )
 	#		get matching dirs, append '/' to their ends
-	#							get matching filenames
-	#										select with fzf
-	#											read the selected;	if the selection isn't a directory, output the parent dir's name
-	#																					if it's a dir, output the dir's name
+	#						get matching filenames
+	#									select with fzf
+	#									     read the selected; if the selection isn't a directory, output the parent dir's name
+	#																		if it's a dir, output the dir's name
 	# lastly, cd into what's been output from this long and beautiful mess! (unless the user cancelled)
 	if [ "$target" != "" ]; then cd "$target"; fi
 }
