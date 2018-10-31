@@ -99,8 +99,14 @@ endfunction
 
 " For creating bindings with custom Mapleaders beyond the regular mapleader:
 " define a custom mapleader
-let mapleader2="whatever"
+"let mapleader2="whatever"
 
 " :execute executes its argument-string as an ex command, since its arg is a string you can use variable interpolation to change up your mapleaders in it!
 " define your mappings like this:
-execute "nnoremap ".mapleader2."O Owheeee I can do mapleader!<ESC>"
+"execute "nnoremap ".mapleader2."O Owheeee I can do mapleader!<ESC>"
+
+" Note: the mapleader2 stuff above has the actual code commented out, because:
+" If a key might be the beginning of a sequence (like w for whatever) vim will
+" wait for a specified timeout, before assuming that nothing else comes. I was
+" getting that timeout, whenever I used the 'w' motion, which was very annoying.
+" See :help ttimeout for more...
