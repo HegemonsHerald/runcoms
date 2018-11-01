@@ -53,6 +53,9 @@ set ruler                       " ru, is on by default
 set listchars=tab:»∙,trail:░,   " lcs, characters for whitespace listing
 set list                        " enable whitespace listing
 
+" mappings
+nnoremap re :e <C-r>%<CR>	" reloads the current file; <C-r> to paste from a register; the % register contains the current filename
+
 " automatically save and restore views (those contain data on custom folds)
 " note: the silent! keyword suppresses error messages from these commands
 augroup AutoSaveFolds
