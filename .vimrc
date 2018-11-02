@@ -1,4 +1,4 @@
-" Vundle ===================================================================
+e Vundle ===================================================================
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -54,7 +54,10 @@ set listchars=tab:»∙,trail:░,   " lcs, characters for whitespace listing
 set list                        " enable whitespace listing
 
 " mappings
-nnoremap re :e <C-r>%<CR>	" reloads the current file; <C-r> to paste from a register; the % register contains the current filename
+nnoremap &r :e <C-r>%<CR>	" reloads the current file; <C-r> to paste from a register; the % register contains the current filename
+nnoremap &y I// <Esc>		" insert // for commenting the line
+nnoremap &u I# <Esc>		" insert # for commenting the line
+nnoremap &i ^dw			" remove comment characters
 
 " automatically save and restore views (those contain data on custom folds)
 " note: the silent! keyword suppresses error messages from these commands
