@@ -26,6 +26,7 @@ alias asciib='asciib.sh'
 alias sus='suspend.sh'
 alias ls1='ls -1'
 alias lsl='ls -al'
+alias p6='perl6'
 
 # Search Function
 alias s='search'			# search for filename and content
