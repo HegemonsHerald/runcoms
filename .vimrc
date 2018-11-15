@@ -1,4 +1,4 @@
-e Vundle ===================================================================
+" Vundle ===================================================================
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -58,6 +58,12 @@ nnoremap &r :e <C-r>%<CR>	" reloads the current file; <C-r> to paste from a regi
 nnoremap &y I// <Esc>		" insert // for commenting the line
 nnoremap &u I# <Esc>		" insert # for commenting the line
 nnoremap &i ^dw			" remove comment characters
+
+" templates
+function! CreateCFile()
+	call append(0, ["#include <stdio.h>", "#include <locale.h>", "", "int main() {", "", "	// Make unicode work", "	setlocale(0, \"\");", "", "	", "", "	return 0;", "", "}"])
+	call cursor(9, 1)
+endfunction
 
 " automatically save and restore views (those contain data on custom folds)
 " note: the silent! keyword suppresses error messages from these commands
