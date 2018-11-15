@@ -68,8 +68,9 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec termite
 bindsym $mod+t exec termite
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec cool-retro-term
+bindsym $mod+Return exec alacritty --config-file ~/.config/alacritty/alacritty.yml.NEON
+bindsym $mod+Shift+Return exec alacritty --config-file ~/.config/alacritty/alacritty.yml.TTY
+bindsym $mod+g exec cool-retro-term
 
 # kill focused window
 bindsym $mod+Shift+q kill
