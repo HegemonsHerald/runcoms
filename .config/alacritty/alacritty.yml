@@ -18,23 +18,23 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 80
-    lines: 24
+    columns: 0
+    lines: 0
 
   # Window padding (changes require restart)
   #
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 2
-    y: 2
+    x: 0
+    y: 0
 
   # Window decorations
   #
   # Values for `decorations`:
   #     - full: Borders and title bar
   #     - none: Neither borders nor title bar
-  decorations: full
+  decorations: none
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -55,7 +55,7 @@ scrolling:
   faux_multiplier: 3
 
   # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
+  auto_scroll: true
 
 # Spaces per Tab (changes require restart)
 #
@@ -86,24 +86,24 @@ tabspaces: 8
 font:
   # Normal (roman) font face
   normal:
-    family: monospace
+    family: hack
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    style: Regular
 
   # Bold font face
   bold:
-    family: monospace
+    family: hack
     # The `style` can be specified to pick a specific face.
-    #style: Bold
+    style: Bold
 
   # Italic font face
   italic:
-    family: monospace
+    family: hack
     # The `style` can be specified to pick a specific face.
-    #style: Italic
+    style: Italic
 
   # Point size
-  size: 11.0
+  size: 12.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -134,8 +134,8 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x000000'
-    foreground: '0xeaeaea'
+    background: '0x171717'
+    foreground: '0xf8f8f8'
 
     # Bright and dim foreground colors
     #
@@ -149,9 +149,9 @@ colors:
   #
   # Colors which should be used to draw the terminal cursor. If these are unset,
   # the cursor color will be the inverse of the cell color.
-  #cursor:
-  #  text: '0x000000'
-  #  cursor: '0xffffff'
+  cursor:
+    text: '0x272822'
+    cursor: '0xf5f4f1'
 
   # Normal colors
   normal:
