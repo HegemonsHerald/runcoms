@@ -41,6 +41,7 @@ alias cs='select_and_search'		# lets you select a file with search to search wit
 # Git
 alias g='git'
 alias ga='git add'
+alias ga.='git add .'
 alias gp='git push'
 alias gc='git commit'
 alias gm='git commit -m'
