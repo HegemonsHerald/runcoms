@@ -1,0 +1,34 @@
+Ahoy, I changed up my keymap!
+
+What I functionally did is this: I removed the behaviour that the Option or Alt key makes certain keys
+enter special characters. Instead it now sends the appropriate keycodes!
+
+I did this using a tool called Ukelele.app. Ukelele is a keymap editor for mac, which uses XML based
+keymaps.
+
+The keymaps you export from Ukelele you can put into the folder '~/Library/Keyboard Layouts/'. Afterwards
+you can select them from the System Preferences' Keyboard Layout selector.
+
+Using Ukelele:
+
+  Create a new keymap with: 'File > New from current Input Source'
+  This keymap will mirror, what you already got.
+  You can then press the target Key Combination, which will be highlighted in Ukelele.
+  Select the Combo by pressing on it. If you double-click you can edit the settings.
+
+  By default the Alt Combos are 'Dead Keys', they have to be enabled by setting them to an 'Output Key'.
+  When prompted for input you can put in the thing you pressed to get to the Combo's settings.
+
+  Eg: press Option-j, enable that dead key combo, set it to an output key and press Option-j again to enter,
+  what the system should send to applications.
+
+
+  It's quite helpful to change the keymap's name to something useful.
+  Use: 'Keyboard > Set Keyboard Name and Script...' to do that.
+
+
+
+
+
+Useful link: https://stackoverflow.com/questions/11876485/how-to-disable-typing-special-characters-when-pressing-option-key-in-mac-os-x
+Ukelele: https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=ukelele

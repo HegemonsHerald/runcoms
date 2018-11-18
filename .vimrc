@@ -54,15 +54,14 @@ set listchars=tab:»∙,trail:░,   " lcs, characters for whitespace listing
 set list                        " enable whitespace listing
 
 " mappings
-nnoremap <Leader>re :e <C-r>%<CR>	" reloads the current file; <C-r> to paste from a register; the % register contains the current filename
-nnoremap <Leader>j I// <Esc>		" insert // for commenting the line
-nnoremap <Leader>k I# <Esc>		" insert # for commenting the line
-nnoremap <Leader>l ^dw			" remove comment characters
+nnoremap &r :e <C-r>%<CR>	" reloads the current file; <C-r> to paste from a register; the % register contains the current filename
+nnoremap &y I// <Esc>		" insert // for commenting the line
+nnoremap &u I# <Esc>		" insert # for commenting the line
+nnoremap &i ^dw			" remove comment characters
 
 " templates
 function! CreateCFile()
-	call append(0, ["#include <stdio.h>", "#include <locale.h>", "", "int main() {", "", "	// Make unicode work", "	setlocale(0, \"\");", "", "	", "", "	return 0;", "", "}"])
-	call cursor(9, 1)
+	norm gg0i#include <stdio.h>#include <locale.h>int main() {	// Fix Unicode Supportsetlocale(0, "");return 0;}hxkkkA	
 endfunction
 
 " automatically save and restore views (those contain data on custom folds)

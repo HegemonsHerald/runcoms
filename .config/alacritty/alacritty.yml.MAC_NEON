@@ -34,7 +34,7 @@ window:
   # Values for `decorations`:
   #     - full: Borders and title bar
   #     - none: Neither borders nor title bar
-  decorations: full
+  decorations: none
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -483,3 +483,48 @@ key_bindings:
   - { key: F12,      mods: Command, chars: "\x1b[24;3~"                  }
   - { key: NumpadEnter,             chars: "\n"                          }
 
+# In the following the remaps for all the alt combinations:
+  - { key: H,        mods: Alt,       chars: "\x02\x1b\x5b\x44"          }
+  - { key: J,        mods: Alt,       chars: "\x02\x1b\x5b\x42"          }
+  - { key: K,        mods: Alt,       chars: "\x02\x1b\x5b\x41"          }
+  - { key: L,        mods: Alt,       chars: "\x02\x1b\x5b\x43"          }
+  - { key: H,        mods: Alt|Shift, chars: "\x02\x70"                  }
+  - { key: L,        mods: Alt|Shift, chars: "\x02\x6e"                  }
+
+
+# Explanation of how the escape code remapping works here!
+#
+# Alicratty sends escape sequences, when the specified keybindings are hit.
+# Those escape sequences need to be the ones, my programs expect.
+#
+# The custom config I'm doing here, is necessary cause tmux on the mac, doesn't
+# get the correct escape sequnces by default.
+#
+# What I do is this:
+#   - decide which mapping to do                                eg: the mapping for 'select pane above' in tmux
+#   - what do you want to input to the terminal?                    'Alt+k'
+#   - what does the target program want to see?                     'Ctrl+b Up'
+#   - look up the escape sequence for the keyboard shortcut         '\x02\x1b\x5b\x43'
+#     the program expects
+#   - map the chosen mapping to the expected escape sequence        'key: K, mods: Alt, chars:"\x02\x1b\x5b\x43"
+#   - enjoy.
+#
+# How to figure out the escape codes?
+#
+#   - run 'xxd -psd' → xxd is a hexdump program (outputs what it got on stdin as hex)
+#   - enter the keyboard shortcut the program expects
+#   - hit enter
+#   - for 'Ctrl+b Up Enter' (without the spaces) you'll get:
+#        021b5b410a
+#     as output
+#   - that's the scancodes in hex, that were sent to the terminal:
+#        02 -> Ctrl
+#        1b -> b
+#        5b -> Arrow key
+#        41 -> Up
+#        0a -> Enter
+#     note: arrows are part of the special keys and have prefixed codes: '5b41' is the Up-Arrow
+#   - ignore the 'Enter' code
+#   - compose the chars value for Alacritty by prefixing each hex-code with '\x' (the 'Hex-Code' escape sequence)
+#        \x02\x1b\x5b\x41
+#   - voilà
