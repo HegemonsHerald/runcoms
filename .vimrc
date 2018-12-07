@@ -40,9 +40,9 @@ highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NON
 
 
 " SET BASIC OPTIONS
-set number		                  " nu
-set relativenumber	            " rnu
-set hlsearch		                " hls; use :noh to hide highlights
+set number                      " nu
+set relativenumber              " rnu
+set hlsearch                    " hls; use :noh to hide highlights
 set incsearch                   " highlight searches incrementally
 set ignorecase                  " ignore case in search
 set smartcase                   " only match case sensitively, if search pattern contains upper case letter; needs ignorecase to function
@@ -54,6 +54,7 @@ set showcmd                     " shows commands on status-line, is on by defaul
 set ruler                       " ru, is on by default
 set listchars=tab:»∙,trail:░,   " lcs, characters for whitespace listing
 set list                        " enable whitespace listing
+set autoread                    " ar, makes vim reread a file, if it changed
 
 
 " MAPPINGS
@@ -71,7 +72,7 @@ set list                        " enable whitespace listing
 " \jsfp	java static final private
 " \jp	private in insert mode
 " \jP	public in insert mode
-" \js	System.out.println(...); in insert mode
+" \js	System.out.println(...); template abbrev in insert and wraps line in normal
 autocmd FileType java nnoremap <leader>jms OSi	public static TYPE NAME(ARGS) {}kkkfTve
 autocmd FileType java nnoremap <leader>jmsp OSi	private static TYPE NAME(ARGS {}3kfTve
 autocmd FileType java nnoremap <leader>jm OSi	public TYPE NAME(ARGS {}3kfTve
@@ -80,7 +81,8 @@ autocmd FileType java nnoremap <leader>jsf I	private static final TYPE NAME = VA
 autocmd FileType java nnoremap <leader>jsfp I	public static final TYPE NAME = VALUE;bbbbve
 autocmd FileType java inoremap <leader>jp private
 autocmd FileType java inoremap <leader>jP public
-autocmd FileType java inoremap <leader>js <Esc>ISystem.out.println(<Esc>A);<Esc>F(a
+autocmd FileType java inoremap <leader>js System.out.println(<Esc>A);<Esc>F(a
+autocmd FileType java nnoremap <leader>js ISystem.out.println(<Esc>A);<Esc>F(
 
 
 " TEMPLATES
