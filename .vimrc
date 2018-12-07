@@ -80,7 +80,7 @@ autocmd FileType java nnoremap <leader>jsf I	private static final TYPE NAME = VA
 autocmd FileType java nnoremap <leader>jsfp I	public static final TYPE NAME = VALUE;bbbbve
 autocmd FileType java inoremap <leader>jp private
 autocmd FileType java inoremap <leader>jP public
-autocmd FileType java inoremap <leader>js ISystem.out.println(<Esc>A);<Esc>F(l
+autocmd FileType java inoremap <leader>js <Esc>ISystem.out.println(<Esc>A);<Esc>F(a
 
 
 " TEMPLATES
