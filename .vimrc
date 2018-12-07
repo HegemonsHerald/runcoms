@@ -71,14 +71,16 @@ set list                        " enable whitespace listing
 " \jsfp	java static final private
 " \jp	private in insert mode
 " \jP	public in insert mode
-autocmd FileType java inoremap <leader>jms OSi	public static TYPE NAME(ARGS) {}kkkfTve
-autocmd FileType java inoremap <leader>jmsp OSi	private static TYPE NAME(ARGS {}3kfTve
-autocmd FileType java inoremap <leader>jm OSi	public TYPE NAME(ARGS {}3kfTve
-autocmd FileType java inoremap <leader>jmp OSi	private TYPE NAME(ARGS {}3kfTve
-autocmd FileType java inoremap <leader>jsf I	private static final TYPE NAME = VALUE;bbbbve
-autocmd FileType java inoremap <leader>jsfp I	public static final TYPE NAME = VALUE;bbbbve
+" \js	System.out.println(...); in insert mode
+autocmd FileType java nnoremap <leader>jms OSi	public static TYPE NAME(ARGS) {}kkkfTve
+autocmd FileType java nnoremap <leader>jmsp OSi	private static TYPE NAME(ARGS {}3kfTve
+autocmd FileType java nnoremap <leader>jm OSi	public TYPE NAME(ARGS {}3kfTve
+autocmd FileType java nnoremap <leader>jmp OSi	private TYPE NAME(ARGS {}3kfTve
+autocmd FileType java nnoremap <leader>jsf I	private static final TYPE NAME = VALUE;bbbbve
+autocmd FileType java nnoremap <leader>jsfp I	public static final TYPE NAME = VALUE;bbbbve
 autocmd FileType java inoremap <leader>jp private
 autocmd FileType java inoremap <leader>jP public
+autocmd FileType java inoremap <leader>js ISystem.out.println(<Esc>A);<Esc>F(l
 
 
 " TEMPLATES
