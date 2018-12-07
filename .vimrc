@@ -74,9 +74,9 @@ set autoread                    " ar, makes vim reread a file, if it changed
 " \jP	public in insert mode
 " \js	System.out.println(...); template abbrev in insert and wraps line in normal
 autocmd FileType java nnoremap <leader>jms OSi	public static TYPE NAME(ARGS) {}kkkfTve
-autocmd FileType java nnoremap <leader>jmsp OSi	private static TYPE NAME(ARGS {}3kfTve
-autocmd FileType java nnoremap <leader>jm OSi	public TYPE NAME(ARGS {}3kfTve
-autocmd FileType java nnoremap <leader>jmp OSi	private TYPE NAME(ARGS {}3kfTve
+autocmd FileType java nnoremap <leader>jmsp OSi	private static TYPE NAME(ARGS) {}3kfTve
+autocmd FileType java nnoremap <leader>jm OSi	public TYPE NAME(ARGS) {}3kfTve
+autocmd FileType java nnoremap <leader>jmp OSi	private TYPE NAME(ARGS) {}3kfTve
 autocmd FileType java nnoremap <leader>jsf I	private static final TYPE NAME = VALUE;bbbbve
 autocmd FileType java nnoremap <leader>jsfp I	public static final TYPE NAME = VALUE;bbbbve
 autocmd FileType java inoremap <leader>jp private
