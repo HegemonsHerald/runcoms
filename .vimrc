@@ -26,7 +26,8 @@ filetype plugin indent on    " required
 
 " Put your non-Plugin stuff after this line ================================
 
-" syntax and theming
+
+" SYNTAX AND THEMING
 syntax on
 color Monokai
 
@@ -37,7 +38,8 @@ highlight NonText ctermbg=none
 " use underlining when highlighting Search results
 highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 
-" set basic options
+
+" SET BASIC OPTIONS
 set number		                  " nu
 set relativenumber	            " rnu
 set hlsearch		                " hls; use :noh to hide highlights
@@ -53,17 +55,40 @@ set ruler                       " ru, is on by default
 set listchars=tab:»∙,trail:░,   " lcs, characters for whitespace listing
 set list                        " enable whitespace listing
 
-" mappings
-nnoremap &r :e <C-r>%<CR>	" reloads the current file; <C-r> to paste from a register; the % register contains the current filename
-nnoremap &y I// <Esc>		" insert // for commenting the line
-nnoremap &u I# <Esc>		" insert # for commenting the line
-nnoremap &i ^dw			" remove comment characters
 
-" templates
+" MAPPINGS
+"nnoremap <Leader>j I// <Esc>		" insert // for commenting the line
+"nnoremap <Leader>k I# <Esc>		" insert # for commenting the line
+"nnoremap <Leader>l ^dw			" remove comment characters
+
+" Java specific mappings
+
+" \jms	java method static
+" \jmsp	java method static private
+" \jm	java method
+" \jmp	java method private
+" \jsf	java static final
+" \jsfp	java static final private
+" \jp	private in insert mode
+" \jP	public in insert mode
+autocmd FileType java inoremap <leader>jms OSi	public static TYPE NAME(ARGS) {}kkkfTve
+autocmd FileType java inoremap <leader>jmsp OSi	private static TYPE NAME(ARGS {}3kfTve
+autocmd FileType java inoremap <leader>jm OSi	public TYPE NAME(ARGS {}3kfTve
+autocmd FileType java inoremap <leader>jmp OSi	private TYPE NAME(ARGS {}3kfTve
+autocmd FileType java inoremap <leader>jsf I	private static final TYPE NAME = VALUE;bbbbve
+autocmd FileType java inoremap <leader>jsfp I	public static final TYPE NAME = VALUE;bbbbve
+autocmd FileType java inoremap <leader>jp private
+autocmd FileType java inoremap <leader>jP public
+
+
+" TEMPLATES
 function! CreateCFile()
-	norm gg0i#include <stdio.h>#include <locale.h>int main() {	// Fix Unicode Supportsetlocale(0, "");return 0;}hxkkkA	
+	call append(0, ["#include <stdio.h>", "#include <locale.h>", "", "int main() {", "", "	// Make unicode work", "	setlocale(0, \"\");", "", "	", "", "	return 0;", "", "}"])
+	call cursor(9, 1)
 endfunction
 
+
+" FOLDING
 " automatically save and restore views (those contain data on custom folds)
 " note: the silent! keyword suppresses error messages from these commands
 augroup AutoSaveFolds
@@ -72,21 +97,8 @@ augroup AutoSaveFolds
   autocmd BufWinEnter * silent! loadview  " loadview loads the appropriate viewfile
 augroup END
 
-" change cursor shape for Insert Mode ======================================
-" for Gnome Terminal
-"if has("autocmd")
-"  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
-"  au InsertEnter,InsertChange *
-"    \ if v:insertmode == 'i' | 
-"    \   silent execute '!echo -ne "\e[5 q"' | redraw! |
-"    \ elseif v:insertmode == 'r' |
-"    \   silent execute '!echo -ne "\e[3 q"' | redraw! |
-"    \ endif
-"  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
-"endif
-"
-"set guicursor=
 
+" FZF AND SEARCH CONFIG
 
 let g:fzf_layout = { 'down':'~40%' }
 function! FzyCommand(search, vim_command)
@@ -97,27 +109,10 @@ function! FzyCommand(search, vim_command)
   let output = fzf#run(fzf#vim#with_preview(fzf#wrap('', {'source':results, 'options':'--multi', 'sink':a:vim_command})))
 endfunction
 
-" search both files and file contents
+" SEARCH BOTH FILES AND FILE CONTENTS
 command! -nargs=1 FF call FzyCommand(<q-args>, "e", 1) | normal /\c<args>/<CR>ggn
 
-function! ToggleList()
-  if &list == 0
-    set list
-  else
-    set nolist
-  endif
-endfunction
 
-" For creating bindings with custom Mapleaders beyond the regular mapleader:
-" define a custom mapleader
-"let mapleader2="whatever"
 
-" :execute executes its argument-string as an ex command, since its arg is a string you can use variable interpolation to change up your mapleaders in it!
-" define your mappings like this:
-"execute "nnoremap ".mapleader2."O Owheeee I can do mapleader!<ESC>"
 
-" Note: the mapleader2 stuff above has the actual code commented out, because:
-" If a key might be the beginning of a sequence (like w for whatever) vim will
-" wait for a specified timeout, before assuming that nothing else comes. I was
-" getting that timeout, whenever I used the 'w' motion, which was very annoying.
-" See :help ttimeout for more...
+
