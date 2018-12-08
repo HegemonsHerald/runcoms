@@ -96,8 +96,16 @@ set autoread                    " ar, makes vim reread a file, if it changed
 
 " TEMPLATES
 function! CreateCFile()
+	set paste " enable paste mode so no auto-formatting is done on the line below
 	call append(0, ["#include <stdio.h>", "#include <locale.h>", "", "int main() {", "", "	// Make unicode work", "	setlocale(0, \"\");", "", "	", "", "	return 0;", "", "}"])
 	call cursor(9, 1)
+	set nopaste
+endfunction
+
+function! CreateJavaFile()
+	set paste
+	norm gg0ipackage ;import acm.program.*;import acm.graphics.*;/** * NAME. */public class ... extends ... {	@Override	public void run() {			}}ggf;h
+	set nopaste
 endfunction
 
 
@@ -105,9 +113,9 @@ endfunction
 " automatically save and restore views (those contain data on custom folds)
 " note: the silent! keyword suppresses error messages from these commands
 augroup AutoSaveFolds
-  autocmd!
-  autocmd BufWinLeave * silent! mkview  " mkview saves the folds in a viewfile in ~/.vim/views/
-  autocmd BufWinEnter * silent! loadview  " loadview loads the appropriate viewfile
+	autocmd!
+	autocmd BufWinLeave * silent! mkview  " mkview saves the folds in a viewfile in ~/.vim/views/
+	autocmd BufWinEnter * silent! loadview  " loadview loads the appropriate viewfile
 augroup END
 
 
@@ -115,11 +123,11 @@ augroup END
 
 let g:fzf_layout = { 'down':'~40%' }
 function! FzyCommand(search, vim_command)
-  " search for a:search in files and filenames ...
-  let results = split(system('printf "$(fd -Ht f -c never ' . shellescape(a:search) . ' )\n$(ag -il --nocolor ' . shellescape(a:search) . ' )\n" | sort -u'))
+	" search for a:search in files and filenames ...
+	let results = split(system('printf "$(fd -Ht f -c never ' . shellescape(a:search) . ' )\n$(ag -il --nocolor ' . shellescape(a:search) . ' )\n" | sort -u'))
 
-  " ... then pipe it into fzf and enable a preview and multi selection
-  let output = fzf#run(fzf#vim#with_preview(fzf#wrap('', {'source':results, 'options':'--multi', 'sink':a:vim_command})))
+	" ... then pipe it into fzf and enable a preview and multi selection
+	let output = fzf#run(fzf#vim#with_preview(fzf#wrap('', {'source':results, 'options':'--multi', 'sink':a:vim_command})))
 endfunction
 
 " SEARCH BOTH FILES AND FILE CONTENTS
@@ -130,525 +138,618 @@ command! -nargs=1 FF call FzyCommand(<q-args>, "e", 1) | normal /\c<args>/<CR>gg
 
 func! JavaConstant(keywords)
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let type = input("Constant Type: ")
-  let name = input("Constant Name: ")
-  let val  = input("Constant Value: ")
+	" get input
+	let type = input("Constant Type: ")
+	let name = input("Constant Name: ")
+	let val  = input("Constant Value: ")
 
-  " set defaults
-  if type == ""
-    let type = "int"
-  endif
-  if name == ""
-    let name = "name"
-  endif
-  if val == ""
-    let val = "42"
-  endif
+	" set defaults
+	if type == ""
+		let type = "int"
+	endif
+	if name == ""
+		let name = "name"
+	endif
+	if val == ""
+		let val = "42"
+	endif
 
-  " get line of cursor
-  let line = line(".")
+	" get line of cursor
+	let line = line(".")
 
-  " concatenate the parts
-  let constant = a:keywords." static final " .type." ".toupper(name)." = ".val.";"
+	" concatenate the parts
+	let constant = a:keywords." static final " .type." ".toupper(name)." = ".val.";"
 
-  " add constant at appropriate indent level
-  call setline(line, "\t".constant)
+	" add constant at appropriate indent level
+	call setline(line, "\t".constant)
 
-  " re-enable indent
-  set nopaste
+	" re-enable indent
+	set nopaste
 
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
 endfunc
 
 func! JavaStaticFinalPrivate()
-  call JavaConstant("private")
+	call JavaConstant("private")
 endfunc!
 
 func! JavaStaticFinalPublic()
-  call JavaConstant("public")
+	call JavaConstant("public")
 endfunc!
 
 func! JavaMethod(keywords)
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let type = input("Method Type: ")
-  let name = input("Method Name: ")
-  let Args = input("Method Args: ")
+	" get input
+	let type = input("Method Type: ")
+	let name = input("Method Name: ")
+	let Args = input("Method Args: ")
 
-  " set defaults
-  if type == ""
-    let type = "void"
-  endif
-  if name == ""
-    let name = "name"
-  endif
+	" set defaults
+	if type == ""
+		let type = "void"
+	endif
+	if name == ""
+		let name = "name"
+	endif
 
-  " get line of cursor
-  let line = line(".")
+	" get line of cursor
+	let line = line(".")
 
-  " concatenate signature
-  let signature = a:keywords." ".type." ".name."(".Args.")"
+	" concatenate signature
+	let signature = a:keywords." ".type." ".name."(".Args.")"
 
-  " add signature at appropriate indent level
-  call setline(line, "\t".signature)
+	" add signature at appropriate indent level
+	call setline(line, "\t".signature)
 
-  " add code block and move cursor to middle line
-  exec "norm! A {\n\n\t\t\n\n\t}"
-  norm! 2k$
+	" add code block and move cursor to middle line
+	exec "norm! A {\n\n\t\t\n\n\t}"
+	norm 2k$
 
-  " re-enable indent
-  set nopaste
+	" re-enable indent
+	set nopaste
 
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
-  " leave in insertmode
-  " call feedkeys('A')
-  " I'm using inputsave and inputrestore now, which means the As at the end
-  " of the mappings below are run after the function call returned, If I
-  " didn't use save the As would be fed into the function call and I could
-  " use feedkeys to add letters to the typeahead buffer before the call ends
-  " to achieve the same behaviour
+	" leave in insertmode
+	" call feedkeys('A')
+	" I'm using inputsave and inputrestore now, which means the As at the end
+	" of the mappings below are run after the function call returned, If I
+	" didn't use save the As would be fed into the function call and I could
+	" use feedkeys to add letters to the typeahead buffer before the call ends
+	" to achieve the same behaviour
 
 endfunc
 
 func! JavaMethodStaticPublic()
-  call JavaMethod("public static")
+	call JavaMethod("public static")
 endfunc
 
 func! JavaMethodStaticPrivate()
-  call JavaMethod("private static")
+	call JavaMethod("private static")
 endfunc
 
 func! JavaMethodPublic()
-  call JavaMethod("public")
+	call JavaMethod("public")
 endfunc
 
 func! JavaMethodPrivate()
-  call JavaMethod("private")
+	call JavaMethod("private")
 endfunc
 
 func! JavaFor()
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let counter = input("Counter Var: ")
-  let ref_var = input("Reference Var: ")
+	" get input
+	let counter = input("Counter Var: ")
+	let ref_var = input("Reference Var: ")
 
-  " set defaults
-  if counter == ""
-    let counter = "i"
-  endif
-  if ref_var == ""
-    let ref_var = "VAR"
-  endif
+	" set defaults
+	if counter == ""
+		let counter = "i"
+	endif
+	if ref_var == ""
+		let ref_var = "VAR"
+	endif
 
-  " get line of cursor
-  let line = line(".")
+	" get line of cursor
+	let line = line(".")
 
-  " concatenate the parts
-  let for = "for (int ".counter." = 0; ".counter." < ".ref_var."; ".counter."++)"
+	" concatenate the parts
+	let for = "for (int ".counter." = 0; ".counter." < ".ref_var."; ".counter."++)"
 
-  " add for loop
-  call setline(line, for)
+	" add for loop
+	call setline(line, for)
 
-  " add for loop's code block
-  exec "norm! A {\n\n\n}"
+	" add for loop's code block
+	exec "norm! A {\n\n\n}"
 
-  " fix indent and position cursor
-  exec "norm! V3k=j"
+	" fix indent and position cursor
+	norm V3k=
+	norm j
 
-  " re-enable indent
-  set nopaste
+	" re-enable indent
+	set nopaste
 
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
 endfunc
 
 func! JavaWhile()
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let counter = input("Counter Var: ")
-  let ref_var = input("Reference Var: ")
+	" get input
+	let counter = input("Counter Var: ")
+	let ref_var = input("Reference Var: ")
 
-  " set defaults
-  if counter == ""
-    let counter = "i"
-  endif
-  if ref_var == ""
-    let ref_var = "VAR"
-  endif
+	" set defaults
+	if counter == ""
+		let counter = "i"
+	endif
+	if ref_var == ""
+		let ref_var = "VAR"
+	endif
 
-  " concatenate the parts
-  let while = "while (".counter." < ".ref_var.")"
-  let increment = counter."++;"
+	" concatenate the parts
+	let while = "while (".counter." < ".ref_var.")"
+	let increment = counter."++;"
 
-  " add while loop initial part
-  call setline(line("."), while)
+	" add while loop initial part
+	call setline(line("."), while)
 
-  " add while loop's code block
-  exec "norm! A {\n\n\n"
+	" add while loop's code block
+	exec "norm! A {\n\n\n"
 
-  " add counter increment
-  call setline(line("."), increment)
+	" add counter increment
+	call setline(line("."), increment)
 
-  " add the rest of the code block
-  exec "norm! A\n\n}"
+	" add the rest of the code block
+	exec "norm! A\n\n}"
 
-  " fix indent and position cursor
-  exec "norm! V5k=j"
+	" fix indent and position cursor
+	norm V5k=
+	norm j
 
-  " re-enable indent
-  set nopaste
+	" re-enable indent
+	set nopaste
 
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
 endfunc
 
 func! JavaDo()
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let counter = input("Counter Var: ")
-  let ref_var = input("Reference Var: ")
+	" get input
+	let counter = input("Counter Var: ")
+	let ref_var = input("Reference Var: ")
 
-  " set defaults
-  if counter == ""
-    let counter = "i"
-  endif
-  if ref_var == ""
-    let ref_var = "VAR"
-  endif
+	" set defaults
+	if counter == ""
+		let counter = "i"
+	endif
+	if ref_var == ""
+		let ref_var = "VAR"
+	endif
 
-  " concatenate the parts
-  let while = "while (".counter." < ".ref_var.");"
-  let increment = counter."++;"
+	" concatenate the parts
+	let while = "while (".counter." < ".ref_var.");"
+	let increment = counter."++;"
 
-  " add while loop initial part
-  call setline(line("."), while)
+	" add while loop initial part
+	call setline(line("."), while)
 
-  " add } before the while
-  exec "norm! I} "
+	" add } before the while
+	exec "norm! I} "
 
-  " add the code block before the while line
-  exec "norm! Odo {\n\n\n"
+	" add the code block before the while line
+	exec "norm! Odo {\n\n\n"
 
-  " add counter increment
-  call setline(line("."), increment)
+	" add counter increment
+	call setline(line("."), increment)
 
-  " add the rest of the code block
-  exec "norm! A\n"
+	" add the rest of the code block
+	exec "norm! A\n"
 
-  " fix indent and position cursor
-  exec "norm! jV5k=j"
+	" fix indent and position cursor
+	norm j
+	norm V5k=
+	norm j
 
-  " re-enable indent
-  set nopaste
+	" re-enable indent
+	set nopaste
 
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
 endfunc
 
 func! JavaIf()
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let expr = input("Condition: ")
+	" get input
+	let expr = input("Condition: ")
 
-  " concatenate the parts
-  let if = "if (".expr.")"
+	" concatenate the parts
+	let if = "if (".expr.")"
 
-  " add if statement initial part
-  call setline(line("."), if)
+	" add if statement initial part
+	call setline(line("."), if)
 
-  " add if block's block
-  exec "norm! A {\n\n\n}"
+	" add if block's block
+	exec "norm! A {\n\n\n}"
 
-  " fix indent and position cursor
-  exec "norm! V3k=j"
+	" fix indent and position cursor
+	norm V3k=
+	norm j
 
-  " re-enable indent
-  set nopaste
+	" re-enable indent
+	set nopaste
 
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
 endfunc
 
 func! JavaElif()
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let expr = input("Condition: ")
+	" get input
+	let expr = input("Condition: ")
 
-  " concatenate the parts
-  let elif = "else if (".expr.")"
+	" concatenate the parts
+	let elif = "else if (".expr.")"
 
-  " add line after '}' of the if block
-  exec "norm! o\e"
+	" add line after '}' of the if block
+	norm o
 
-  " add else if part
-  call setline(line("."), elif)
+	" add else if part
+	call setline(line("."), elif)
 
-  " put the else if on the correct line
-  exec "norm! kJ"
+	" put the else if on the correct line
+	norm k
+	norm J
 
-  " add else if code block
-  exec "norm! A {\n\n\n}"
+	" add else if code block
+	exec "norm! A {\n\n\n}"
 
-  " fix indent and position cursor
-  exec "norm! V3k=j"
+	" fix indent and position cursor
+	norm V3k=
+	norm j
 
-  " re-enable indent
-  set nopaste
+	" re-enable indent
+	set nopaste
 
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
 endfunc
 
-func! JavaObj(keywords)
+func! JavaObj()
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let type = input("Type: ")
-  let name = input("Name: ")
-  let Args = input("Args: ", "")
+	" get input
+	let type = input("Type: ")
+	let name = input("Name: ")
+	let Args = input("Args: ", "")
 
-  if type == ""
-    let type = "int"
-  endif
-  if name == ""
-    let name = "name"
-  endif
+	if type == ""
+		let type = "int"
+	endif
+	if name == ""
+		let name = "name"
+	endif
 
-  " concatenate the parts
-  let obj = a:keywords."".type." ".name." = new ".type."(".Args.");"
+	" concatenate the parts
+	let obj = type." ".name." = new ".type."(".Args.");"
 
-  " newline, that will be merged later for non-destructive editing
-  norm o
+	" newline, that will be merged later for non-destructive editing
+	norm o
 
-  " add object
-  call setline(line("."), obj)
+	" add object
+	call setline(line("."), obj)
 
-  " merge newline
-  norm k
-  norm J
+	" merge newline
+	norm k
+	norm J
 
-  " formatting and cursor position
-  exec "norm! V="
+	" formatting and cursor position
+	norm V=
 
-  " re-enable indent
-  set nopaste
+	" re-enable indent
+	set nopaste
 
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
 endfunc
 
 func! JavaObjLiteral()
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let type = input("Type: ")
-  let name = input("Name: ")
-  let val  = input("Value: ")
+	" get input
+	let type = input("Type: ")
+	let name = input("Name: ")
+	let val  = input("Value: ")
 
-  if type == ""
-    let type = "int"
-  endif
-  if name == ""
-    let name = "name"
-  endif
-  if val == ""
-    let val = "42"
-  endif
+	if type == ""
+		let type = "int"
+	endif
+	if name == ""
+		let name = "name"
+	endif
+	if val == ""
+		let val = "42"
+	endif
 
-  " concatenate the parts
-  let obj = "".type." ".name." = ".val.";"
+	" concatenate the parts
+	let obj = "".type." ".name." = ".val.";"
 
-  " newline, that will be merged later for non-destructive editing
-  norm o
+	" newline, that will be merged later for non-destructive editing
+	norm o
 
-  " add object
-  call setline(line("."), obj)
+	" add object
+	call setline(line("."), obj)
 
-  " merge newline
-  norm k
-  norm J
+	" merge newline
+	norm k
+	norm J
+	
+	" formatting and cursor position
+	norm V=
 
-  " formatting and cursor position
-  norm V=
+	" re-enable indent
+	set nopaste
 
-  " re-enable indent
-  set nopaste
-
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
 endfunc
 
 func! JavaArr(keywords)
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let type = input("Type: ")
-  let name = input("Name: ")
+	" get input
+	let type = input("Type: ")
+	let name = input("Name: ")
 
-  if type == ""
-    let type = "int"
-  endif
-  if name == ""
-    let name = "name"
-  endif
+	if type == ""
+		let type = "int"
+	endif
+	if name == ""
+		let name = "name"
+	endif
 
-  " concatenate the parts
-  let arr = a:keywords."".type." ".name."[] = new ".type."[];"
+	" concatenate the parts
+	let arr = a:keywords."".type." ".name."[] = new ".type."[];"
 
-  " newline, that will be merged later for non-destructive editing
-  norm o
+	" newline, that will be merged later for non-destructive editing
+	norm o
+	
+	" formatting and cursor position
+	norm V=
+	norm $h
 
-  " formatting and cursor position
-  norm V=
-  norm $h
+	" add array
+	call setline(line("."), arr)
 
-  " add array
-  call setline(line("."), arr)
+	" merge newline
+	norm kJ0
 
-  " merge newline
-  norm kJ0
+	" re-enable indent
+	set nopaste
 
-  " re-enable indent
-  set nopaste
-
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
 
 endfunc
 
 func! JavaArrLiteral(keywords)
 
-  " disable indent
-  set paste
+	" disable indent
+	set paste
 
-  " make sure to not break the typeahead buffer
-  call inputsave()
+	" make sure to not break the typeahead buffer
+	call inputsave()
 
-  " get input
-  let type = input("Type: ")
-  let name = input("Name: ")
+	" get input
+	let type = input("Type: ")
+	let name = input("Name: ")
 
-  if type == ""
-    let type = "int"
-  endif
-  if name == ""
-    let name = "name"
-  endif
+	if type == ""
+		let type = "int"
+	endif
+	if name == ""
+		let name = "name"
+	endif
 
-  " concatenate the parts
-  let arr = a:keywords."".type." ".name."[] = {};"
+	" concatenate the parts
+	let arr = a:keywords."".type." ".name."[] = {};"
 
-  " newline, that will be merged later for non-destructive editing
-  norm o
+	" newline, that will be merged later for non-destructive editing
+	norm o
 
-  " add array
-  call setline(line("."), arr)
+	" add array
+	call setline(line("."), arr)
 
-  " merge newline
-  norm kJ0
+	" merge newline
+	norm k
+	norm J
 
-  " formatting and cursor position
-  norm V=
-  norm $h
+	" formatting and cursor position
+	norm V=
+	norm $h
 
-  " re-enable indent
-  set nopaste
+	" re-enable indent
+	set nopaste
 
-  " restore the typeahead buffer
-  call inputrestore()
+	" restore the typeahead buffer
+	call inputrestore()
+
+endfunc
+
+func! JavaDocParams()
+
+	" get the function's signature
+	let signature = getline(line("."))
+
+	" separate signature into required bits
+	let name = substitute(signature, '^.*\(\<.*\>\)(.*', '\1', '')
+	let args = substitute(signature, '^.*(\(.*\)).*', '\1', '')
+	let return = substitute(signature, '^.*\(\<.*\>\) \<.*\>(.*).*', '\1', '')
+
+	" split args into a list, if there's nothing it'll be empty
+	let args = split(args, ',')
+
+	" create a list, that's gonna contain the lines of the javadoc
+	let doc_lines = []
+
+	" add the first line to the javadoc lines
+	call add(doc_lines, "/** ".name.".")
+
+	" for all the arguments, that are there (none if there aren't any)...
+	for argument in args
+		" ... delete the first word, that's the type, of the argument...
+		let arg = substitute(argument, '^.*\> \(.*\)', '\1', '')
+		" ... add the argument with the @param text to the javadoc lines
+		call add(doc_lines, "* @param ".arg."	Here something useful about {@code ".arg."}.")
+	endfor
+
+	" if the return type isn't void...
+	if return != "void"
+		" ... add a return tag
+		call add(doc_lines, "* @return	The thing returns a thing, I guess.")
+	endif
+
+	" add the finish line of the javadoc
+	call add(doc_lines, "*/")
+
+	" add the javadoc to the file
+
+	" move up a line, to append before the signature
+	norm! k
+
+	" if there's only the first line and the javadoc end...
+	if len(doc_lines) == 2
+		" ... add the javadoc as a one-liner
+		call append(line("."), [join(doc_lines)])
+	else
+		" ... else add the javadoc's lines en proper
+		call append(line("."), doc_lines)
+	endif
+
+	" append doesn't move the cursor, so move down to the first line of the javadoc
+	norm! j
+
+	" select the javadoc and format it for indentation
+	exec "norm! V".len(doc_lines)."j="
+
+endfunc
+
+func! JavaDocParamsAll()
+
+	" save cursor position
+	norm m[
+
+	" move to top
+	norm gg
+
+	" while there's another function signature to work with... (note: 'W' so this won't loop infinitely)
+	while search('.*\<.*\> \<.*\>(.*) {.*', 'W') != 0
+		" get the line above the signature
+		let line_above = getline(line(".")-1)
+
+		" if the line above that signature isn't a javadoc or override...
+		if line_above !~ '\*\/' && line_above !~ '@Override'
+			" ... add a javadoc to it
+			call JavaDocParams()
+		endif
+	endwhile
+
+	" move cursor back to where it was
+	norm `[
 
 endfunc
 
 " calls to functions
-autocmd FileType java inoremap jfor <Esc>:call JavaFor()<Cr>o
-autocmd FileType java inoremap jwh <Esc>:call JavaWhile()<Cr>o
-autocmd FileType java inoremap jdo <Esc>:call JavaDo()<Cr>o
-autocmd FileType java inoremap jif <Esc>:call JavaIf()<Cr>o
-autocmd FileType java inoremap jel <Esc>:call JavaElif()<Cr>o
-autocmd FileType java inoremap joj <Esc>:call JavaObjLiteral()<Cr>A
-autocmd FileType java inoremap Joj <Esc>:call JavaObj("")<Cr>A
-autocmd FileType java inoremap jarr <Esc>:call JavaArr("")<Cr>i
-autocmd FileType java inoremap Jarr <Esc>:call JavaArrLiteral("")<Cr>i
-autocmd FileType java nnoremap <leader>jms :call JavaMethodStaticPrivate()<Cr>A
-autocmd FileType java nnoremap <leader>jmsp :call JavaMethodStaticPrivate()<Cr>A
-autocmd FileType java nnoremap <leader>jm :call JavaMethodStaticPrivate()<Cr>A
-autocmd FileType java nnoremap <leader>jmp :call JavaMethodStaticPrivate()<Cr>A
-autocmd FileType java nnoremap <leader>jsf :call JavaStaticFinalPrivate()<Cr>
+autocmd FileType java inoremap jfor <Esc>   :call JavaFor()<Cr>o
+autocmd FileType java inoremap jwhile <Esc> :call JavaWhile()<Cr>o
+autocmd FileType java inoremap jdo <Esc>    :call JavaDo()<Cr>o
+autocmd FileType java inoremap jif <Esc> :call JavaIf()<Cr>o
+autocmd FileType java inoremap jel <Esc> :call JavaElif()<Cr>o
+autocmd FileType java inoremap joj <Esc> :call JavaObjLiteral()<Cr>A
+autocmd FileType java inoremap Joj <Esc> :call JavaObj()<Cr>A
+autocmd FileType java inoremap jarr <Esc> :call JavaArr()<Cr>i
+autocmd FileType java inoremap Jarr <Esc> :call JavaArrLiteral()<Cr>i
+autocmd FileType java nnoremap <leader>jms  :call JavaMethodStaticPrivate()<Cr>A
+autocmd FileType java nnoremap <leader>jmsp :call JavaMethodStaticPublic()<Cr>A
+autocmd FileType java nnoremap <leader>jm   :call JavaMethodPrivate()<Cr>A
+autocmd FileType java nnoremap <leader>jmp  :call JavaMethodPublic()<Cr>A
+autocmd FileType java nnoremap <leader>jsf  :call JavaStaticFinalPrivate()<Cr>
 autocmd FileType java nnoremap <leader>jsfp :call JavaStaticFinalPublic()<Cr>
+autocmd FileType java nnoremap <leader>jdoc :call JavaDocParams()<Cr>
+autocmd FileType java nnoremap <leader>Jdoc :call JavaDocParamsAll()<Cr>
 
 " these ones are plain macros, that add something and format it and possibly
 autocmd FileType java inoremap jls <Esc>:exec "norm! oelse {\n\n\n}\eV3k=kJ"<Cr>jo
 autocmd FileType java inoremap Jif <Esc>:exec "norm! Aif () ;"<Cr>V=$2hi
-autocmd FileType java inoremap jel <Esc>:exec "norm! Aelse if () ;"<Cr>V=$2hi
+autocmd FileType java inoremap Jel <Esc>:exec "norm! Aelse if () ;"<Cr>V=$2hi
 autocmd FileType java inoremap Jls <Esc>:exec "norm! Aelse ;"<Cr>V=$i
 
 " these have <Esc>a at the end to insure the space
