@@ -462,7 +462,7 @@ func! JavaObj(keywords)
   " get input
   let type = input("Type: ")
   let name = input("Name: ")
-  let Args = input("Args: ")
+  let Args = input("Args: ", "")
 
   if type == ""
     let type = "int"
@@ -475,13 +475,14 @@ func! JavaObj(keywords)
   let obj = a:keywords."".type." ".name." = new ".type."(".Args.");"
 
   " newline, that will be merged later for non-destructive editing
-  exec "norm! o"
+  norm o
 
   " add object
   call setline(line("."), obj)
 
   " merge newline
-  exec "norm! kJ0"
+  norm k
+  norm J
 
   " formatting and cursor position
   exec "norm! V="
@@ -494,7 +495,7 @@ func! JavaObj(keywords)
 
 endfunc
 
-func! JavaObjLiteral(keywords)
+func! JavaObjLiteral()
 
   " disable indent
   set paste
@@ -518,19 +519,20 @@ func! JavaObjLiteral(keywords)
   endif
 
   " concatenate the parts
-  let obj = a:keywords."".type." ".name." = ".val.";"
+  let obj = "".type." ".name." = ".val.";"
 
   " newline, that will be merged later for non-destructive editing
-  exec "norm! o"
+  norm o
 
   " add object
   call setline(line("."), obj)
 
   " merge newline
-  exec "norm! kJ0"
+  norm k
+  norm J
 
   " formatting and cursor position
-  exec "norm! V="
+  norm V=
 
   " re-enable indent
   set nopaste
@@ -563,17 +565,17 @@ func! JavaArr(keywords)
   let arr = a:keywords."".type." ".name."[] = new ".type."[];"
 
   " newline, that will be merged later for non-destructive editing
-  exec "norm! o"
+  norm o
 
   " formatting and cursor position
-  exec "norm! V="
-  exec "norm! $h"
+  norm V=
+  norm $h
 
   " add array
   call setline(line("."), arr)
 
   " merge newline
-  exec "norm! kJ0"
+  norm kJ0
 
   " re-enable indent
   set nopaste
@@ -606,17 +608,17 @@ func! JavaArrLiteral(keywords)
   let arr = a:keywords."".type." ".name."[] = {};"
 
   " newline, that will be merged later for non-destructive editing
-  exec "norm! o"
+  norm o
 
   " add array
   call setline(line("."), arr)
 
   " merge newline
-  exec "norm! kJ0"
+  norm kJ0
 
   " formatting and cursor position
-  exec "norm! V="
-  exec "norm! $h"
+  norm V=
+  norm $h
 
   " re-enable indent
   set nopaste
@@ -627,26 +629,26 @@ func! JavaArrLiteral(keywords)
 endfunc
 
 " calls to functions
-autocmd FileType java inoremap jfor <Esc>   :call JavaFor()<Cr>o
-autocmd FileType java inoremap jwhile <Esc> :call JavaWhile()<Cr>o
-autocmd FileType java inoremap jdo <Esc>    :call JavaDo()<Cr>o
-autocmd FileType java inoremap jif <Esc> :call JavaIf()<Cr>o
-autocmd FileType java inoremap jel <Esc> :call JavaElif()<Cr>o
-autocmd FileType java inoremap joj <Esc> :call JavaObjLiteral("")<Cr>A
-autocmd FileType java inoremap Joj <Esc> :call JavaObj("")<Cr>A
-autocmd FileType java inoremap jarr <Esc> :call JavaArr("")<Cr>i
-autocmd FileType java inoremap Jarr <Esc> :call JavaArrLiteral("")<Cr>i
-autocmd FileType java nnoremap <leader>jms  :call JavaMethodStaticPrivate()<Cr>A
+autocmd FileType java inoremap jfor <Esc>:call JavaFor()<Cr>o
+autocmd FileType java inoremap jwh <Esc>:call JavaWhile()<Cr>o
+autocmd FileType java inoremap jdo <Esc>:call JavaDo()<Cr>o
+autocmd FileType java inoremap jif <Esc>:call JavaIf()<Cr>o
+autocmd FileType java inoremap jel <Esc>:call JavaElif()<Cr>o
+autocmd FileType java inoremap joj <Esc>:call JavaObjLiteral()<Cr>A
+autocmd FileType java inoremap Joj <Esc>:call JavaObj("")<Cr>A
+autocmd FileType java inoremap jarr <Esc>:call JavaArr("")<Cr>i
+autocmd FileType java inoremap Jarr <Esc>:call JavaArrLiteral("")<Cr>i
+autocmd FileType java nnoremap <leader>jms :call JavaMethodStaticPrivate()<Cr>A
 autocmd FileType java nnoremap <leader>jmsp :call JavaMethodStaticPrivate()<Cr>A
-autocmd FileType java nnoremap <leader>jm   :call JavaMethodStaticPrivate()<Cr>A
-autocmd FileType java nnoremap <leader>jmp  :call JavaMethodStaticPrivate()<Cr>A
-autocmd FileType java nnoremap <leader>jsf  :call JavaStaticFinalPrivate()<Cr>
+autocmd FileType java nnoremap <leader>jm :call JavaMethodStaticPrivate()<Cr>A
+autocmd FileType java nnoremap <leader>jmp :call JavaMethodStaticPrivate()<Cr>A
+autocmd FileType java nnoremap <leader>jsf :call JavaStaticFinalPrivate()<Cr>
 autocmd FileType java nnoremap <leader>jsfp :call JavaStaticFinalPublic()<Cr>
 
 " these ones are plain macros, that add something and format it and possibly
 autocmd FileType java inoremap jls <Esc>:exec "norm! oelse {\n\n\n}\eV3k=kJ"<Cr>jo
 autocmd FileType java inoremap Jif <Esc>:exec "norm! Aif () ;"<Cr>V=$2hi
-autocmd FileType java inoremap Jel <Esc>:exec "norm! Aelse if () ;"<Cr>V=$2hi
+autocmd FileType java inoremap jel <Esc>:exec "norm! Aelse if () ;"<Cr>V=$2hi
 autocmd FileType java inoremap Jls <Esc>:exec "norm! Aelse ;"<Cr>V=$i
 
 " these have <Esc>a at the end to insure the space
