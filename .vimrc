@@ -61,7 +61,15 @@ nnoremap &i ^dw			" remove comment characters
 
 " templates
 function! CreateCFile()
-	norm gg0i#include <stdio.h>#include <locale.h>int main() {	// Fix Unicode Supportsetlocale(0, "");return 0;}hxkkkA	
+	set paste " enable paste mode so no auto-formatting is done on the line below
+	norm gg0i#include <stdio.h>#include <locale.h>int main() {	// Fix Unicode Support	setlocale(0, "");return 0;}hxkkkA	
+	set nopaste
+endfunction
+
+function! CreateJavaFile()
+	set paste
+	norm gg0ipackage ;import acm.program.*;import acm.graphics.*;/** * NAME. */public class ... extends ... {	@Override	public void run() {			}}ggf;h
+	set nopaste
 endfunction
 
 " automatically save and restore views (those contain data on custom folds)
