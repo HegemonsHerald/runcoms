@@ -217,7 +217,8 @@ func! JavaMethod(keywords)
 
 	" add code block and move cursor to middle line
 	exec "norm! A {\n\n\t\t\n\n\t}"
-	norm 2k$
+	norm! 2k
+	norm! $
 
 	" re-enable indent
 	set nopaste
@@ -284,8 +285,8 @@ func! JavaFor()
 	exec "norm! A {\n\n\n}"
 
 	" fix indent and position cursor
-	norm V3k=
-	norm j
+	norm! V3k=
+	norm! j
 
 	" re-enable indent
 	set nopaste
@@ -332,8 +333,8 @@ func! JavaWhile()
 	exec "norm! A\n\n}"
 
 	" fix indent and position cursor
-	norm V5k=
-	norm j
+	norm! V5k=
+	norm! j
 
 	" re-enable indent
 	set nopaste
@@ -383,9 +384,9 @@ func! JavaDo()
 	exec "norm! A\n"
 
 	" fix indent and position cursor
-	norm j
-	norm V5k=
-	norm j
+	norm! j
+	norm! V5k=
+	norm! j
 
 	" re-enable indent
 	set nopaste
@@ -416,8 +417,8 @@ func! JavaIf()
 	exec "norm! A {\n\n\n}"
 
 	" fix indent and position cursor
-	norm V3k=
-	norm j
+	norm! V3k=
+	norm! j
 
 	" re-enable indent
 	set nopaste
@@ -429,11 +430,11 @@ endfunc
 
 func! JavaElif()
 
-	" disable indent
-	set paste
-
 	" make sure to not break the typeahead buffer
 	call inputsave()
+
+	" disable indent
+	set paste
 
 	" get input
 	let expr = input("Condition: ")
@@ -442,21 +443,21 @@ func! JavaElif()
 	let elif = "else if (".expr.")"
 
 	" add line after '}' of the if block
-	norm o
+	norm! o
 
-	" add else if part
+	" add the else if part
 	call setline(line("."), elif)
 
 	" put the else if on the correct line
-	norm k
-	norm J
+	norm! k
+	norm! J
 
 	" add else if code block
 	exec "norm! A {\n\n\n}"
 
 	" fix indent and position cursor
-	norm V3k=
-	norm j
+	norm! V3k=
+	norm! j
 
 	" re-enable indent
 	set nopaste
@@ -490,17 +491,17 @@ func! JavaObj()
 	let obj = type." ".name." = new ".type."(".Args.");"
 
 	" newline, that will be merged later for non-destructive editing
-	norm o
+	norm! o
 
 	" add object
 	call setline(line("."), obj)
 
 	" merge newline
-	norm k
-	norm J
+	norm! k
+	norm! J
 
 	" formatting and cursor position
-	norm V=
+	norm! V=
 
 	" re-enable indent
 	set nopaste
@@ -537,17 +538,17 @@ func! JavaObjLiteral()
 	let obj = "".type." ".name." = ".val.";"
 
 	" newline, that will be merged later for non-destructive editing
-	norm o
+	norm! o
 
 	" add object
 	call setline(line("."), obj)
 
 	" merge newline
-	norm k
-	norm J
+	norm! k
+	norm! J
 	
 	" formatting and cursor position
-	norm V=
+	norm! V=
 
 	" re-enable indent
 	set nopaste
@@ -557,7 +558,7 @@ func! JavaObjLiteral()
 
 endfunc
 
-func! JavaArr(keywords)
+func! JavaArr()
 
 	" disable indent
 	set paste
@@ -577,20 +578,20 @@ func! JavaArr(keywords)
 	endif
 
 	" concatenate the parts
-	let arr = a:keywords."".type." ".name."[] = new ".type."[];"
+	let arr = type." ".name."[] = new ".type."[];"
 
 	" newline, that will be merged later for non-destructive editing
-	norm o
+	norm! o
 	
 	" formatting and cursor position
-	norm V=
-	norm $h
+	norm! V=
+	norm! $h
 
 	" add array
 	call setline(line("."), arr)
 
 	" merge newline
-	norm kJ0
+	norm! kJ0
 
 	" re-enable indent
 	set nopaste
@@ -600,7 +601,7 @@ func! JavaArr(keywords)
 
 endfunc
 
-func! JavaArrLiteral(keywords)
+func! JavaArrLiteral()
 
 	" disable indent
 	set paste
@@ -620,21 +621,21 @@ func! JavaArrLiteral(keywords)
 	endif
 
 	" concatenate the parts
-	let arr = a:keywords."".type." ".name."[] = {};"
+	let arr = type." ".name."[] = {};"
 
 	" newline, that will be merged later for non-destructive editing
-	norm o
+	norm! o
 
 	" add array
 	call setline(line("."), arr)
 
 	" merge newline
-	norm k
-	norm J
+	norm! k
+	norm! J
 
 	" formatting and cursor position
-	norm V=
-	norm $h
+	norm! V=
+	norm! $h
 
 	" re-enable indent
 	set nopaste
@@ -705,10 +706,10 @@ endfunc
 func! JavaDocParamsAll()
 
 	" save cursor position
-	norm m[
+	norm! m[
 
 	" move to top
-	norm gg
+	norm! gg
 
 	" while there's another function signature to work with... (note: 'W' so this won't loop infinitely)
 	while search('.*\<.*\> \<.*\>(.*) {.*', 'W') != 0
@@ -723,25 +724,25 @@ func! JavaDocParamsAll()
 	endwhile
 
 	" move cursor back to where it was
-	norm `[
+	norm! `[
 
 endfunc
 
 " calls to functions
-autocmd FileType java inoremap jfor <Esc>   :call JavaFor()<Cr>o
-autocmd FileType java inoremap jwhile <Esc> :call JavaWhile()<Cr>o
-autocmd FileType java inoremap jdo <Esc>    :call JavaDo()<Cr>o
-autocmd FileType java inoremap jif <Esc> :call JavaIf()<Cr>o
-autocmd FileType java inoremap jel <Esc> :call JavaElif()<Cr>o
-autocmd FileType java inoremap joj <Esc> :call JavaObjLiteral()<Cr>A
-autocmd FileType java inoremap Joj <Esc> :call JavaObj()<Cr>A
-autocmd FileType java inoremap jarr <Esc> :call JavaArr()<Cr>i
-autocmd FileType java inoremap Jarr <Esc> :call JavaArrLiteral()<Cr>i
-autocmd FileType java nnoremap <leader>jms  :call JavaMethodStaticPrivate()<Cr>A
+autocmd FileType java inoremap jfor <Esc>:call JavaFor()<Cr>o
+autocmd FileType java inoremap jwhile <Esc>:call JavaWhile()<Cr>o
+autocmd FileType java inoremap jdo <Esc>:call JavaDo()<Cr>o
+autocmd FileType java inoremap jif <Esc>:call JavaIf()<Cr>o
+autocmd FileType java inoremap jel <Esc>:call JavaElif()<Cr>o
+autocmd FileType java inoremap joj <Esc>:call JavaObjLiteral()<Cr>A
+autocmd FileType java inoremap Joj <Esc>:call JavaObj()<Cr>A
+autocmd FileType java inoremap jarr <Esc>:call JavaArr()<Cr>i
+autocmd FileType java inoremap Jarr <Esc>:call JavaArrLiteral()<Cr>i
+autocmd FileType java nnoremap <leader>jms :call JavaMethodStaticPrivate()<Cr>A
 autocmd FileType java nnoremap <leader>jmsp :call JavaMethodStaticPublic()<Cr>A
-autocmd FileType java nnoremap <leader>jm   :call JavaMethodPrivate()<Cr>A
-autocmd FileType java nnoremap <leader>jmp  :call JavaMethodPublic()<Cr>A
-autocmd FileType java nnoremap <leader>jsf  :call JavaStaticFinalPrivate()<Cr>
+autocmd FileType java nnoremap <leader>jm :call JavaMethodPrivate()<Cr>A
+autocmd FileType java nnoremap <leader>jmp :call JavaMethodPublic()<Cr>A
+autocmd FileType java nnoremap <leader>jsf :call JavaStaticFinalPrivate()<Cr>
 autocmd FileType java nnoremap <leader>jsfp :call JavaStaticFinalPublic()<Cr>
 autocmd FileType java nnoremap <leader>jdoc :call JavaDocParams()<Cr>
 autocmd FileType java nnoremap <leader>Jdoc :call JavaDocParamsAll()<Cr>
