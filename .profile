@@ -27,7 +27,12 @@ export PATH="$HOME/.scripts:$PATH"
 
 # Mac specific stuff
 if [ $(uname -s) = "Darwin" ]; then
+	# Add GHC location to path
 	export PATH="/Applications/ghc/bin:$PATH"
+
+	# Updated vim and now I need to set this to utf8 or it gets confused...
+	export LC_CTYPE=en_US.UTF-8
+
 	export COLORTERM=truecolor
 fi
 
