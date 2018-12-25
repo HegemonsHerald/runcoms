@@ -720,20 +720,20 @@ func! JavaDocParamsAll()
 endfunc
 
 " calls to functions
-autocmd FileType java inoremap jfor <Esc>   :call JavaFor()<Cr>o
-autocmd FileType java inoremap jwhile <Esc> :call JavaWhile()<Cr>o
-autocmd FileType java inoremap jdo <Esc>    :call JavaDo()<Cr>o
-autocmd FileType java inoremap jif <Esc> :call JavaIf()<Cr>o
-autocmd FileType java inoremap jel <Esc> :call JavaElif()<Cr>o
-autocmd FileType java inoremap joj <Esc> :call JavaObjLiteral("")<Cr>A
-autocmd FileType java inoremap Joj <Esc> :call JavaObj("")<Cr>A
-autocmd FileType java inoremap jarr <Esc> :call JavaArr("")<Cr>i
-autocmd FileType java inoremap Jarr <Esc> :call JavaArrLiteral("")<Cr>i
-autocmd FileType java nnoremap <leader>jms  :call JavaMethodStaticPrivate()<Cr>A
+autocmd FileType java inoremap jfor <Esc>:call JavaFor()<Cr>o
+autocmd FileType java inoremap jwhile <Esc>:call JavaWhile()<Cr>o
+autocmd FileType java inoremap jdo <Esc>:call JavaDo()<Cr>o
+autocmd FileType java inoremap jif <Esc>:call JavaIf()<Cr>o
+autocmd FileType java inoremap jel <Esc>:call JavaElif()<Cr>o
+autocmd FileType java inoremap joj <Esc>:call JavaObjLiteral("")<Cr>A
+autocmd FileType java inoremap Joj <Esc>:call JavaObj("")<Cr>A
+autocmd FileType java inoremap jarr <Esc>:call JavaArr("")<Cr>i
+autocmd FileType java inoremap Jarr <Esc>:call JavaArrLiteral("")<Cr>i
+autocmd FileType java nnoremap <leader>jms :call JavaMethodStaticPrivate()<Cr>A
 autocmd FileType java nnoremap <leader>jmsp :call JavaMethodStaticPublic()<Cr>A
-autocmd FileType java nnoremap <leader>jm   :call JavaMethodPrivate()<Cr>A
-autocmd FileType java nnoremap <leader>jmp  :call JavaMethodPublic()<Cr>A
-autocmd FileType java nnoremap <leader>jsf  :call JavaStaticFinalPrivate()<Cr>
+autocmd FileType java nnoremap <leader>jm :call JavaMethodPrivate()<Cr>A
+autocmd FileType java nnoremap <leader>jmp :call JavaMethodPublic()<Cr>A
+autocmd FileType java nnoremap <leader>jsf :call JavaStaticFinalPrivate()<Cr>
 autocmd FileType java nnoremap <leader>jsfp :call JavaStaticFinalPublic()<Cr>
 autocmd FileType java nnoremap <leader>jdoc :call JavaDocParams()<Cr>
 autocmd FileType java nnoremap <leader>Jdoc :call JavaDocParamsAll()<Cr>
