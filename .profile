@@ -27,6 +27,7 @@ export PATH="$HOME/.scripts:$PATH"
 
 # Mac specific stuff
 if [ $(uname -s) = "Darwin" ]; then
+	export PATH="/Applications/ghc/bin:$PATH"
 	export COLORTERM=truecolor
 fi
 
