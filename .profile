@@ -31,7 +31,8 @@ if [ $(uname -s) = "Darwin" ]; then
 	export PATH="/Applications/ghc/bin:$PATH"
 
 	# Updated vim and now I need to set this to utf8 or it gets confused...
-	export LC_CTYPE=en_US.UTF-8
+	export LC_CTYPE="en_US.UTF-8"
+	export LANG="en_US.UTF-8"
 
 	export COLORTERM=truecolor
 fi
