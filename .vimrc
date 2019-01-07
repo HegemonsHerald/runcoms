@@ -61,7 +61,22 @@ set autoread                    " ar, makes vim reread a file, if it changed
 " MAPPINGS
 "nnoremap <Leader>j I// <Esc>		" insert // for commenting the line
 "nnoremap <Leader>k I# <Esc>		" insert # for commenting the line
-"nnoremap <Leader>l ^dw			" remove comment characters
+"nnoremap <Leader>l ^dw					" remove comment characters
+nnoremap <Leader>l :call ToggleList()<Cr>
+
+" BASIC FUNCTIONS
+
+" Toggles the list setting
+func! ToggleList()
+
+	if &list == 0
+		set list
+	else
+		set nolist
+	endif
+
+endfunc
+
 
 " TEMPLATES
 function! CreateCFile()
