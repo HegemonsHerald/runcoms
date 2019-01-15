@@ -27,6 +27,7 @@ alias sus='suspend.sh'
 alias ls1='ls -1'
 alias lsl='ls -al'
 alias p6='perl6'
+alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
 
 # Search Function
 alias s='search'			# search for filename and content
