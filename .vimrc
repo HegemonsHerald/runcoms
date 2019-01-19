@@ -17,6 +17,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'hegemonsherald/vim-codegen'
+Plugin 'hegemonsherald/vim-dlx_syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
