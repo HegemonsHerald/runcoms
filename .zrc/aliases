@@ -50,6 +50,8 @@ alias gpu='git pull'
 alias gf='git fetch'
 alias gs='git status'
 alias gl='git log'
+alias gst='git stash'
+alias gsta='git stash apply'
 
 # Cargo
 alias cr='cargo run'
