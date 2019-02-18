@@ -352,6 +352,7 @@ bindsym $mod+Shift+x exec i3lock --color 171717
 bindsym $mod+x exec xmodmap ~/.i3/Xmodmap
 
 # Autostart apps
+# exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id "compton"
 exec --no-startup-id nm-applet
