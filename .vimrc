@@ -16,12 +16,12 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'autozimu/LanguageClient-neovim'
 
 " More advanced autocompletion
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'Shougo/deoplete.nvim', {
   \ 'branch': 'next',
   \ 'do': 'bash install.sh'
   \ }
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
 
 " Tiny things
 Plugin 'flazz/vim-colorschemes'
@@ -39,6 +39,14 @@ filetype plugin indent on
 " see :h vundle for more details or wiki for FAQ
 
 " Put your non-Plugin stuff after this line ================================
+
+
+" laguage client neovim
+
+set hidden
+let g:LanguageClient_serverCommands = {
+      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+      \ }
 
 
 " SYNTAX AND THEMING
@@ -75,8 +83,22 @@ set foldmethod=manual
 
 
 " DEOPLETE CONFIG
+" Note: the dependancy nvim-yarp of this, requires pynvim to be installed
+" (pip3 install pynvim)
 let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option()
+call deoplete#custom#option({
+      \ 'auto_complete': v:false,
+      \ })
+
+" Make it select the first item from the menu
+set completeopt=menu,noinsert
+
+" Map deoplete to CTRL-N
+inoremap <C-n> <C-r>=Deoplete_helper()<Cr>
+
+func! Deoplete_helper()
+  return deoplete#manual_complete() . deoplete#close_popup()
+endfunc
 
 
 " MAPPINGS
