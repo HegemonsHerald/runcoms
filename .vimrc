@@ -9,11 +9,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" RUUUUUUST
+" RUUUUUUST and HASKEEEEELLLL
 Plugin 'rust-lang/rust.vim'
-
-" Language Server
-Plugin 'autozimu/LanguageClient-neovim'
+Plugin 'neovimhaskell/haskell-vim'
 
 " More advanced autocompletion
 Plugin 'Shougo/deoplete.nvim', {
@@ -33,6 +31,9 @@ Plugin 'junegunn/fzf.vim'
 " My things
 Plugin 'hegemonsherald/vim-codegen'
 Plugin 'hegemonsherald/vim-dlx_syntax'
+
+" Language Server
+Plugin 'autozimu/LanguageClient-neovim'
 
 call vundle#end()
 filetype plugin indent on
