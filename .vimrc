@@ -75,10 +75,17 @@ set smarttab			" make use of sts and sw for <tab>-insertion
 set nowrap
 set foldmethod=manual
 
+" set guicursor=
 
 " DEOPLETE CONFIG
 let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option()
+
+" Make completion lazy
+call deoplete#custom#option('auto_complete', v:false)
+inoremap <C-n> <C-r>=deoplete#manual_complete()<Cr>
+
+" For some reason this makes it select the first entry of the menu...?
+set completeopt+=noinsert
 
 
 " MAPPINGS
