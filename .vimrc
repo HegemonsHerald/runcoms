@@ -165,9 +165,9 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 " FILETYPE SPECIFIC CONFIGS
 
-autocmd BufRead,BufNewFile *.lisp set filetype=lisp
-
 augroup filetype_lisp
+
+  autocmd BufRead,BufNewFile *.lisp set filetype=lisp
 
   " In case the auto-formatting isn't enough =)
   " Remember: you can use <C-I> to insert a tab
@@ -175,6 +175,7 @@ augroup filetype_lisp
   au FileType lisp inoremap <S-Tab> <C-D>
   au FileType lisp nnoremap <Tab> >>
   au FileType lisp nnoremap <S-Tab> <<
+
 augroup END
 
 
