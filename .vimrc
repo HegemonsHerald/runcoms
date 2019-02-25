@@ -67,7 +67,7 @@ set autowrite			" aw
 set matchpairs+=<:>		" brackets to matching symbols
 set showcmd			" shows commands on status-line, is on by default
 set ruler			" ru, is on by default
-set listchars=tab:»∙,trail:\ ,	" lcs, characters for whitespace listing
+set listchars=tab:»·,trail:\ ,	" lcs, characters for whitespace listing
 set list			" enable whitespace listing
 set autoread			" ar, makes vim reread a file, if it changed
 set backspace+=start,eol,indent	" allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
@@ -161,5 +161,21 @@ let g:multi_cursor_next_key            = '<C-m>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
+
+
+" FILETYPE SPECIFIC CONFIGS
+
+autocmd BufRead,BufNewFile *.lisp set filetype=lisp
+
+augroup filetype_lisp
+
+  " In case the auto-formatting isn't enough =)
+  " Remember: you can use <C-I> to insert a tab
+  au FileType lisp inoremap <Tab> <C-T>
+  au FileType lisp inoremap <S-Tab> <C-D>
+  au FileType lisp nnoremap <Tab> >>
+  au FileType lisp nnoremap <S-Tab> <<
+augroup END
+
 
 " vim:sts=2:sw=2:noet
