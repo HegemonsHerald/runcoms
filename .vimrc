@@ -67,7 +67,7 @@ set autowrite			" aw
 set matchpairs+=<:>		" brackets to matching symbols
 set showcmd			" shows commands on status-line, is on by default
 set ruler			" ru, is on by default
-set listchars=tab:»∙,trail:░,	" lcs, characters for whitespace listing
+set listchars=tab:»∙,trail:\ ,	" lcs, characters for whitespace listing
 set list			" enable whitespace listing
 set autoread			" ar, makes vim reread a file, if it changed
 set backspace+=start,eol,indent	" allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
