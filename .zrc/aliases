@@ -10,7 +10,8 @@ fi
 # Mac Specific
 if [ $(uname -s) = "Darwin" ]; then
 
-	alias ls='ls -G -L -h'
+	# alias ls='ls -G -L -h'
+	alias ls='exa'
 
 fi
 
