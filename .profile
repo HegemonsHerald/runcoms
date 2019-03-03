@@ -25,15 +25,11 @@ export PATH="$HOME/.perl6/bin:$PATH"
 # note: that's the location of my custom scripts
 export PATH="$HOME/.scripts:$PATH"
 
+# Make alacritty scale well
+export WINIT_HIDPI_FACTOR=1.0
+
 # Mac specific stuff
 if [ $(uname -s) = "Darwin" ]; then
-	# Add GHC location to path
-	export PATH="/Applications/ghc/bin:$PATH"
-
-	# Updated vim and now I need to set this to utf8 or it gets confused...
-	export LC_CTYPE="en_US.UTF-8"
-	export LANG="en_US.UTF-8"
-
 	export COLORTERM=truecolor
 fi
 
@@ -43,4 +39,5 @@ if [ $(uname -n) = "Antergos" ]; then
 	# Right now that's rakudo-star, this makes the perl6 debugger work
 	export PATH="$HOME/Documents/code/custom_builds/rakudo-star/rakudo-star-2018.06/install/bin:$PATH"
 	export PATH="$HOME/Documents/code/custom_builds/rakudo-star/rakudo-star-2018.06/install/share/perl6/site/bin:$PATH"
+	export HOSTALIASES=~/.local/hosts
 fi
