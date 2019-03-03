@@ -9,9 +9,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" RUUUUUUST and HASKEEEEELLLL
+" RUUUUUUST and HASKEEEEELLLL and LIIIIIISSSSSSP
 Plugin 'rust-lang/rust.vim'
 Plugin 'neovimhaskell/haskell-vim'
+Plugin 'kovisoft/slimv'
 
 " More advanced autocompletion
 Plugin 'Shougo/deoplete.nvim', {
@@ -25,6 +26,7 @@ Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'markonm/traces.vim'
 Plugin 'flazz/vim-colorschemes'
+" Plugin 'scrooloose/nerdcommenter'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
@@ -75,6 +77,7 @@ set autoindent
 set smarttab			" make use of sts and sw for <tab>-insertion
 set nowrap
 set foldmethod=manual
+filetype plugin on
 
 " set guicursor=
 
@@ -85,17 +88,23 @@ let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('auto_complete', v:false)
 inoremap <C-n> <C-r>=deoplete#manual_complete()<Cr>
 
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+
 " For some reason this makes it select the first entry of the menu...?
 set completeopt+=noinsert
 
 
 " MAPPINGS
-"nnoremap <Leader>j I// <Esc>   " insert // for commenting the line
-"nnoremap <Leader>k I# <Esc>    " insert # for commenting the line
-"nnoremap <Leader>l ^dw         " remove comment characters
+let mapleader = "\<C-j>" " see :h expr-quote for more on the backslash
 nnoremap <Leader>l :call ToggleList()<Cr> " toggle list option
 nnoremap <Leader>f :call ToggleFDC()<Cr>  " toggle foldcolumn
 nnoremap <Leader>n :noh<Cr>		  " disable search highlight
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
+vnoremap <Tab> >>
+vnoremap <S-Tab> <<
+
+" Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
 
 
 " BASIC FUNCTIONS
@@ -171,10 +180,6 @@ augroup filetype_lisp
 
   " In case the auto-formatting isn't enough =)
   " Remember: you can use <C-I> to insert a tab
-  au FileType lisp inoremap <Tab> <C-T>
-  au FileType lisp inoremap <S-Tab> <C-D>
-  au FileType lisp nnoremap <Tab> >>
-  au FileType lisp nnoremap <S-Tab> <<
 
 augroup END
 
