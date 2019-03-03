@@ -15,12 +15,12 @@ Plugin 'neovimhaskell/haskell-vim'
 Plugin 'kovisoft/slimv'
 
 " More advanced autocompletion
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'Shougo/deoplete.nvim', {
   \ 'branch': 'next',
   \ 'do': 'bash install.sh'
   \ }
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
 
 " Tiny things
 Plugin 'terryma/vim-multiple-cursors'
@@ -46,6 +46,13 @@ filetype plugin indent on
 " Put your non-Plugin stuff after this line ================================
 
 
+" LAGUAGE CLIENT NEOVIM
+set hidden
+let g:LanguageClient_serverCommands = {
+      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+      \ }
+
+
 " SYNTAX AND THEMING
 syntax on
 color Monokai
@@ -69,8 +76,8 @@ set autowrite			" aw
 set matchpairs+=<:>		" brackets to matching symbols
 set showcmd			" shows commands on status-line, is on by default
 set ruler			" ru, is on by default
-set listchars=tab:»·,trail:\ ,	" lcs, characters for whitespace listing
-set list			" enable whitespace listing
+set listchars=tab:»·,trail:\ ,	" lcs, characters for whitespace listing; alternatively use ░ for trail
+set nolist			" disable whitespace listing
 set autoread			" ar, makes vim reread a file, if it changed
 set backspace+=start,eol,indent	" allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
 set autoindent
@@ -81,21 +88,38 @@ filetype plugin on
 
 " set guicursor=
 
-" DEOPLETE CONFIG
-let g:deoplete#enable_at_startup = 1
 
-" Make completion lazy
-call deoplete#custom#option('auto_complete', v:false)
-inoremap <C-n> <C-r>=deoplete#manual_complete()<Cr>
+" DEOPLETE CONFIG
+" Note: the dependancy nvim-yarp of this, requires pynvim to be installed
+" (pip3 install pynvim)
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+      \ 'auto_complete': v:false,
+      \ })
+
+" Make it select the first item from the menu
+set completeopt=menu,noinsert
 
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
 " For some reason this makes it select the first entry of the menu...?
 set completeopt+=noinsert
 
+" Map deoplete to CTRL-N
+inoremap <C-n> <C-r>=Deoplete_helper()<Cr>
+
+func! Deoplete_helper()
+  return deoplete#manual_complete() . deoplete#close_popup()
+endfunc
+
+" Make completion lazy
+call deoplete#custom#option('auto_complete', v:false)
+inoremap <C-n> <C-r>=deoplete#manual_complete()<Cr>
+
 
 " MAPPINGS
 let mapleader = "\<C-j>" " see :h expr-quote for more on the backslash
+" Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
 nnoremap <Leader>l :call ToggleList()<Cr> " toggle list option
 nnoremap <Leader>f :call ToggleFDC()<Cr>  " toggle foldcolumn
 nnoremap <Leader>n :noh<Cr>		  " disable search highlight
@@ -103,8 +127,6 @@ nnoremap <Tab> >>
 nnoremap <S-Tab> <<
 vnoremap <Tab> >>
 vnoremap <S-Tab> <<
-
-" Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
 
 
 " BASIC FUNCTIONS
