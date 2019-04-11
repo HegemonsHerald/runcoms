@@ -17,10 +17,10 @@ let g:colorscheme_list_either = [
 " selection of schemes only compatible with tui, or especially compatible with tui
 " (this includes themes, that look good but wildly different from their tui version)
 let g:colorscheme_list_tui = [
-			\ '256-jungle',
 			\ 'fahrenheit',
-			\ '256-grayvim',
 			\ 'iceberg',
+			\ '256-jungle',
+			\ '256-grayvim',
 			\ 'lapis256',
 			\ 'OceanicNext',
 			\ 'blues',
