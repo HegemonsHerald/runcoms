@@ -134,6 +134,7 @@ let mapleader = "\<C-j>" " see :h expr-quote for more on the backslash
 nnoremap <Leader>l :set list!<Cr>	  " toggle list option
 nnoremap <Leader>f :call ToggleFDC()<Cr>  " toggle foldcolumn
 nnoremap <Leader>n :noh<Cr>		  " disable search highlight
+nnoremap <Leader>c :set cursorline!<Cr>	  " toggle cursorline
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
 vnoremap <Tab> >>
