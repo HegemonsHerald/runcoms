@@ -19,13 +19,17 @@ let g:colorscheme_list_either = [
 let g:colorscheme_list_tui = [
 			\ 'fahrenheit',
 			\ 'iceberg',
-			\ '256-jungle',
 			\ '256-grayvim',
 			\ 'lapis256',
+			\ '256-jungle',
 			\ 'OceanicNext',
 			\ 'blues',
 			\ 'palenight'
 			\ ]
+
+" depending on whether you select 256-grayvim coming from iceberg or from
+" lapis256, it will change subtly... IDK
+
 
 " selection of schemes only compatible with gui, or especially compatible with gui
 " (this includes themes, that look good but wildly different from their gui version)
@@ -179,6 +183,10 @@ func! SetScheme(name)
 	exec new_config
 
 	let g:colors_name = a:name
+
+	redraw
+
+	echo g:colors_name
 
 endfunc
 
