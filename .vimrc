@@ -9,10 +9,12 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'felixhummel/setcolors.vim'
+
 " RUUUUUUST and HASKEEEEELLLL and LIIIIIISSSSSSP
 Plugin 'rust-lang/rust.vim'
 Plugin 'neovimhaskell/haskell-vim'
-Plugin 'kovisoft/slimv'
+" Plugin 'kovisoft/slimv'
 
 " More advanced autocompletion
 Plugin 'roxma/nvim-yarp'
@@ -46,6 +48,12 @@ filetype plugin indent on
 " Put your non-Plugin stuff after this line ================================
 
 
+" LOAD MY CUSTOM STUFF
+" These files are in ~/.vim/after
+runtime functionals.vim
+runtime colorschemes.vim
+
+
 " LAGUAGE CLIENT NEOVIM
 set hidden
 let g:LanguageClient_serverCommands = {
@@ -55,11 +63,10 @@ let g:LanguageClient_serverCommands = {
 
 " SYNTAX AND THEMING
 syntax on
-color Monokai
 
-" use the terminal's background
-highlight Normal ctermbg=none
-highlight NonText ctermbg=none
+" color Monokai
+" highlight Normal ctermbg=none
+" highlight NonText ctermbg=none
 
 " use underlining when highlighting Search results
 highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
@@ -81,9 +88,13 @@ set nolist			" disable whitespace listing
 set autoread			" ar, makes vim reread a file, if it changed
 set backspace+=start,eol,indent	" allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
 set autoindent
+set smartindent
 set smarttab			" make use of sts and sw for <tab>-insertion
 set nowrap
 set foldmethod=manual
+set colorcolumn=+2		" cc, highlight the column to the right of textwidth
+set wildmenu			" wmnu, menu for command line completion
+set cursorline			" cul, cursorcolumn, cuc
 filetype plugin on
 
 " set guicursor=
@@ -120,7 +131,7 @@ inoremap <C-n> <C-r>=deoplete#manual_complete()<Cr>
 " MAPPINGS
 let mapleader = "\<C-j>" " see :h expr-quote for more on the backslash
 " Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
-nnoremap <Leader>l :call ToggleList()<Cr> " toggle list option
+nnoremap <Leader>l :set list!<Cr>	  " toggle list option
 nnoremap <Leader>f :call ToggleFDC()<Cr>  " toggle foldcolumn
 nnoremap <Leader>n :noh<Cr>		  " disable search highlight
 nnoremap <Tab> >>
@@ -130,17 +141,6 @@ vnoremap <S-Tab> <<
 
 
 " BASIC FUNCTIONS
-
-" Toggles the list setting
-func! ToggleList()
-
-  if &list == 0
-    set list
-  else
-    set nolist
-  endif
-
-endfunc
 
 " Toggles the foldcolumn
 func! ToggleFDC()
@@ -204,6 +204,5 @@ augroup filetype_lisp
   " Remember: you can use <C-I> to insert a tab
 
 augroup END
-
 
 " vim:sts=2:sw=2:noet
