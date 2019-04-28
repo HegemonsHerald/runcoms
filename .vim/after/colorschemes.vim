@@ -1,7 +1,8 @@
+" pre-supposes, that functionals is sourced
+
 let g:colors_name = 'yin'
 
-" selection of schemes compatible with either gui or tui
-let g:colorscheme_list_either = [
+let g:colorscheme_list = [
 			\ 'badwolf',
 			\ 'orbital',
 			\ 'bubblegum-256-dark',
@@ -11,12 +12,7 @@ let g:colorscheme_list_either = [
 			\ 'Tomorrow-Night-Eighties',
 			\ 'wolfpack',
 			\ 'yin',
-			\ 'yang'
-			\ ]
-
-" selection of schemes only compatible with tui, or especially compatible with tui
-" (this includes themes, that look good but wildly different from their tui version)
-let g:colorscheme_list_tui = [
+			\ 'yang',
 			\ 'fahrenheit',
 			\ 'iceberg',
 			\ '256-grayvim',
@@ -24,31 +20,24 @@ let g:colorscheme_list_tui = [
 			\ '256-jungle',
 			\ 'OceanicNext',
 			\ 'blues',
+			\ 'ayu',
+			\ 'cobalt2',
+			\ 'lucid',
+			\ 'anderson',
 			\ 'palenight'
 			\ ]
 
 " depending on whether you select 256-grayvim coming from iceberg or from
 " lapis256, it will change subtly... IDK
 
-
-" selection of schemes only compatible with gui, or especially compatible with gui
-" (this includes themes, that look good but wildly different from their gui version)
-let g:colorscheme_list_gui = [
-			\ 'ayu',
-			\ 'cobalt2',
-			\ 'lucid',
-			\ 'anderson',
-			\ 'OceanicNext',
-			\ 'palenight'
-			\ ]
-
 " special scheme specific settings, first in the list is on-activation, second is on-deactivation
-let g:colorscheme_config_gui = {
-			\ 'cobalt2'  : [ 'set cursorline! cursorline?', 'set cursorline! cursorline?' ]
-			\ }
-
-let g:colorscheme_config_tui = {
-			\ 'lapis256' : [ 'set cursorline! cursorline?', 'set cursorline! cursorline?' ]
+let g:colorscheme_config = {
+			\ '256-grayvim'  : [ 'set notermguicolors', 'set termguicolors' ],
+			\ 'lapis256'     : [ 'set notermguicolors', 'set termguicolors' ],
+			\ '256-jungle'   : [ 'set notermguicolors', 'set termguicolors' ],
+			\ 'Monokai'      : [ [ 'highlight Normal  ctermbg=none guibg=NONE',
+			\                      'highlight NonText ctermbg=none guibg=NONE' ],
+			\                    '' ]
 			\ }
 
 " UTILITIES
@@ -88,21 +77,10 @@ endfunc
 
 " SCHEME LIST
 
-func! MakeGUISchemeList()
-	return g:colorscheme_list_either + g:colorscheme_list_gui
-endfunc
-
-func! MakeTUISchemeList()
-	return g:colorscheme_list_either + g:colorscheme_list_tui
-endfunc
-
-func! MakeCurrentSchemeList()
-	return has('gui_running') ? MakeGUISchemeList() : MakeTUISchemeList()
-endfunc
 
 func! EchoSchemeList()
 
-	let list = MakeCurrentSchemeList()
+	let list = g:colorscheme_list
 
 	for i in range(len(list))
 
@@ -134,20 +112,12 @@ func! SetScheme(name)
 
 	" get the leave settings for the old theme
 
-	if has('gui_running') && has_key(g:colorscheme_config_gui, g:colors_name)
+	if has_key(g:colorscheme_config, g:colors_name)
 
-		" get settings item from gui settings
-		let old_config = g:colorscheme_config_gui[g:colors_name]
+		" get settings item
+		let old_config = g:colorscheme_config[g:colors_name]
 
-		" get leave settings from settings item
-		let old_config = old_config[1]
-
-	elseif has_key(g:colorscheme_config_tui, g:colors_name)
-
-		" get settings item from tui settings
-		let old_config = g:colorscheme_config_tui[g:colors_name]
-
-		" get leave settings from settings item
+		" get leave settings
 		let old_config = old_config[1]
 
 	endif
@@ -155,18 +125,11 @@ func! SetScheme(name)
 
 	" get the start settings for the new theme
 
-	if has('gui_running') && has_key(g:colorscheme_config_gui, a:name)
 
-		" get settings item from gui settings
-		let new_config = g:colorscheme_config_gui[a:name]
+	if has_key(g:colorscheme_config, a:name)
 
-		" get enter settings from settings item
-		let new_config = new_config[0]
-
-	elseif has_key(g:colorscheme_config_tui, a:name)
-
-		" get settings item from tui settings
-		let new_config = g:colorscheme_config_tui[a:name]
+		" get settings item from
+		let new_config = g:colorscheme_config[a:name]
 
 		" get enter settings from settings item
 		let new_config = new_config[0]
@@ -176,11 +139,11 @@ func! SetScheme(name)
 
 	" set the new colorscheme
 
-	exec old_config
+	call ExecConfig(old_config)
 
 	exec ':colorscheme ' . a:name
 
-	exec new_config
+	call ExecConfig(new_config)
 
 	let g:colors_name = a:name
 
@@ -190,10 +153,27 @@ func! SetScheme(name)
 
 endfunc
 
+" executes configuration command[s]
+func! ExecConfig(config)
+
+	" multiple commands?
+	if type(a:config) == v:t_list
+		for cmd in a:config
+			exec cmd
+		endfor
+	
+	" single command?
+	elseif type(a:config) == v:t_string
+		exec a:config
+	endif
+
+
+endfunc
+
 " Sets the colorscheme to the scheme, that has the number of a:index in the list from EchoSchemeList()
 func! SetSchemeByIndex(index)
 
-	let list = MakeCurrentSchemeList()
+	let list = g:colorscheme_list
 
 	let name = list[a:index]
 
@@ -204,9 +184,9 @@ endfunc
 " sets the scheme to the scheme, with the next higher index from the EchoSchemeList list
 func! NextScheme()
 
-	let list = MakeCurrentSchemeList()
+	let list = g:colorscheme_list
 
-	let next_index = FindInList(list, g:colors_name) + 1
+	let next_index = IndexOf(g:colors_name, list) + 1
 
 	" set the scheme to the next index, but wrap around if the index gets out of bounds
 	call SetSchemeByIndex(next_index >= len(list) ? 0 : next_index)
@@ -216,9 +196,9 @@ endfunc
 " sets the scheme to the scheme, with the next lower index from the EchoSchemeList list
 func! PrevScheme()
 
-	let list = MakeCurrentSchemeList()
+	let list = g:colorscheme_list
 
-	let next_index = FindInList(list, g:colors_name) - 1
+	let next_index = IndexOf(g:colors_name, list) - 1
 
 	" set the scheme to the next index, but wrap around if the index gets out of bounds
 	call SetSchemeByIndex(next_index < 0 ? (len(list) - 1) : next_index)
@@ -228,7 +208,7 @@ endfunc
 " set a random scheme
 func! RandomScheme()
 
-	let list = MakeCurrentSchemeList()
+	let list = g:colorscheme_list
 
 	let index = GetRandomNumber(0, len(list) - 1)
 

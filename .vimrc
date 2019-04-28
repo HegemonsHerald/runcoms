@@ -9,8 +9,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'felixhummel/setcolors.vim'
-
 " RUUUUUUST and HASKEEEEELLLL and LIIIIIISSSSSSP
 Plugin 'rust-lang/rust.vim'
 Plugin 'neovimhaskell/haskell-vim'
@@ -27,10 +25,13 @@ Plugin 'Shougo/deoplete.nvim', {
 " Tiny things
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'markonm/traces.vim'
-Plugin 'flazz/vim-colorschemes'
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+
+" Colorschemes
+" Plugin 'flazz/vim-colorschemes'
+Plugin 'ayu-theme/ayu-vim'
 
 " My things
 Plugin 'hegemonsherald/vim-codegen'
@@ -62,11 +63,6 @@ let g:LanguageClient_serverCommands = {
 
 
 " SYNTAX AND THEMING
-syntax on
-
-" color Monokai
-" highlight Normal ctermbg=none
-" highlight NonText ctermbg=none
 
 " use underlining when highlighting Search results
 highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
@@ -95,7 +91,9 @@ set foldmethod=manual
 set colorcolumn=+2		" cc, highlight the column to the right of textwidth
 set wildmenu			" wmnu, menu for command line completion
 set cursorline			" cul, cursorcolumn, cuc
-filetype plugin on
+syntax on
+set termguicolors		" make use of gui colors for the terminal <-- truecolor support
+filetype plugin on		" load filetype specific plugins
 
 " set guicursor=
 
@@ -131,10 +129,18 @@ inoremap <C-n> <C-r>=deoplete#manual_complete()<Cr>
 " MAPPINGS
 let mapleader = "\<C-j>" " see :h expr-quote for more on the backslash
 " Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
+
 nnoremap <Leader>l :set list!<Cr>	  " toggle list option
 nnoremap <Leader>f :call ToggleFDC()<Cr>  " toggle foldcolumn
 nnoremap <Leader>n :noh<Cr>		  " disable search highlight
 nnoremap <Leader>c :set cursorline!<Cr>	  " toggle cursorline
+
+" substitution mappings
+noremap s/	:s/\v/g<Left><Left>
+nnoremap s%	:%s/\v/g<Left><Left>
+nnoremap S	0D
+
+" indentation mappings
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
 vnoremap <Tab> >>
