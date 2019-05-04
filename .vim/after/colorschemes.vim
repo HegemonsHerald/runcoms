@@ -232,6 +232,9 @@ endfunc
 
 " MAPPINGS
 
+" These may have to be reconsidered a bit, cause right now I'm just filling up
+" the function keys.
+
 nnoremap <F7> :call RandomScheme()<CR>
 nnoremap <F8> :call PrevScheme()<CR>
 nnoremap <F9> :call NextScheme()<CR>
@@ -239,3 +242,10 @@ nnoremap <F10> :call EchoSchemeList()<CR>
 
 " Setting Command
 command! -nargs=1 Colo :call ColoCommand(<args>)
+
+" Make setting normal background for transparencies neat
+func s:SetNormalBackground()
+	highlight Normal  ctermbg=none guibg=NONE
+	highlight NonText ctermbg=none guibg=NONE
+endfunc
+nnoremap <F6> :call <SID>SetNormalBackground()<Cr>
