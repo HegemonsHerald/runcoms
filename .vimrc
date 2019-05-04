@@ -92,8 +92,12 @@ set colorcolumn=+2		" cc, highlight the column to the right of textwidth
 set wildmenu			" wmnu, menu for command line completion
 set cursorline			" cul, cursorcolumn, cuc
 syntax on
-set termguicolors		" make use of gui colors for the terminal <-- truecolor support
 filetype plugin on		" load filetype specific plugins
+
+set termguicolors		" make use of gui colors for the terminal <-- truecolor support
+" These two make termguicolors work with tmux
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " set guicursor=
 
@@ -211,5 +215,6 @@ augroup filetype_lisp
   " Remember: you can use <C-I> to insert a tab
 
 augroup END
+
 
 " vim:sts=2:sw=2:noet
