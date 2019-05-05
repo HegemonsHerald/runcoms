@@ -250,4 +250,4 @@ func s:SetNormalBackground()
 	highlight Normal  ctermbg=none guibg=NONE
 	highlight NonText ctermbg=none guibg=NONE
 endfunc
-nnoremap <F6> :call <SID>SetNormalBackground()<Cr>
+nnoremap <F6> :call <SID>SetNormalBackground()<CR>
