@@ -24,7 +24,9 @@ let g:colorscheme_list = [
 			\ 'cobalt2',
 			\ 'lucid',
 			\ 'anderson',
-			\ 'palenight'
+			\ 'palenight',
+			\ 'neodark',
+			\ 'spacegray'
 			\ ]
 
 " depending on whether you select 256-grayvim coming from iceberg or from
