@@ -18,6 +18,7 @@ fi
 # General Aliases
 alias ranger='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"; ls;'
 alias vifm='vifm --choose-dir "$HOME/.vifm_dir" && cd "$(cat $HOME/.vifm_dir)" && ls'
+alias v='vifm'
 alias wtouch='wacom-toggle_touch.sh'
 alias youtube-dl="youtube-dl --config-location '~/.config/youtube-dl.conf'"
 alias fzf='fzf --multi --preview="highlight --force -O ansi {} | head -$LINES --silent"'
