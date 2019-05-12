@@ -216,5 +216,7 @@ augroup filetype_lisp
 
 augroup END
 
+autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
+
 
 " vim:sts=2:sw=2:noet
