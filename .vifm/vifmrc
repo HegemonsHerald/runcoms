@@ -430,6 +430,10 @@ nnoremap <f6> :move<cr>
 nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
 
+
+" Quick Loock on the mac
+nnoremap <space> :!qlmanage -p %f 2> /dev/null &<cr>
+
 " ------------------------------------------------------------------------------
 
 " Various customization examples
