@@ -1,0 +1,4 @@
+#!/bin/sh
+export CHEZSCHEMELIBDIRS="/Users/code/.akku/lib"
+unset CHEZSCHEMELIBEXTS
+exec scheme-script "/Users/code/.akku/bin/akku.sps" "$@"
