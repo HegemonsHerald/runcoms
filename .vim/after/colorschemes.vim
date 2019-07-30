@@ -1,6 +1,6 @@
 " pre-supposes, that functionals is sourced
 
-let g:colors_name = 'yin'
+let g:colors_name = 'ayu'
 
 let g:colorscheme_list = [
 			\ 'badwolf',

@@ -39,6 +39,8 @@ export LOCALE="en_us.utf-8"
 if [ $(uname -s) = "Darwin" ]; then
 
 	export COLORTERM=truecolor
+
+	export CHEZSCHEMELIBDIRS="$HOME/.scripts/scheme-env/:./"
 fi
 
 # Main Linux specific stuff

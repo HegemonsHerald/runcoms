@@ -23,7 +23,7 @@ Plugin 'Shougo/deoplete.nvim', {
   \ }
 
 " Tiny things
-Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'terryma/vim-multiple-cursors'
 Plugin 'markonm/traces.vim'
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'junegunn/fzf'
@@ -57,9 +57,9 @@ runtime colorschemes.vim
 
 " LAGUAGE CLIENT NEOVIM
 set hidden
-let g:LanguageClient_serverCommands = {
-      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ }
+"let g:LanguageClient_serverCommands = {
+"      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"      \ }
 
 
 " SYNTAX AND THEMING
@@ -93,6 +93,9 @@ set wildmenu			" wmnu, menu for command line completion
 set cursorline			" cul, cursorcolumn, cuc
 syntax on
 filetype plugin on		" load filetype specific plugins
+
+set sts=3
+set sw=3
 
 set termguicolors		" make use of gui colors for the terminal <-- truecolor support
 " These two make termguicolors work with tmux
@@ -217,6 +220,5 @@ augroup filetype_lisp
 augroup END
 
 autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
-
 
 " vim:sts=2:sw=2:noet

@@ -1,0 +1,11 @@
+[EXCLUDE]
+.config
+.screenlayout
+.local
+.i3
+
+[INCLUDE]
+.config/alacritty
+.config/youtube-dl.conf
+
+
