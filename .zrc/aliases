@@ -25,6 +25,8 @@ alias fzf='fzf --multi --preview="highlight --force -O ansi {} | head -$LINES --
 alias chmodx='chmod +x'
 alias ran='ranger'
 alias :q='exit'
+alias Q='exit'
+alias q='exit'
 alias asciib='asciib.sh'
 alias sus='suspend.sh'
 alias ls1='ls -1'
