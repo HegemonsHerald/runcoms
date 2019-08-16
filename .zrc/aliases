@@ -3,18 +3,23 @@
 # Linux Specific
 if [ $(uname -s) = "Linux" ]; then
 
-	alias ls='ls --color -F -h'
+        alias ls='ls --color -F -h'
 
 fi
 
 # Mac Specific
 if [ $(uname -s) = "Darwin" ]; then
 
-	# alias ls='ls -G -L -h'
-	alias ls='exa'
+        # alias ls='ls -G -L -h'
+        alias ls='exa'
 
-	alias xrandr_reset='xrandr -s 1680x1050'
-	alias xrandr_max='xrandr -s 2880x1800'
+        # control xterm resolution under xQuartz (so you may use X11 on the mac)
+        alias xrandr_reset='xrandr -s 1680x1050'
+        alias xrandr_max='xrandr -s 2880x1800'
+
+        # fixes bug, where mpv can't open files under macOs for some reason
+        # I believe media keys are thing like "play" buttons
+        alias mpv='mpv --input-media-keys=no'
 
 fi
 
@@ -44,14 +49,14 @@ alias q='exit'
 alias sus='suspend.sh'
 
 # Search Function
-alias s='search'			# search for filename and content
-alias cds='cd_search'			# cd search	(full search)
-alias cdf='cd_search_filename'		# cd file	(filename and dirname search)
-alias cdd='cd_search_directory' 	# cd directory	(dirname only search)
-alias vims='vim_search'			# vim search
-alias sless='less_search'		# search | less
-alias cats='content_search_exact'	# lets you search the contents of $1 by line, cat $1 | search
-alias cs='select_and_search'		# lets you select a file with search to search with cats, search $1 | cats
+alias s='search'                        # search for filename and content
+alias cds='cd_search'                   # cd search     (full search)
+alias cdf='cd_search_filename'          # cd file       (filename and dirname search)
+alias cdd='cd_search_directory'         # cd directory  (dirname only search)
+alias vims='vim_search'                 # vim search
+alias sless='less_search'               # search | less
+alias cats='content_search_exact'       # lets you search the contents of $1 by line, cat $1 | search
+alias cs='select_and_search'            # lets you select a file with search to search with cats, search $1 | cats
 
 # Git
 alias g='git'
