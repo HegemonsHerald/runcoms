@@ -25,7 +25,7 @@ alias asciib='asciib.sh'
 alias p6='perl6'
 alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
 alias youtube-dl="youtube-dl --config-location '~/.config/youtube-dl.conf'"
-alias sxiv='sxiv -o'
+alias sxiv='sxiv -bo'
 alias mpvp='mpv --playlist '
 
 # File Management
