@@ -114,7 +114,11 @@ let &t_ut = ""
 " DEOPLETE CONFIG
 " Note: the dependancy nvim-yarp of this, requires pynvim to be installed
 " (pip3 install pynvim)
-let g:deoplete#enable_at_startup = 1
+
+" Enable deoplete at startup (this isn't active right now, cause turns out it
+" slooooow)
+" let g:deoplete#enable_at_startup = 1
+
 call deoplete#custom#option({
       \ 'auto_complete': v:false,
       \ })
