@@ -13,6 +13,9 @@ if [ $(uname -s) = "Darwin" ]; then
 	# alias ls='ls -G -L -h'
 	alias ls='exa'
 
+	alias xrandr_reset='xrandr -s 1680x1050'
+	alias xrandr_max='xrandr -s 2880x1800'
+
 fi
 
 # General Aliases
