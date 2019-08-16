@@ -97,10 +97,16 @@ filetype plugin on		" load filetype specific plugins
 set sts=3
 set sw=3
 
+" Fixes for weird color conditions
+
 set termguicolors		" make use of gui colors for the terminal <-- truecolor support
+
 " These two make termguicolors work with tmux
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" Kitty Terminal fix background flickering
+let &t_ut = ""
 
 " set guicursor=
 
