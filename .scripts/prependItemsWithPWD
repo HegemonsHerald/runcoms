@@ -1,4 +1,4 @@
-#!/usr/local/bin/dash
+#!/bin/dash
 
 # prepends a list of files with $PWD. (eg for fixing relative output from sxiv)
 

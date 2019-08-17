@@ -1,4 +1,4 @@
-#!/usr/local/bin/dash
+#!/bin/dash
 
 # hardlinks a list of files into a target directory
 # stdin	 list of files to link
