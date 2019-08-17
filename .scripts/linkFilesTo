@@ -5,5 +5,5 @@
 # $1	 target directory
 
 while read -r file; do
-   ln -i "$file" "$1"
+   ln "$file" "$1"
 done
