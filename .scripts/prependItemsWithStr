@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/dash
 
 # prepends a list of files with the String from $1
 

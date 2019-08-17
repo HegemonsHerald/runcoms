@@ -1,8 +1,9 @@
-#! /usr/bin/awk -f
+#!/usr/bin/awk -f
 
 # filter_ie -- filter with include and exclude patterns.
 # 
 # USAGE
+#
 #    filter_ie -v [ file=<pattern file> | i=<patterns> | e=<patterns> ]
 # 
 #    One may use combinations of `file`, `i` and `e`, but at least one has to be
@@ -29,18 +30,6 @@
 #       - lines that match any include pattern are always kept
 #       - lines that match an exclude pattern and don't match an include pattern
 #         are discarded
-# 
-#    As a boolean table:
-# 
-#       ┏━━━┳━━━┳━━━━━━━━━━━━━━┳━━━┓
-#       ┃ i ┃ e ┃ i OR (NOT e) ┃ = ┃
-#       ┣━━━╋━━━╋━━━━━━━━━━━━━━╋━━━┫
-#       │ 1 │ _ │ 1 OR _______ │ 1 │ > true if included
-#       ├───┼───┼──────────────┼───┤
-#       │ 0 │ 0 │ 0 OR    1    │ 1 │ > true if not excluded
-#       ├───┼───┼──────────────┼───┤
-#       │ 0 │ 1 │ 0 OR    0    │ 0 │ > false if excluded and not included
-#       └───┴───┴──────────────┴───┘
 # 
 # 
 # SYNTAX FOR PATTERN FILES
@@ -74,15 +63,10 @@
 #       ```
 
 
-# Get the patterns based on provided arguments
 BEGIN {
-
-   # include_patterns and exclude_patterns will be arrays containing all the
-   # patterns to check with. The patterns are the array's subscripts!
 
    # no patterns provided is an error
    if (file == "" && i == "" && e == "") { print "Usage: filter_ie -v [file=...|i=...|e=...]\nManual included in script file; use where filter_ie."; exit 1 }
-
 
    # pattern file provided
    if (file != "") {
