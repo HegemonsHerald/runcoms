@@ -1,7 +1,15 @@
 # DEFINE FUNCTIONS
 
+function toUpper () {
+   echo "$@" | awk '{ print toupper($0) }'
+}
+
+function toLower () {
+   echo "$@" | awk '{ print tolower($0) }'
+}
+
 # repeats until no errors happen
-function cycle {
+function cycle () {
    $@
 
    while [ $? -ne 0 ]
