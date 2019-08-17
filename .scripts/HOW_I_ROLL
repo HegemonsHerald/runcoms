@@ -1,0 +1,20 @@
+
+Scripts that just do some action are named in snake_case and end in .sh:
+
+   suspend.sh
+   wacom-toggle_touch.sh
+
+
+Scripts that function as part of a pipeline are named in lowerCamelCase without
+extension. They follow Haskell's naming convention, as the UNIX pipe is
+analogous to a kind of IO Monad:
+
+   filterIncludeExclude
+   linkFilesTo
+
+
+Comments in scripts should be sparse -- follow the suckless philosophy for the
+code itself.  You are smart enough to look things up, if you don't quite
+remember.
+However there should be one man page comment, that includes a brief
+description, a list of possible inputs and valid options.
