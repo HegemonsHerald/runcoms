@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# prepends a list of files with the String from $1
+
+while read -r line; do
+   echo "$1$line"
+done

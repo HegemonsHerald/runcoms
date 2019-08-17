@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# prepends a list of files with $PWD. (eg for fixing relative output from sxiv)
+
+while read -r file; do
+   echo "$PWD/$file"
+done

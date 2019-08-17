@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# hardlinks a list of files into a target directory
+# stdin	 list of files to link
+# $1	 target directory
+
+while read -r file; do
+   ln "$file" "$1"
+done
