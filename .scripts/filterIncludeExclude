@@ -3,7 +3,6 @@
 # filter_ie -- filter with include and exclude patterns.
 # 
 # USAGE
-
 #    filter_ie -v [ file=<pattern file> | i=<patterns> | e=<patterns> ]
 # 
 #    One may use combinations of `file`, `i` and `e`, but at least one has to be
