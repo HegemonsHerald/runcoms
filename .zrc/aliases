@@ -4,13 +4,15 @@
 if [ $(uname -s) = "Linux" ]; then
 
         alias ls='ls --color -F -h'
+        # alias ls='exa'
+
+        alias cdr='... IDK'
 
 fi
 
 # Mac Specific
 if [ $(uname -s) = "Darwin" ]; then
 
-        # alias ls='ls -G -L -h'
         alias ls='exa'
 
         # control xterm resolution under xQuartz (so you may use X11 on the mac)
@@ -21,17 +23,17 @@ if [ $(uname -s) = "Darwin" ]; then
         # I believe media keys are thing like "play" buttons
         alias mpv='mpv --input-media-keys=no'
 
+        alias cdr='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/'
+
 fi
 
 # General Aliases
 alias fzf='fzf --multi --preview="highlight --force -O ansi {} | head -$LINES --silent"'
-alias wtouch='wacom-toggle_touch.sh'
-alias asciib='asciib.sh'
+alias sxiv='sxiv -bos f'
+alias youtube-dl="youtube-dl --config-location '~/.config/youtube-dl.conf'"
+alias mpvp='mpv --playlist '
 alias p6='perl6'
 alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
-alias youtube-dl="youtube-dl --config-location '~/.config/youtube-dl.conf'"
-alias sxiv='sxiv -bos f'
-alias mpvp='mpv --playlist '
 
 # File Management
 alias chmodx='chmod +x'
@@ -41,6 +43,7 @@ alias ls1='ls -1'
 alias lsl='ls -al'
 alias vifm='vifm --choose-dir "$HOME/.vifm_dir" && cd "$(cat $HOME/.vifm_dir)" && ls'
 alias v='vifm'
+alias vi='vim'
 
 # Session management
 alias :q='exit'
@@ -71,6 +74,7 @@ alias gs='git status'
 alias gl='git log'
 alias gst='git stash'
 alias gsta='git stash apply'
+alias gd='git diff'
 
 # Cargo
 alias cr='cargo run'
