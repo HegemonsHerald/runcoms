@@ -14,19 +14,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'neovimhaskell/haskell-vim'
 " Plugin 'kovisoft/slimv'
 
-" " More advanced autocompletion
-" Plugin 'roxma/nvim-yarp'
-" Plugin 'roxma/vim-hug-neovim-rpc'
-" Plugin 'Shougo/deoplete.nvim', {
-"   \ 'branch': 'next',
-"   \ 'do': 'bash install.sh'
-"   \ }
-
 " Tiny things
-" Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'scrooloose/nerdcommenter'
-" Plugin 'junegunn/fzf'
-" Plugin 'junegunn/fzf.vim'
 Plugin 'markonm/traces.vim'
 
 " Colorschemes
@@ -37,8 +25,9 @@ Plugin 'ayu-theme/ayu-vim'
 Plugin 'hegemonsherald/vim-codegen'
 Plugin 'hegemonsherald/vim-dlx_syntax'
 
-" Language Server
-" Plugin 'autozimu/LanguageClient-neovim'
+" Note: I removed Language Server and Deoplete Completion (and some other
+" things). Their old config is the diff of a commit from 19. August 2019
+" (2019.08.19) at 2:30-ish in the morning
 
 call vundle#end()
 filetype plugin indent on
@@ -53,13 +42,6 @@ filetype plugin indent on
 " These files are in ~/.vim/after
 runtime functionals.vim
 runtime colorschemes.vim
-
-
-" LAGUAGE CLIENT NEOVIM
-set hidden
-"let g:LanguageClient_serverCommands = {
-"      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-"      \ }
 
 
 " SYNTAX AND THEMING
@@ -111,38 +93,6 @@ let &t_ut = ""
 " set guicursor=
 
 
-" " DEOPLETE CONFIG
-" " Note: the dependancy nvim-yarp of this, requires pynvim to be installed
-" " (pip3 install pynvim)
-" 
-" Enable deoplete at startup (this isn't active right now, cause turns out it
-" slooooow)
-" let g:deoplete#enable_at_startup = 1
-" 
-" call deoplete#custom#option({
-"       \ 'auto_complete': v:false,
-"       \ })
-" 
-" " Make it select the first item from the menu
-" set completeopt=menu,noinsert
-" 
-" call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-" 
-" " For some reason this makes it select the first entry of the menu...?
-" set completeopt+=noinsert
-" 
-" " Map deoplete to CTRL-N
-" inoremap <C-n> <C-r>=Deoplete_helper()<Cr>
-" 
-" func! Deoplete_helper()
-"   return deoplete#manual_complete() . deoplete#close_popup()
-" endfunc
-" 
-" " Make completion lazy
-" call deoplete#custom#option('auto_complete', v:false)
-" inoremap <C-n> <C-r>=deoplete#manual_complete()<Cr>
-
-
 " MAPPINGS
 let mapleader = "\<C-j>" " see :h expr-quote for more on the backslash
 " Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
@@ -187,21 +137,6 @@ augroup AutoSaveFolds
   autocmd BufWinLeave * silent! mkview  " mkview saves the folds in a viewfile in ~/.vim/views/
   autocmd BufWinEnter * silent! loadview  " loadview loads the appropriate viewfile
 augroup END
-
-
-" " FZF AND SEARCH CONFIG
-" 
-" let g:fzf_layout = { 'down':'~40%' }
-" function! FzyCommand(search, vim_command)
-"   " search for a:search in files and filenames ...
-"   let results = split(system('printf "$(fd -Ht f -c never ' . shellescape(a:search) . ' )\n$(ag -il --nocolor ' . shellescape(a:search) . ' )\n" | sort -u'))
-" 
-"   " ... then pipe it into fzf and enable a preview and multi selection
-"   let output = fzf#run(fzf#vim#with_preview(fzf#wrap('', {'source':results, 'options':'--multi', 'sink':a:vim_command})))
-" endfunction
-" 
-" " SEARCH BOTH FILES AND FILE CONTENTS
-" command! -nargs=1 FF call FzyCommand(<q-args>, "e", 1) | normal /\c<args>/<CR>ggn
 
 
 " " MULTI CURSORS
