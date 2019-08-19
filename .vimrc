@@ -14,20 +14,20 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'neovimhaskell/haskell-vim'
 " Plugin 'kovisoft/slimv'
 
-" More advanced autocompletion
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'Shougo/deoplete.nvim', {
-  \ 'branch': 'next',
-  \ 'do': 'bash install.sh'
-  \ }
+" " More advanced autocompletion
+" Plugin 'roxma/nvim-yarp'
+" Plugin 'roxma/vim-hug-neovim-rpc'
+" Plugin 'Shougo/deoplete.nvim', {
+"   \ 'branch': 'next',
+"   \ 'do': 'bash install.sh'
+"   \ }
 
 " Tiny things
 " Plugin 'terryma/vim-multiple-cursors'
-Plugin 'markonm/traces.vim'
 " Plugin 'scrooloose/nerdcommenter'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+" Plugin 'junegunn/fzf'
+" Plugin 'junegunn/fzf.vim'
+Plugin 'markonm/traces.vim'
 
 " Colorschemes
 Plugin 'flazz/vim-colorschemes'
@@ -38,7 +38,7 @@ Plugin 'hegemonsherald/vim-codegen'
 Plugin 'hegemonsherald/vim-dlx_syntax'
 
 " Language Server
-Plugin 'autozimu/LanguageClient-neovim'
+" Plugin 'autozimu/LanguageClient-neovim'
 
 call vundle#end()
 filetype plugin indent on
@@ -111,36 +111,36 @@ let &t_ut = ""
 " set guicursor=
 
 
-" DEOPLETE CONFIG
-" Note: the dependancy nvim-yarp of this, requires pynvim to be installed
-" (pip3 install pynvim)
-
+" " DEOPLETE CONFIG
+" " Note: the dependancy nvim-yarp of this, requires pynvim to be installed
+" " (pip3 install pynvim)
+" 
 " Enable deoplete at startup (this isn't active right now, cause turns out it
 " slooooow)
 " let g:deoplete#enable_at_startup = 1
-
-call deoplete#custom#option({
-      \ 'auto_complete': v:false,
-      \ })
-
-" Make it select the first item from the menu
-set completeopt=menu,noinsert
-
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-
-" For some reason this makes it select the first entry of the menu...?
-set completeopt+=noinsert
-
-" Map deoplete to CTRL-N
-inoremap <C-n> <C-r>=Deoplete_helper()<Cr>
-
-func! Deoplete_helper()
-  return deoplete#manual_complete() . deoplete#close_popup()
-endfunc
-
-" Make completion lazy
-call deoplete#custom#option('auto_complete', v:false)
-inoremap <C-n> <C-r>=deoplete#manual_complete()<Cr>
+" 
+" call deoplete#custom#option({
+"       \ 'auto_complete': v:false,
+"       \ })
+" 
+" " Make it select the first item from the menu
+" set completeopt=menu,noinsert
+" 
+" call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+" 
+" " For some reason this makes it select the first entry of the menu...?
+" set completeopt+=noinsert
+" 
+" " Map deoplete to CTRL-N
+" inoremap <C-n> <C-r>=Deoplete_helper()<Cr>
+" 
+" func! Deoplete_helper()
+"   return deoplete#manual_complete() . deoplete#close_popup()
+" endfunc
+" 
+" " Make completion lazy
+" call deoplete#custom#option('auto_complete', v:false)
+" inoremap <C-n> <C-r>=deoplete#manual_complete()<Cr>
 
 
 " MAPPINGS
@@ -189,33 +189,33 @@ augroup AutoSaveFolds
 augroup END
 
 
-" FZF AND SEARCH CONFIG
+" " FZF AND SEARCH CONFIG
+" 
+" let g:fzf_layout = { 'down':'~40%' }
+" function! FzyCommand(search, vim_command)
+"   " search for a:search in files and filenames ...
+"   let results = split(system('printf "$(fd -Ht f -c never ' . shellescape(a:search) . ' )\n$(ag -il --nocolor ' . shellescape(a:search) . ' )\n" | sort -u'))
+" 
+"   " ... then pipe it into fzf and enable a preview and multi selection
+"   let output = fzf#run(fzf#vim#with_preview(fzf#wrap('', {'source':results, 'options':'--multi', 'sink':a:vim_command})))
+" endfunction
+" 
+" " SEARCH BOTH FILES AND FILE CONTENTS
+" command! -nargs=1 FF call FzyCommand(<q-args>, "e", 1) | normal /\c<args>/<CR>ggn
 
-let g:fzf_layout = { 'down':'~40%' }
-function! FzyCommand(search, vim_command)
-  " search for a:search in files and filenames ...
-  let results = split(system('printf "$(fd -Ht f -c never ' . shellescape(a:search) . ' )\n$(ag -il --nocolor ' . shellescape(a:search) . ' )\n" | sort -u'))
 
-  " ... then pipe it into fzf and enable a preview and multi selection
-  let output = fzf#run(fzf#vim#with_preview(fzf#wrap('', {'source':results, 'options':'--multi', 'sink':a:vim_command})))
-endfunction
-
-" SEARCH BOTH FILES AND FILE CONTENTS
-command! -nargs=1 FF call FzyCommand(<q-args>, "e", 1) | normal /\c<args>/<CR>ggn
-
-
-" MULTI CURSORS
-let g:multi_cursor_use_default_mapping=0
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-m>'
-let g:multi_cursor_select_all_word_key = '<A-m>'
-let g:multi_cursor_start_key           = 'g<C-m>'
-let g:multi_cursor_select_all_key      = 'g<A-m>'
-let g:multi_cursor_next_key            = '<C-m>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
+" " MULTI CURSORS
+" let g:multi_cursor_use_default_mapping=0
+" 
+" " Default mapping
+" let g:multi_cursor_start_word_key      = '<C-m>'
+" let g:multi_cursor_select_all_word_key = '<A-m>'
+" let g:multi_cursor_start_key           = 'g<C-m>'
+" let g:multi_cursor_select_all_key      = 'g<A-m>'
+" let g:multi_cursor_next_key            = '<C-m>'
+" let g:multi_cursor_prev_key            = '<C-p>'
+" let g:multi_cursor_skip_key            = '<C-x>'
+" let g:multi_cursor_quit_key            = '<Esc>'
 
 
 " FILETYPE SPECIFIC CONFIGS
