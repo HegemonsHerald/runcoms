@@ -1,0 +1,13 @@
+#!/bin/dash
+
+# repeats until no errors happen
+
+$@
+
+while [ $? -ne 0 ]
+do
+   echo "Command: $1 exited with code $?"
+   echo "Waiting 5 seconds for User Interrupt until recursion..."
+   sleep 5s
+   $@
+done

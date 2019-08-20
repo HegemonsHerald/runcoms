@@ -1,39 +1,40 @@
 # DEFINE FUNCTIONS
 
-function toUpper () {
-   echo "$@" | awk '{ print toupper($0) }'
-}
-
-function toLower () {
-   echo "$@" | awk '{ print tolower($0) }'
-}
-
-# repeats until no errors happen
-function cycle () {
-   $@
-
-   while [ $? -ne 0 ]
-   do
-      echo "command: $1 exited with code 1 [ERROR]"
-      echo "waiting 5 seconds for User Interrupt until recursion"
-      sleep 5s
-   done
-}
-
-# hardlinks a list of files into a target directory
-# stdin	 list of files to link
-# $1	 target directory
-function linkFilesTo () {
-   xargs -I file ln file "$1"
-}
-
-function prependFilesWithPWD () {
-   xargs -I file echo "$PWD/file"
-}
-
-function prependItemsWith () {
-   xargs -I line echo "$@line"
-}
+# function toUpper () {
+#    echo "$@" | awk '{ print toupper($0) }'
+# }
+# 
+# function toLower () {
+#    echo "$@" | awk '{ print tolower($0) }'
+# }
+# 
+# # repeats until no errors happen
+# function cycle () {
+#    $@
+# 
+#    while [ $? -ne 0 ]
+#    do
+#       echo "command: $1 exited with code 1 [ERROR]"
+#       echo "waiting 5 seconds for User Interrupt until recursion"
+#       sleep 5s
+#       $@
+#    done
+# }
+# 
+# # hardlinks a list of files into a target directory
+# # stdin	 list of files to link
+# # $1	 target directory
+# function linkFilesTo () {
+#    xargs -I file ln file "$1"
+# }
+# 
+# function prependFilesWithPWD () {
+#    xargs -I file echo "$PWD/file"
+# }
+# 
+# function prependItemsWith () {
+#    xargs -I line echo "$@line"
+# }
 
 
 
