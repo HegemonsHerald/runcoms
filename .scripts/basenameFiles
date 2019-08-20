@@ -1,0 +1,5 @@
+#!/bin/dash
+
+while read -r file; do
+   basename "$file"
+done
