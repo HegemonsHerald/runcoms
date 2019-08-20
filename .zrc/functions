@@ -20,37 +20,19 @@ function cycle () {
    done
 }
 
-function map () {
-   while read -r line; do
-      echo "$line" | $@
-   done
-}
-
-function mapArg () {
-   while read -r line; do
-      $@ "$line"
-   done
-}
-
 # hardlinks a list of files into a target directory
 # stdin	 list of files to link
 # $1	 target directory
 function linkFilesTo () {
-   while read -r file; do
-      ln "$file" "$1"
-   done
+   xargs -I file ln file "$1"
 }
 
 function prependFilesWithPWD () {
-   while read -r file; do
-      echo "$PWD/$file"
-   done
+   xargs -I file echo "$PWD/file"
 }
 
 function prependItemsWith () {
-   while read -r line; do
-      echo "$@$line"
-   done
+   xargs -I line echo "$@line"
 }
 
 
