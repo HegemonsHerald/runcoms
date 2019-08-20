@@ -437,7 +437,8 @@ exec_always nitrogen --restore
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # rofi
-bindsym $mod+d exec rofi -show run -theme ~/.config/rofi/theme.rasi
+# bindsym $mod+d exec rofi -show run -theme ~/.config/rofi/theme.rasi
+bindsym $mod+d exec dmenu_run -i -l 44 -fn 'Monaco'
 
 # gaps config
 for_window [class="^.*"] border pixel 0
