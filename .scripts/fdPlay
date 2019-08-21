@@ -16,7 +16,7 @@
 
 fname="playlist-$RANDOM"
 
-fd -t f $@ | xargs -d "\n" -I % realpath "./%" >> $fname
+fd -t f $@ | xargs -d "\n" -I % realpath "./%" > $fname
 
 mpv --playlist $fname
 
