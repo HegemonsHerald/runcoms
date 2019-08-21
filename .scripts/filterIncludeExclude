@@ -1,0 +1,124 @@
+#!/usr/bin/awk -f
+
+# filter_ie -- filter with include and exclude patterns.
+# 
+# USAGE
+#
+#    filter_ie -v [ file=<pattern file> | i=<patterns> | e=<patterns> ]
+# 
+#    One may use combinations of `file`, `i` and `e`, but at least one has to be
+#    specified.
+# 
+#    file=<name>    read patterns from pattern file with name <name> (see below)
+#    i=<patterns>   include patterns specified in newline-separated string
+#    e=<patterns>   exclude patterns specified in newline-separated string
+# 
+# 
+# WHAT THIS DOES
+# 
+#    This utility filters lines against include and exclude patterns. The
+#    patterns are regular expressions.
+# 
+#    Lines are filtered using this boolean expresssion:
+# 
+#       print if: included(line) || !excluded(line)
+# 
+#    which reads as: "line is included in output OR line is NOT excluded from
+#    output", that is
+# 
+#       - lines that don't match an exclude pattern are always kept
+#       - lines that match any include pattern are always kept
+#       - lines that match an exclude pattern and don't match an include pattern
+#         are discarded
+# 
+# 
+# SYNTAX FOR PATTERN FILES
+# 
+#    Empty lines are ignored.
+# 
+#    The file is split into two sections: the include and exclude patterns.
+#    (Technically one can have as many of these sections as one wants, but why tho?)
+# 
+#    A section begins with a section header, i.e. one of these lines:
+# 
+#       "$ Include"
+#       "$ Exclude"
+# 
+#    Lines above the first section are also ignored.
+# 
+#    Example:
+# 
+#       ```
+#       you can't match me!
+#       match me, if you can
+# 
+#       $ Include
+#       this (is|indeed) a serious pattern
+#       hohoho
+# 
+#       $ Exclude
+#       oh no
+#       not me
+#       please!!!
+#       ```
+
+
+BEGIN {
+
+   # no patterns provided is an error
+   if (file == "" && i == "" && e == "") { print "Usage: filter_ie -v [file=...|i=...|e=...]\nManual included in script file; use where filter_ie."; exit 1 }
+
+   # pattern file provided
+   if (file != "") {
+
+      read_state = "Neither"
+      while (getline x <file > 0) {
+
+	 if      (match(x, /^\$ Include$/)) read_state = "Include"
+	 else if (match(x, /^\$ Exclude$/)) read_state = "Exclude"
+
+	 else if (x == "") continue
+
+	 else if (read_state == "Include") include_patterns[x]
+	 else if (read_state == "Exclude") exclude_patterns[x]
+
+      } 
+
+   }
+
+   # cli flags provided
+   if (i != "") cli_patterns(i, include_patterns)
+   if (e != "") cli_patterns(e, exclude_patterns)
+
+}
+
+
+
+# Actually do the thing:
+{ if (included($0) || !excluded($0)) { print } else { next } }
+
+
+
+function included(line) {
+   return match_patterns(line, include_patterns)
+}
+
+function excluded(line) {
+   return match_patterns(line, exclude_patterns)
+}
+
+# true if line matches one of the regex in patterns
+function match_patterns(line, patterns) {
+   for (patt in patterns) {
+      if (match(line, patt)) return 1
+   }
+   return 0
+}
+
+# handle patterns supplied through cli flags
+function cli_patterns(var, tgt) {
+   split(var, a, /\n/)
+   for (patt in a) {
+      tgt[a[patt]]
+   }
+}

@@ -1,0 +1,7 @@
+#!/bin/dash
+
+# hardlinks a list of files into a target directory
+# stdin	 list of files to link
+# $1	 target directory
+
+xargs -I file ln file "$1"

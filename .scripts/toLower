@@ -1,0 +1,3 @@
+#!/bin/dash
+
+echo "$@" | awk '{ print tolower($0) }'

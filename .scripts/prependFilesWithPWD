@@ -1,0 +1,3 @@
+#!/bin/dash
+
+xargs -I file echo "$PWD/file"

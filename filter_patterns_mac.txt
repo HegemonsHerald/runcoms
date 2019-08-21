@@ -1,0 +1,9 @@
+$ Exclude
+.config
+.screenlayout
+.local
+.i3
+
+$ Include
+.config/alacritty
+.config/youtube-dl.conf

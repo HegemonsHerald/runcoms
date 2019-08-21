@@ -3,7 +3,7 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
@@ -11,6 +11,7 @@
   # check the local terminfo database and use 'alacritty' if it is
   # available, otherwise 'xterm-256color' is used.
   #TERM: xterm-256color
+  LANG: en_us.utf-8
 
 window:
   # Window dimensions (changes require restart)
@@ -26,15 +27,15 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 0
-    y: 0
+    x: 15
+    y: 15
 
   # Window decorations
   #
   # Values for `decorations`:
   #     - full: Borders and title bar
   #     - none: Neither borders nor title bar
-  decorations: none
+  decorations: full
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -87,19 +88,16 @@ font:
   # Normal (roman) font face
   normal:
     family: hack
-    # The `style` can be specified to pick a specific face.
     style: Regular
 
   # Bold font face
   bold:
     family: hack
-    # The `style` can be specified to pick a specific face.
     style: Bold
 
   # Italic font face
   italic:
     family: hack
-    # The `style` can be specified to pick a specific face.
     style: Italic
 
   # Point size
@@ -130,7 +128,7 @@ render_timer: false
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Tomorrow Night Bright)
+# Colors (Neon from Konsole)
 colors:
   # Default colors
   primary:
@@ -301,7 +299,7 @@ live_config_reload: true
 # Key bindings are specified as a list of objects. Each binding will specify
 # a key and modifiers required to trigger it, terminal modes where the binding
 # is applicable, and what should be done when the key binding fires. It can
-# either send a byte sequnce to the running application (`chars`), execute
+# either send a byte sequence to the running application (`chars`), execute
 # a predefined action (`action`) or fork and execute a specified command plus
 # arguments (`command`).
 #
@@ -483,7 +481,7 @@ key_bindings:
   - { key: F12,      mods: Command, chars: "\x1b[24;3~"                  }
   - { key: NumpadEnter,             chars: "\n"                          }
 
-# In the following the remaps for all the alt combinations:
+# These are the remaps for all the alt combinations, which don't work with tmux otherwise (cause mac and option...)
   - { key: H,        mods: Alt,       chars: "\x02\x1b\x5b\x44"          }
   - { key: J,        mods: Alt,       chars: "\x02\x1b\x5b\x42"          }
   - { key: K,        mods: Alt,       chars: "\x02\x1b\x5b\x41"          }
@@ -494,11 +492,11 @@ key_bindings:
 
 # Explanation of how the escape code remapping works here!
 #
-# Alicratty sends escape sequences, when the specified keybindings are hit.
-# Those escape sequences need to be the ones, my programs expect.
+# Alacritty sends escape sequences, when the specified keybindings are hit.
+# Those escape sequences need to be the ones the programs expect.
 #
-# The custom config I'm doing here, is necessary cause tmux on the mac, doesn't
-# get the correct escape sequnces by default.
+# The custom config I'm doing here is necessary, because tmux on the mac doesn't
+# get the correct escape sequences by default.
 #
 # What I do is this:
 #   - decide which mapping to do                                eg: the mapping for 'select pane above' in tmux
