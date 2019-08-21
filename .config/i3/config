@@ -390,6 +390,7 @@ bindsym $mod+F8 exec mocp --next
 
 # Redirect sound to headphones
 bindsym $mod+m exec "/usr/local/bin/switch-audio-port"
+bindsym $mod+Shift+m exec "amixer set Master toggle"
 
 
 # =============================================================================
