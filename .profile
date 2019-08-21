@@ -39,5 +39,6 @@ if [ $(uname -n) = "Antergos" ]; then
 	# Right now that's rakudo-star, this makes the perl6 debugger work
 	export PATH="$HOME/Documents/code/custom_builds/rakudo-star/rakudo-star-2018.06/install/bin:$PATH"
 	export PATH="$HOME/Documents/code/custom_builds/rakudo-star/rakudo-star-2018.06/install/share/perl6/site/bin:$PATH"
+	export PATH="/home/work/.scripts_experimental/:$PATH"
 	export HOSTALIASES=~/.local/hosts
 fi
