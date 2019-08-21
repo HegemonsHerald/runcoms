@@ -1,3 +1,8 @@
 #!/bin/sh
 
+# Query the filesystem using fd and open matched files in sxiv.
+#
+# Note the $@ expansion means, you may pass flags and other pipelined commands
+# to this script.
+
 fd -t f $@ | sxiv -abo -
