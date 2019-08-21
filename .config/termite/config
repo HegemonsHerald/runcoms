@@ -1,5 +1,5 @@
 [options]
-font = Hack 20
+font = Monaco 20
 
 [colors]
 foreground          = #f8f8f8
