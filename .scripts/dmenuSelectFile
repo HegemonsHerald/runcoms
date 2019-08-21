@@ -1,19 +1,22 @@
 #!/bin/sh
 
 # $1	where to start from
-# $2	prompt
+# $2	show hidden files if not ""
+# $3	prompt
 
 # test: -z  true if string has length 0 ("")
 # grep: -v  invert match
 
-[ -z "$1" ] && target="$(realpath .)"
-prompt="$2"
+[ -z "$1" ] && target="$(realpath .)" || target="$1"
+[ -z "$2" ] && show_hidden=""         || show_hidden="-a"
+prompt="$3"
+
 
 while true; do
 
-   [ -z "$prompt" ] && actualPrompt="$target" || actualPrompt="$prompt"
+   [ -z "$prompt" ] && actual_prompt="$target" || actual_prompt="$prompt"
 
-   selection="$(ls -1 "$target" | grep -v '^\.$' | dmenu -i -p "$actualPrompt" -l 25)"
+   selection="$(ls -1 $show_hidden "$target" | grep -v '^\.$' | dmenu -i -p "$actual_prompt" -l 25)"
 
 
    # dmenu escaped or cancelled
