@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# $1	where to start from
+# $2	prompt
+
+# test: -z  true if string has length 0 ("")
+# grep: -v  invert match
+
+[ -z "$1" ] && target="$(realpath .)"
+prompt="$2"
+
+while true; do
+
+   [ -z "$prompt" ] && actualPrompt="$target" || actualPrompt="$prompt"
+
+   selection="$(ls -1 "$target" | grep -v '^\.$' | dmenu -i -p "$actualPrompt" -l 25)"
+
+
+   # dmenu escaped or cancelled
+   exit_code="$?"
+   [ "$exit_code" -ne 0 ] && exit $exit_code
+
+
+   # choose new valid path
+   if [ "$(dirname "$selection")" = "/" ]; then
+      new_target="$selection"
+   else
+      new_target="$(realpath "$target/$selection")"
+   fi
+
+   [ -e "$new_target" ] && target="$new_target"
+
+
+   # file was selected
+   if [ ! -d "$target" ]; then
+      echo "$target"
+      exit 0
+   fi
+
+done
