@@ -3,7 +3,7 @@
 # Linux Specific
 if [ $(uname -s) = "Linux" ]; then
 
-        alias ls='ls --color -F -h'
+        alias ls='ls --color=auto -h'
         # alias ls='exa'
 
         alias cdr='cd /home/work/Documents/github/HegemonsHerald/runcoms/'
