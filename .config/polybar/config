@@ -57,14 +57,14 @@ module-margin	= 1
 [bar/left]
 inherit		= bar/base
 monitor		= HDMI-0
-modules-right	= date_small
+modules-right	= volume date_small
 padding-left	= 1
 
 
 [bar/right]
 inherit		= bar/base
 monitor		= DP-2
-modules-right	= date_small
+modules-right	= volume date_small
 
 
 [bar/middle]
