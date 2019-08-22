@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Playback playlist using mpv from stdin.
+# stdin	    entries of the playlist
+
+random="$(cat /dev/urandom | head -c 100 | xargs -0 printf "%q" | sed 's/[^0-9]//g' | head -c 10)"
+fname="/tmp/playlist-$PPID-$random"
+
+while read -r l; do echo "$l" >> $fname done
+
+mpv --playlist $fname
+
+rm $fname
