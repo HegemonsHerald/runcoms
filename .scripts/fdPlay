@@ -10,16 +10,10 @@
 #    fdPlay 'regex'
 #    fdPlay -p 'folder\/regex' -e mp4
 #    fdPlay -H | sort -h
+#
+# DEPENDENCIES: mpvPlay
 
 # xargs -d makes quotes be non-special characters, necessary for filenames,
 # that may contain quotes
 
-fname="playlist-$RANDOM"
-
-echo "using playlist file: $fname"
-
-fd -t f $@ | xargs -d "\n" -I % realpath "./%" > $fname
-
-mpv --playlist $fname
-
-rm $fname
+fd -t f $@ | xargs -d "\n" -I % realpath "./%" | mpvPlay
