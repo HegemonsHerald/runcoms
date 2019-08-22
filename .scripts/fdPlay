@@ -2,7 +2,10 @@
 
 # Query filesystem with fd to compose playlist for mpv.
 #
-# $@	args to fd
+#  fdPlay [-r] ...
+#
+# [-r]   randomize using sort -R (not strictly unix, but meh)
+# $@     args to fd
 #
 # Note that expanding with $@ means you may pass flags and even other
 # pipe-segments here:
@@ -13,7 +16,6 @@
 #
 # DEPENDENCIES: mpvPlay
 
-# xargs -d makes quotes be non-special characters, necessary for filenames,
-# that may contain quotes
+[ "$1" = "-r" ]; { randomize=" | sort -R"; shift 1; }
 
-fd -t f $@ | xargs -d "\n" -I % realpath "./%" | mpvPlay
+eval "fd -0 -t f $@ | xargs -0 realpath" $randomize " | mpvPlay"

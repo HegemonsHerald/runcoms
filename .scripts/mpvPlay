@@ -5,10 +5,9 @@
 
 random="$(cat /dev/urandom | head -c 100 | cksum | cut -d' ' -f1)"
 fname="/tmp/playlist-$PPID-$random"
-
 echo "Playlist File: $fname"
 
-while read -r l; do echo "$l" >> $fname; done
+while read -r l; do realpath "$l" >> $fname; done
 
 mpv --playlist $fname
 
