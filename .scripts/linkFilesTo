@@ -4,4 +4,4 @@
 # stdin	 list of files to link
 # $1	 target directory
 
-xargs -I file ln file "$1"
+xargs -I %file ln %file "$1"
