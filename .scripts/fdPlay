@@ -16,6 +16,8 @@
 
 fname="playlist-$RANDOM"
 
+echo "using playlist file: $fname"
+
 fd -t f $@ | xargs -d "\n" -I % realpath "./%" > $fname
 
 mpv --playlist $fname
