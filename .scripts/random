@@ -1,16 +1,9 @@
 #!/bin/sh
 
 # $1	 how many digits to produce, defaults to 10
-# $2	 how many bytes to take from /dev/urandom on each go, defaults to 100
-#
-# You don't need to touch $2, but I'm guessing that it's more efficient to have
-# a $2, that's considerably larger than $1.
-
-# I have to use head twice, because other commands in the pipe expect the input
-# to finish at some point. Mind, that this isn't lazily evaluated.
 
 while [ ${#random} -lt ${1:-10} ]; do
-   random="$random$(cat /dev/urandom | head -c ${2:-100} | xargs -0 printf "%q" | sed 's/[^0-9]//g' | head -c ${1:-10})"
+   random="$random$(cat /dev/urandom | head -c 100 | cksum | cut -d' ' -f1)"
 done
 
-echo $random
+echo $random | head -c ${1:-10}
