@@ -37,6 +37,10 @@ alias mpvp='mpv --playlist '
 alias p6='perl6'
 alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
 
+# Scripts as unix names
+alias fdplay='fdPlay'
+alias fdshow='fdShow'
+
 # File Management
 alias chmodx='chmod +x'
 alias ranger='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"; ls;'
