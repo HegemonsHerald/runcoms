@@ -45,6 +45,8 @@ toLower                 convert string to lowercase
 toUpper                 convert string to uppercase
 wacom-mapping.sh        map to monitors
 wacom-toggle_touch.sh   toggle touch
+sortR                   randomly sort the standard input (like sort -R but slower)
+isInt                   shell predicate for identifying integer arguments
 ```
 
 ### ln* -- hard link files creatively
