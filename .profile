@@ -21,8 +21,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Add perl6 packages to PATH
 export PATH="$HOME/.perl6/bin:$PATH"
 
-export PATH="$HOME/.scripts:$PATH"
 export PATH="$HOME/.env:$PATH"
+
+export PATH="$HOME/.scripts:$PATH"
+export PATH="$HOME/.scripts/fd:$PATH"
+export PATH="$HOME/.scripts/ln:$PATH"
+export PATH="$HOME/.scripts/old:$PATH"
 
 # Make alacritty scale well
 export WINIT_HIDPI_FACTOR=1.0
