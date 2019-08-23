@@ -6,7 +6,9 @@
 #
 # Note the $@ expansion means, you may pass flags and other pipelined commands
 # to this script.
+#
+# DEPENDENCIES: sanitize
 
-[ "$1" = "-r" ]; { randomize=" | sort -R"; shift 1; }
+[ "$1" = "-r" ] && { randomize="-R"; shift 1; }
 
-eval "fd -pt f "$@"" $randomize " | sxiv -qabo -"
+fd -pt f "$@" | sort $randomize | sxiv -qabo -

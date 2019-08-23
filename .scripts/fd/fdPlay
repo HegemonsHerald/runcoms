@@ -16,6 +16,9 @@
 #
 # DEPENDENCIES: mpvPlay
 
-[ "$1" = "-r" ]; { randomize=" | sort -R"; shift 1; }
+[ "$1" = "-r" ] && { randomize="-R"; shift 1; }
 
-eval "fd -pt f -0 $@ | xargs -0 -I % realpath \"./%\"" $randomize " | mpvPlay"
+# prepend with ./ and realpath the chosen paths to deal with bad characters in
+# the names.
+
+fd -pt f -0 "$@" | xarts -0 -I % realpath "./%" | sort $randomize | mpvPlay
