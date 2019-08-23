@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Randomize input without relying on -R flag of sort.
+#
+# USAGE:
+#
+#	 sortR [digitc]
+#
+#     digitc   how many digits to use for randomly sorting. Defaults to 10, so
+#	       you'll never have to use this.
+#
+# DEPENDENCIES:
+#
+#     random   -- create random numbers in a POSIX safe way
+
+# Not using xargs, because then the expansion would only be evaluated once
+
+while read -r l; do echo "$(random ${1:-10)-$l"; done | sort | sed -E "s/^[0-9]{${1:-10}}-//"
