@@ -32,11 +32,11 @@ export PATH="$HOME/.scripts/old:$PATH"
 export WINIT_HIDPI_FACTOR=1.0
 
 # Locales for the Vim
-export LC_ALL="en_us.utf-8"
-export LC_LANG="en_us.utf-8"
-export LC_LOCALE="en_us.utf-8"
-export LANG="en_us.utf-8"
-export LOCALE="en_us.utf-8"
+export LC_LANG=en_US.UTF-8
+export LC_LOCALE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LOCALE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Mac specific stuff
 if [ $(uname -s) = "Darwin" ]; then

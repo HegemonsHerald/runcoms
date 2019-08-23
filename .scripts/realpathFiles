@@ -1,0 +1,5 @@
+#!/bin/dash
+
+# assumes the file to be in $PWD
+
+xargs -I %file realpath "./%file"

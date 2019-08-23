@@ -1,0 +1,28 @@
+#!/bin/sh
+
+helptext="
+format	 -- printf for every line of stdin
+
+USAGE:
+
+      format <formatstr> [ args [ ... ] ]
+
+   <formatstr> should require at least one argument, as the first argument
+   provided to printf will be the current line:
+
+      format "hi there: %s\n"
+
+   will turn into
+
+      xargs -I :: printf "hi there: %s\n" ::
+
+   Note, that because of shell expansion you can't use the numbered format
+   directives. Meh.
+"
+
+[ "$1" = "-h" ] && { echo "$helptext"; exit 1; }
+
+formatstr="$1"
+shift 1
+
+xargs -I :: printf "$formatstr" "::" "$@"
