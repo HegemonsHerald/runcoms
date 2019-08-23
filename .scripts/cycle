@@ -1,13 +1,40 @@
 #!/bin/dash
 
 # repeats until no errors happen
+#
+#     cycle [count] ...
+#
+#  count    Optional number of repitions.
+#	    If specified, ...'s exit code is ignored.
 
-$@
+isInt () {
+   [ ! -z "$(echo "$1" | sed -En '/^[0-9]+$/ p')" ] && return 0 || return 1
+}
 
-while [ $? -ne 0 ]
-do
-   echo "Command: $1 exited with code $?"
-   echo "Waiting 5 seconds for User Interrupt until recursion..."
-   sleep 5s
+isInt "$1" && { count=$1; shift 1; }
+
+while true; do
+
    $@
+   ec=$?
+
+   # counting mode
+   if [ ! -z $count ]; then
+
+      count=$((count - 1))
+      [ $count -eq 0 ] && break
+
+   # success mode
+   else
+
+      if [ $ec -ne 0 ]; then
+	 echo "\n\nCommand: $1 exited with code $?"
+	 echo "Waiting 5 seconds for User Interrupt until recursion...\n\n"
+	 sleep 5s
+      else
+	 break
+      fi
+
+   fi
+
 done
