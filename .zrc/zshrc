@@ -49,4 +49,4 @@ RANGER_LOAD_DEFAULT_RC=false
 # Source other things
 source ~/.zrc/aliases
 source ~/.zrc/prompt
-source ~/.zrc/functions
+source ~/.scripts/functions

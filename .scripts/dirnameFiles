@@ -1,5 +1,3 @@
-#!/bin/dash
+#!/bin/sh
 
-while read -r file; do
-   dirname "$file"
-done
+xargs -I % dirname "%"

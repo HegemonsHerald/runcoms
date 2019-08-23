@@ -1,13 +1,21 @@
-# Wheeeeee Obligatory Runcoms Yay
+### How I Roll
 
-**Note to self:** If you have thingies, that are user/platform-specific and can't be decided by an if clause (eg wm-config), put that stuff in a folder like this:
-`'THING-OS-USER/...'` and treat that location as if it were the $HOME dir of the USER on the OS!
+For the most part this repository only contains configuration files, there are
+a few considerations though.
 
-### How I Roll -- Scripts
+```
+.zrc/                   contains zsh specific startup settings
+.zrc/aliases            zsh aliases
+.zrc/prompt             zsh prompt
+.zrc/zshrc              sets autocomplete and sources resources
 
-Custom scripts and utilities go into .scripts/.  
-They are named in lowerCamelCase and are written in a (mostly) functional style.  
-For convenience the commands get UNIX-like aliases, eg `fdPlay` has the alias `fdplay`.
+.scripts/               contains all my custom commands
+.scripts/functions      shell function definitions, these are sourced by .zrc/zshrc
+
+.env/                   things to make available in $PATH or other environment vars
+
+.i3/                    i3 wm specific scripts, temp files
+```
 
 
 

@@ -1,5 +1,3 @@
-#!/bin/dash
+#!/bin/sh
 
-while read -r file; do
-   basename "$file"
-done
+xargs -I % basename "%"

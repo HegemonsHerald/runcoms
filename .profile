@@ -21,9 +21,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Add perl6 packages to PATH
 export PATH="$HOME/.perl6/bin:$PATH"
 
-# Add ~/Documents/scripts/ to PATH
-# note: that's the location of my custom scripts
 export PATH="$HOME/.scripts:$PATH"
+export PATH="$HOME/.env:$PATH"
 
 # Make alacritty scale well
 export WINIT_HIDPI_FACTOR=1.0
@@ -40,7 +39,7 @@ if [ $(uname -s) = "Darwin" ]; then
 
 	export COLORTERM=truecolor
 
-	export CHEZSCHEMELIBDIRS="$HOME/.scripts/scheme-env/:./"
+	export CHEZSCHEMELIBDIRS="$HOME/.env/scheme-env/:./"
 fi
 
 # Main Linux specific stuff

@@ -1,4 +1,3 @@
-
 Scripts that just do some action are named in snake_case and end in .sh:
 
    suspend.sh
@@ -12,9 +11,21 @@ analogous to a kind of IO Monad:
    filterIncludeExclude
    linkFilesTo
 
+Scripts / Commands that are used a lot may get aliases for convenience. These
+should follow UNIX naming convention -- small lowercase abbreviations.
+
 
 Comments in scripts should be sparse -- follow the suckless philosophy for the
 code itself.  You are smart enough to look things up, if you don't quite
 remember.
+
 However there should be one man page comment, that includes a brief
 description, a list of possible inputs and valid options.
+
+
+
+Try to generalize all commands. Also try to think about all the different input
+means -- arguments, pipes, etc -- to make a UNIX utility: does one thing, but
+does it well, by having a simple interface and a sensible feature set.
+
+The generalization is also why we define command families.
