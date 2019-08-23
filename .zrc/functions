@@ -1,5 +1,10 @@
 # DEFINE FUNCTIONS
 
+isInt () {
+   [ ! -z "$(echo "$1" | sed -En '/^[0-9]+$/ p')" ] && return 0 || return 1
+}
+
+
 # search function, that combines content search via ag and file search via fd, and lets you select via fzf
 search(){
 	# if $2 is 'a' or 'all', search hidden files and gitignore files (ag: -a means don't exclude based on extension)
