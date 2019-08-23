@@ -7,8 +7,8 @@ random="$(cat /dev/urandom | head -c 100 | cksum | cut -d' ' -f1)"
 fname="/tmp/playlist-$PPID-$random"
 echo "Playlist File: $fname"
 
-while read -r l; do realpath "$l" >> $fname; done
+xargs -0 >> $fname
 
-mpv --playlist $fname
+mpv --input-media-keys=no --playlist $fname
 
 rm $fname

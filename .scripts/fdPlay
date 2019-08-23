@@ -18,4 +18,4 @@
 
 [ "$1" = "-r" ]; { randomize=" | sort -R"; shift 1; }
 
-eval "fd -0 -t f $@ | xargs -0 realpath" $randomize " | mpvPlay"
+eval "fd -0 -t f $@ | xargs -0 -I % realpath \"./%\"" $randomize " | mpvPlay"
