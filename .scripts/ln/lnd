@@ -1,0 +1,58 @@
+#!/bin/sh
+
+helptext="
+lnd -- link directory trees
+
+USAGE:
+
+      lnd [options] FROM TO
+      lnd [options] FROM... TO
+
+   FROM and TO have to be directories.
+
+   Multiple FROMs may be provided.
+
+DESCRIPTION:
+
+   lnd will link all files under FROM to TO, while maintaining the
+   folderstructure.
+
+   If multiple FROMs are provided lnd will link all of them left-to-right.
+   Filename collisions are handled by ln itself.
+
+OPTIONS:
+
+   All options are handed off to the ln command.
+
+   Only options, that DON'T take any arguments, i.e. don't contain any unquoted
+   spaces are supported. Options like:
+
+      -s, --symbolic
+      -f, --force
+
+   should work fine. Note that this also means argument-options with '='
+   assignment do work:
+
+      --target-directory=DIR
+
+   This script hands off all error handling about the existence and types of
+   TARGETs to the ln command itself.
+
+DEPENDENCIES:
+
+   ln_opts -- handler for command line options in ln* utilities
+   lnp -- link with mkdir -p
+"
+
+# Handle options to ln
+flags="$(ln_opts "$@")"
+flagc=$?
+shift $flagc
+
+[ $# -lt 2 ] && { echo "$helptext"; exit 1; }
+
+for parameter; do
+
+   # magic
+
+done

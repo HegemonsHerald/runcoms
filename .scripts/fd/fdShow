@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Query the filesystem using fd and open matched files in sxiv.
+#
+#     fdShow [-r] ...
+#
+# Note the $@ expansion means, you may pass flags and other pipelined commands
+# to this script.
+
+[ "$1" = "-r" ]; { randomize=" | sort -R"; shift 1; }
+
+eval "fd -pt f "$@"" $randomize " | sxiv -qabo -"

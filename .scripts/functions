@@ -1,0 +1,73 @@
+# DEFINE FUNCTIONS
+
+
+# search function, that combines content search via ag and file search via fd, and lets you select via fzf
+search(){
+	# if $2 is 'a' or 'all', search hidden files and gitignore files (ag: -a means don't exclude based on extension)
+	# if $2 is 'h' or 'H', search hidden files,
+	# if $2 is 'i' or 'I', search gitignore files
+	fd_hidden=''; ag_hidden=''; ag_hidden2=''
+	if [ "$2" = "a" ] || [ "$2" = "all" ]; then fd_hidden='HI'; ag_hidden='--hidden'; ag_hidden2='ua'
+	elif [ "$2" = "h" ] || [ "$2" = "H" ]; then fd_hidden='H'; ag_hidden='--hidden'
+	elif [ "$2" = "i" ] || [ "$2" = "I" ]; then fd_hidden='I'; ag_hidden2='u'; fi
+
+	# generate a temp file
+	tmp="/tmp/tmp_search-$RANDOM"
+	touch "$tmp"
+
+	# do the actual search								      | filter the search's output to only pass along, what hasn't been found				      | fzf
+	(fd -${fd_hidden}t f -c 'never' $1; ag ${ag_hidden} -${ag_hidden2}il --nocolor $1 ./) | while read line; do if [ "$(ag $line $tmp)" = "" ]; then echo $line >> "$tmp" && echo $line; fi; done | fzf; rm "$tmp"
+	# note the parenthesis: they make bash handle fd and ag as one process with one stdout
+}
+
+# open search-result in vim
+vim_search(){
+	vim $(search $1 $2)
+}
+
+# open search-result in less
+less_search(){
+	less -S $(search $1 $2)
+}
+
+# search through contents of file with fzf
+content_search(){
+	cat -n $1 | fzf --tac
+	# --tac: fzf reverses the input, which in this case if from cat (cat → tac, eh?)
+}
+
+# as above, but match exactly
+content_search_exact(){
+	cat -n $1 | fzf --exact --tac
+}
+
+# select a file and search through its contents using the above functions
+select_and_search(){
+	content_search_exact $(search $1 $2)
+}
+
+# cd to parent directory of search-result
+cd_search(){
+	target=$(dirname "./$(search $1 $2)")
+	if [ "$target" != "" ]; then cd "$target"; fi
+	# note: if the user cancels the search, target will be empty. If you cd with no args, you'll move to ~ -- which you don't want, if you cancelled!
+}
+
+# search function, that searches for files and directories, lets you select with fzf and moves you into the parent dir of a selected file or into the selected dir
+cd_search_filename(){
+	target=$( (fd -Ht d -c 'never' $1 -x echo {}/; fd -Ht f -c 'never' $1) | fzf | while read dir; do if [[ ! $dir =~ '^.*/$' ]]; then dirname $dir; else echo $dir; fi; done )
+	#		get matching dirs, append '/' to their ends
+	#						get matching filenames
+	#									select with fzf
+	#									     read the selected; if the selection isn't a directory, output the parent dir's name
+	#																		if it's a dir, output the dir's name
+	# lastly, cd into what's been output from this long and beautiful mess! (unless the user cancelled)
+	if [ "$target" != "" ]; then cd "$target"; fi
+}
+
+# does the exact same as cd_search_filename, only excludes filenames and ONLY searches for directories
+# this one is useful for insanely large filestructures, eg '/'
+cd_search_directory(){
+	target=$(fd -Ht d -c 'never' $1 | fzf)
+	if [ "$target" != "" ]; then cd "$target"; fi
+}
