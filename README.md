@@ -8,3 +8,51 @@
 Custom scripts and utilities go into .scripts/.  
 They are named in lowerCamelCase and are written in a (mostly) functional style.  
 For convenience the commands get UNIX-like aliases, eg `fdPlay` has the alias `fdplay`.
+
+
+
+# The .scripts/ Commands
+
+My custom commands and utilites are grouped into "families" of similar/related
+semantics. These commands may depend on each other. If they do, they say it in
+their doc comment at the start.
+
+Commands that are only related to the families may still be listed under them.
+
+**This list only includes *my* commands, not things that are only in .scripts/
+because of $PATH reasons!**
+
+### Assorted
+
+```
+cycle                   repeat command until it is successful
+basenameFiles           apply basename to all files on stdin
+dirnameFiles            apply dirname to all files on stdin
+dmenuSelectFile         dmenu select file
+filterIncludeExclude    filter lines against include and exclude regex patterns
+prependItemsWith        prepend every line with string
+random                  produce random numbers in a UNIX safe way
+suspend.sh              sleep n; systemctl suspend;
+toLower                 convert string to lowercase
+toUpper                 convert string to uppercase
+wacom-mapping.sh        map to monitors
+wacom-toggle_touch.sh   toggle touch
+```
+
+### ln* -- hard link files creatively
+
+```
+linkFromTo              REMOVE
+ln_opts                 handle options in the ln* commands
+lnd                     link directory trees
+lnp                     link with mkdir -p
+lns                     link from stdin
+```
+
+### fd* -- opend files using fd searches
+
+```
+fdPlay                  playback files with mpv
+fdShow                  show files with sxiv
+mpvPlay                 playback playlist with mpv
+```
