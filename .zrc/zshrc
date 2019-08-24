@@ -43,6 +43,11 @@ VISUAL=/usr/bin/vim
 # Make use Vi-like keybindings
 set -o vi
 
+# Make v key open editor in zle command mode (kinda like with sh's vi-mode)
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 # Ranger Config
 RANGER_LOAD_DEFAULT_RC=false
 
