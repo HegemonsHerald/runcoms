@@ -8,18 +8,18 @@
 #	    If specified, ...'s exit code is ignored.
 
 isInt () {
-   [ ! -z "$(echo "$1" | sed -En '/^[0-9]+$/ p')" ] && return 0 || return 1
+   [ -n "$(echo "$1" | sed -En '/^[0-9]+$/ p')" ] && return 0 || return 1
 }
 
 isInt "$1" && { count=$1; shift 1; }
 
 while true; do
 
-   $@
+   "$@"
    ec=$?
 
    # counting mode
-   if [ ! -z $count ]; then
+   if [ -n "$count" ]; then
 
       count=$((count - 1))
       [ $count -eq 0 ] && break
