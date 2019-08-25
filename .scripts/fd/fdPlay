@@ -21,4 +21,4 @@
 # prepend with ./ and realpath the chosen paths to deal with bad characters in
 # the names.
 
-fd -pt f -0 "$@" | xarts -0 -I % realpath "./%" | sort $randomize | mpvPlay
+fd -pt f -0 "$@" | xargs -0 -I % realpath "./%" | sort $randomize | mpvPlay
