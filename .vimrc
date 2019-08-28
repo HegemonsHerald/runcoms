@@ -101,6 +101,7 @@ nnoremap <Leader>l :set list!<Cr>	  " toggle list option
 nnoremap <Leader>f :call ToggleFDC()<Cr>  " toggle foldcolumn
 nnoremap <Leader>n :noh<Cr>		  " disable search highlight
 nnoremap <Leader>c :set cursorline!<Cr>	  " toggle cursorline
+nnoremap <Leader>u YpVr-		  " underline current line
 
 " substitution mappings
 noremap s/	:s/\v/g<Left><Left>
