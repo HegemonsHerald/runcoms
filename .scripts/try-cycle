@@ -1,0 +1,87 @@
+#!/bin/sh
+
+helptext="
+try-cycle -- repeat on failure
+
+USAGE:
+
+   try-cycle [count] ...
+   try-cycle -d [delay] [count] ...
+   try-cycle [-h|--help]
+
+   ... is the command to repeat.
+
+DESCRIPTION:
+
+   try-cycle will repeat the provided command until it exits with exit code 0
+   (success).
+
+   If a count is specified, the repeated attempts are limited to count-many
+   tries.
+
+   Before re-executing the command try-cycle will wait 5 seconds (by default),
+   to allow the user to interrupt the command with <C-C> or <C-D>.
+   The number of seconds waited can be changed using the -d flag.
+
+   To disable the wait use -d 0. This is inadvisable, if you don't have a
+   count specified, as it may make it impossible to interrupt the repetition.
+
+   try-cycle will exit with the exit code of the last execution of command.
+
+
+   PLEASE NOTE, that specifying a count smaller than 1 has the same effect as
+   specifying no count at all.
+
+OPTIONS:
+
+   count    Number of retries on failed attempt,
+	    count <= 0 is equivalent to infinity.
+   -d delay Number of seconds to wait before retrying,
+	    use 0 to disable.
+
+   -h, --help	  Print this helptext.
+
+DEPENDENCIES: isInt"
+
+[ "$1" = "--help" -o "$1" = "-h" ] && { echo "$helptext"; exit; }
+
+
+# delay flag
+if [ "$1" = "-d" ] && isInt "$2"; then
+   delay="$2"
+   shift 2
+else
+   delay=5
+fi
+
+# count
+isInt "$1" && { count=$1; shift 1; }
+
+
+
+while true; do
+
+   "$@"
+   ec=$?
+   echo "ho"
+
+   # success?
+   if [ $ec -eq 0 ]; then 
+      break
+   else
+
+      # counting mode
+      if [ -n "$count" ]; then
+	 count=$((count - 1))
+	 [ $count -eq 0 ] && break
+      fi
+
+      echo "\n\nCommand: '$@' exited with code $ec."
+      echo "Waiting $delay seconds for User Interrupt until recursion...\n\n"
+      sleep $delay
+
+   fi
+
+done
+
+exit $ec
