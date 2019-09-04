@@ -2,8 +2,9 @@
 
 # Query filesystem with fd to compose playlist for mpv.
 #
-#  fdPlay [-r] ...
+#  fdPlay [-f] [-r] ...
 #
+# [-f]	 use fzf as another filter (fzf -m)
 # [-r]   randomize using sort -R (not strictly unix, but meh)
 # $@     args to fd
 #
@@ -16,6 +17,7 @@
 #
 # DEPENDENCIES: mpvPlay
 
-[ "$1" = "-r" ]; { randomize=" | sort -R"; shift 1; }
+[ "$1" = "-f" ] && { fzf=" | fzf -m"; shift 1; }
+[ "$1" = "-r" ] && { randomize=" | sort -R"; shift 1; }
 
-eval "fd -pt f -0 $@ | xargs -0 -I % realpath \"./%\"" $randomize " | mpvPlay"
+eval "fd -pt f -0 $@ " $fzf " | xargs -0 -I % realpath \"./%\"" $randomize " | mpvPlay"

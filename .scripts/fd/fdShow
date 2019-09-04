@@ -2,11 +2,15 @@
 
 # Query the filesystem using fd and open matched files in sxiv.
 #
-#     fdShow [-r] ...
+#     fdShow [-f] [-r] ...
+#
+# [-f]	 use fzf as another filter (fzf -m)
+# [-r]   randomize using sort -R (not strictly unix, but meh)
 #
 # Note the $@ expansion means, you may pass flags and other pipelined commands
 # to this script.
 
-[ "$1" = "-r" ]; { randomize=" | sort -R"; shift 1; }
+[ "$1" = "-f" ] && { fzf=" | fzf -m"; shift 1; }
+[ "$1" = "-r" ] && { randomize=" | sort -R"; shift 1; }
 
-eval "fd -pt f "$@"" $randomize " | sxiv -qabo -"
+eval "fd -pt f "$@"" $fzf $randomize " | sxiv -qabo -"
