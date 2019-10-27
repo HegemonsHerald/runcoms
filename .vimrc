@@ -16,13 +16,14 @@ Plugin 'neovimhaskell/haskell-vim'
 
 " Tiny things
 Plugin 'markonm/traces.vim'
+Plugin 'https://github.com/vifm/vifm.vim'
 
 " Colorschemes
 Plugin 'flazz/vim-colorschemes'
 Plugin 'ayu-theme/ayu-vim'
 
 " My things
-Plugin 'hegemonsherald/vim-codegen'
+" Plugin 'hegemonsherald/vim-codegen'
 Plugin 'hegemonsherald/vim-dlx_syntax'
 
 " Note: I removed Language Server and Deoplete Completion (and some other
