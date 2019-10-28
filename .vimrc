@@ -104,6 +104,10 @@ nnoremap <Leader>n :noh<Cr>		  " disable search highlight
 nnoremap <Leader>c :set cursorline!<Cr>	  " toggle cursorline
 nnoremap <Leader>u YpVr-		  " underline current line
 
+" better motions for :set wrap
+nnoremap j gj
+nnoremap k gk
+
 " substitution mappings
 noremap s/	:s/\v/g<Left><Left>
 nnoremap s%	:%s/\v/g<Left><Left>
