@@ -88,7 +88,7 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
 mark b ~/bin/
 mark h ~/
-mark U ~/Documents/University/Classes/semester-2/
+mark U ~/Documents/University/Classes/semester-3/
 
 " ------------------------------------------------------------------------------
 
