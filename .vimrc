@@ -152,10 +152,12 @@ augroup filetype_lisp
   autocmd BufRead,BufNewFile *.lisp set filetype=lisp
 
   " In case the auto-formatting isn't enough =)
-  " Remember: you can use <C-I> to insert a tab
 
 augroup END
 
 autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
+
+autocmd BufRead,BufNewFile *.hs set et sts=2 sw=2
+
 
 " vim:sts=2:sw=2:noet
