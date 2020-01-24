@@ -159,5 +159,7 @@ autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
 
 autocmd BufRead,BufNewFile *.hs set et sts=2 sw=2
 
+autocmd BufRead,BufNewFile *.pl set filetype=prolog
+
 
 " vim:sts=2:sw=2:noet
