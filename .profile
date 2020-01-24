@@ -46,6 +46,9 @@ if [ $(uname -s) = "Darwin" ]; then
 	export COLORTERM=truecolor
 
 	export CHEZSCHEMELIBDIRS="$HOME/.env/scheme-env/:./"
+
+	export PATH="$HOME/.cabal/bin:$PATH"
+
 fi
 
 # Main Linux specific stuff
