@@ -56,7 +56,7 @@ set number			" nu
 set relativenumber		" rnu
 set hlsearch			" hls; use :noh to hide highlights
 set incsearch			" highlight searches incrementally
-set ignorecase			" ignore case in search
+set ignorecase			" ignore case in regex searches
 set smartcase			" only match case sensitively, if search pattern contains upper case letter; needs ignorecase to function
 set autowrite			" aw
 set matchpairs+=<:>		" brackets to matching symbols
@@ -74,6 +74,7 @@ set foldmethod=manual
 set colorcolumn=+2		" cc, highlight the column to the right of textwidth
 set wildmenu			" wmnu, menu for command line completion
 set cursorline			" cul, cursorcolumn, cuc
+set textwidth=80		" tw
 syntax on
 filetype plugin on		" load filetype specific plugins
 
@@ -157,7 +158,7 @@ augroup END
 
 autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
 
-autocmd BufRead,BufNewFile *.hs set et sts=2 sw=2 tw=80
+autocmd BufRead,BufNewFile *.hs set et sts=2 sw=2
 
 autocmd BufRead,BufNewFile *.pl set filetype=prolog
 
