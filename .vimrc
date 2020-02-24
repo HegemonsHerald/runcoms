@@ -71,9 +71,9 @@ set smartindent
 set smarttab			" make use of sts and sw for <tab>-insertion
 set nowrap
 set foldmethod=manual
-set colorcolumn=+2		" cc, highlight the column to the right of textwidth
+set colorcolumn=+0 		" cc, highlight the column to the right of textwidth
 set wildmenu			" wmnu, menu for command line completion
-set cursorline			" cul, cursorcolumn, cuc
+set cursorline			" cul, see also cursorcolumn, cuc
 set textwidth=80		" tw
 syntax on
 filetype plugin on		" load filetype specific plugins
