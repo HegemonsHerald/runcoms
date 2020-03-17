@@ -321,6 +321,11 @@ filextype */
 	\ {View in thunar}
 	\ Thunar %f &,
 
+" Scribus
+filetype *.sla
+	\ {Open with scribus}
+	\ scribus %f
+
 " Syntax highlighting in preview
 
 " Explicitly set highlight type for some extensions
