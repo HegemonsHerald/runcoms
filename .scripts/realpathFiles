@@ -1,5 +1,5 @@
 #!/bin/sh
 
-# assumes the file to be in $PWD
+# Using -d to keep xargs from unquoting filenames with bad characters
 
-xargs -I %file realpath "./%file"
+xargs -d "\n" -I %file realpath "./%file"
