@@ -2,7 +2,7 @@
 
 # If no args are provided, print a help
 if [ "$1" = "" ]; then
-	printf "Usage: $0                                          show this help
+	echo "Usage: $0                                          show this help
 Usage: $0 list                                     list available monitors and tablets
 Usage: $0 <tablet ID> <monitor name>               map the wacom tablet with <tablet ID> to the monitor with <monitor name>
 Usage: $0 <tablet ID> [all]                        map the wacom tablet with <tablet ID> to all monitors (assuming your monitors are next to each other and not overlapping)

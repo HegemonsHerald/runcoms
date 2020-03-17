@@ -1,39 +1,44 @@
 #!/bin/dash
 
-# repeats until no errors happen
-#
-#     cycle [count] ...
-#
-#  count    Optional number of repitions.
-#	    If specified, ...'s exit code is ignored.
+helptext="
+cycle -- repeat a command
 
-isInt () {
-   [ ! -z "$(echo "$1" | sed -En '/^[0-9]+$/ p')" ] && return 0 || return 1
-}
+USAGE:
+
+   cycle [count] ...
+   cycle [-h|--help]
+
+   ... is the command to repeat.
+
+DESCRIPTION:
+
+   Infinitely repeats the provided command, like a while-true-loop.
+
+   If a count is specified, cycle will repeat the command count-many times,
+   like a for-loop.
+
+OPTIONS:
+
+   count    Number of repetitions, count <= 0 is equivalent to infinity.
+
+   -h, --help	  Print this helptext.
+
+DEPENDENCIES: isInt"
+
+[ "$1" = "--help" -o "$1" = "-h" ] && { echo "$helptext"; exit; }
+
 
 isInt "$1" && { count=$1; shift 1; }
 
 while true; do
 
-   $@
-   ec=$?
+   "$@"
 
    # counting mode
-   if [ ! -z $count ]; then
+   if [ -n "$count" ]; then
 
       count=$((count - 1))
       [ $count -eq 0 ] && break
-
-   # success mode
-   else
-
-      if [ $ec -ne 0 ]; then
-	 echo "\n\nCommand: $1 exited with code $?"
-	 echo "Waiting 5 seconds for User Interrupt until recursion...\n\n"
-	 sleep 5s
-      else
-	 break
-      fi
 
    fi
 

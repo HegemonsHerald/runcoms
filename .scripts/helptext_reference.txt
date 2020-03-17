@@ -1,0 +1,54 @@
+name -- description in one sentence
+
+USAGE:
+
+      name [flags] [arguments]
+      name [alternate flags] [alternate arguments]
+      name ...
+
+   Important notes on usage, like "FROM and TO have to be direcories."
+   ...
+
+DESCRIPTION:
+
+   What name does, but in more detail.
+   Possible multiple sentences.
+
+   Maybe even multiple paragraphs.
+
+   This section is optional.
+
+OPTIONS:
+
+   flags    What the flags mean.
+	    In multiple lines if needed.
+   argument What this arg means.
+   ...	    ...
+
+   Possible notes on the option behaviour.
+
+   This section may be merged with USAGE, especially if no DESCRIPTION is
+   given.
+
+EXAMPLE:
+
+   Maybe. On a large thing.
+
+DEPENDENCIES:
+
+   Scripts from my custom suite name needs.
+   Only given if there are dependencies.
+
+
+
+
+
+Fundamentally this is just a UNIX manpage cloned without groff-styles.
+Because of the style-less-ness I have added ":\n" after the Section Headlines.
+There obviously isn't a header or footer.
+Because these comments may be used as the helptexts I also renamed SYNOPSIS
+with USAGE, that makes more sense.
+These comments are used as helptexts because my scripts don't get their own man
+pages.
+Note also that I fold the lines to a length of 80 characters! No adjustments
+like in man, hahahahahaha

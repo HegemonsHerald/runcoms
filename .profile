@@ -30,6 +30,8 @@ export PATH="$HOME/.scripts/old:$PATH"
 
 # Make alacritty scale well
 export WINIT_HIDPI_FACTOR=1.0
+export QT_AUTO_SCREEN_SCALE_FACTOR="True"
+export QT_SCALE_FACTOR=2
 
 # Locales for the Vim
 export LC_LANG=en_US.UTF-8
@@ -44,6 +46,9 @@ if [ $(uname -s) = "Darwin" ]; then
 	export COLORTERM=truecolor
 
 	export CHEZSCHEMELIBDIRS="$HOME/.env/scheme-env/:./"
+
+	export PATH="$HOME/.cabal/bin:$PATH"
+
 fi
 
 # Main Linux specific stuff

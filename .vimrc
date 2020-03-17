@@ -16,13 +16,14 @@ Plugin 'neovimhaskell/haskell-vim'
 
 " Tiny things
 Plugin 'markonm/traces.vim'
+Plugin 'https://github.com/vifm/vifm.vim'
 
 " Colorschemes
 Plugin 'flazz/vim-colorschemes'
 Plugin 'ayu-theme/ayu-vim'
 
 " My things
-Plugin 'hegemonsherald/vim-codegen'
+" Plugin 'hegemonsherald/vim-codegen'
 Plugin 'hegemonsherald/vim-dlx_syntax'
 
 " Note: I removed Language Server and Deoplete Completion (and some other
@@ -55,13 +56,13 @@ set number			" nu
 set relativenumber		" rnu
 set hlsearch			" hls; use :noh to hide highlights
 set incsearch			" highlight searches incrementally
-set ignorecase			" ignore case in search
+set ignorecase			" ignore case in regex searches
 set smartcase			" only match case sensitively, if search pattern contains upper case letter; needs ignorecase to function
 set autowrite			" aw
 set matchpairs+=<:>		" brackets to matching symbols
 set showcmd			" shows commands on status-line, is on by default
 set ruler			" ru, is on by default
-set listchars=tab:»·,trail:\ ,	" lcs, characters for whitespace listing; alternatively use ░ for trail
+set listchars=tab:»·,trail:\░,	" lcs, characters for whitespace listing; alternatively use ░ for trail
 set nolist			" disable whitespace listing
 set autoread			" ar, makes vim reread a file, if it changed
 set backspace+=start,eol,indent	" allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
@@ -70,9 +71,10 @@ set smartindent
 set smarttab			" make use of sts and sw for <tab>-insertion
 set nowrap
 set foldmethod=manual
-set colorcolumn=+2		" cc, highlight the column to the right of textwidth
+set colorcolumn=+0 		" cc, highlight the column to the right of textwidth
 set wildmenu			" wmnu, menu for command line completion
-set cursorline			" cul, cursorcolumn, cuc
+set cursorline			" cul, see also cursorcolumn, cuc
+set textwidth=80		" tw
 syntax on
 filetype plugin on		" load filetype specific plugins
 
@@ -101,6 +103,11 @@ nnoremap <Leader>l :set list!<Cr>	  " toggle list option
 nnoremap <Leader>f :call ToggleFDC()<Cr>  " toggle foldcolumn
 nnoremap <Leader>n :noh<Cr>		  " disable search highlight
 nnoremap <Leader>c :set cursorline!<Cr>	  " toggle cursorline
+nnoremap <Leader>u YpVr-		  " underline current line
+
+" better motions for :set wrap
+nnoremap j gj
+nnoremap k gk
 
 " substitution mappings
 noremap s/	:s/\v/g<Left><Left>
@@ -146,10 +153,14 @@ augroup filetype_lisp
   autocmd BufRead,BufNewFile *.lisp set filetype=lisp
 
   " In case the auto-formatting isn't enough =)
-  " Remember: you can use <C-I> to insert a tab
 
 augroup END
 
 autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
+
+autocmd BufRead,BufNewFile *.hs set et sts=2 sw=2
+
+autocmd BufRead,BufNewFile *.pl set filetype=prolog
+
 
 " vim:sts=2:sw=2:noet

@@ -3,7 +3,7 @@
 # Playback playlist using mpv from stdin.
 # stdin	    entries of the playlist
 
-random="$(cat /dev/urandom | head -c 100 | cksum | cut -d' ' -f1)"
+random="$(head -c 100 </dev/urandom | cksum | cut -d' ' -f1)"
 fname="/tmp/playlist-$PPID-$random"
 echo "Playlist File: $fname"
 

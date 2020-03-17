@@ -1,3 +1,3 @@
 #!/bin/bash
 
-$(sleep "$1m"; systemctl suspend -i)&
+{ sleep "$1m"; systemctl suspend -i; }&

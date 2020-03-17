@@ -3,7 +3,7 @@
 # $1	 how many digits to produce, defaults to 10
 
 while [ ${#random} -lt ${1:-10} ]; do
-   random="$random$(cat /dev/urandom | head -c 100 | cksum | cut -d' ' -f1)"
+   random="$random$(head -c 100 </dev/urandom | cksum | cut -d' ' -f1)"
 done
 
 echo $random | head -c ${1:-10}
