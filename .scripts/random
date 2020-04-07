@@ -1,9 +1,5 @@
 #!/bin/sh
 
 # $1	 how many digits to produce, defaults to 10
-
-while [ ${#random} -lt ${1:-10} ]; do
-   random="$random$(head -c 100 </dev/urandom | cksum | cut -d' ' -f1)"
-done
-
-echo $random | head -c ${1:-10}
+ 
+iconv -c -f ascii -t ascii </dev/urandom | tr -dc '0-9' | head -c ${1:-10}
