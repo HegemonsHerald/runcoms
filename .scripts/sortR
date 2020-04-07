@@ -10,4 +10,7 @@
 
 # Not using xargs, because then the expansion would only be evaluated once
 
-while read -r l; do echo "$(random)-$l"; done | sort | sed -E 's/^[0-9]{10}-//'
+if [ $# -ne 0 -a "$1" != "-" ]
+then cat "$@" | while read -r l; do echo "$(random 10)$l"; done | sort | cut -b 11-
+else            while read -r l; do echo "$(random 10)$l"; done | sort | cut -b 11-
+fi
