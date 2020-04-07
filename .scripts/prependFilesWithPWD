@@ -1,3 +1,4 @@
 #!/bin/dash
 
-xargs -I file echo "$PWD/file"
+xargs -I file realpath 'file'
+# xargs -I file echo "$PWD/file"
