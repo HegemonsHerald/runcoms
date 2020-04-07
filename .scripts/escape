@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Adds a backslash in front of every character except '-', 'a-z', 'A-Z', '0-9', '=', '+', '_', ':'.
+
+substitute () {
+   sed -E 's/([^-a-zA-Z0-9=+_:])/\\\1/g'
+}
+
+if [ $# -eq 0 -o "$1" = "-" ]; then
+   substitute
+else
+   for parameter; do
+      echo "$parameter" | substitute
+   done
+fi

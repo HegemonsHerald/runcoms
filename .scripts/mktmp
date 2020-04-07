@@ -1,0 +1,149 @@
+#!/bin/sh
+
+# DEPENDENCIES: random, quote
+
+helptext="See manual for mktemp. This is a complete reproduction except for --version and -t.
+(Behaviour may be slightly different, didn't bother testing it properly ;))"
+
+lastChar () {
+   echo "$1" | tail -c 2 | head -c 1
+}
+
+
+# Parse the options
+
+args=0
+varnames=""
+
+optc=0   # count of options, shift this many
+
+# The options variables
+
+directory=0
+dry_run=0
+quiet=0
+t=0
+
+tmpdir=-1
+tmpdir_val=""
+
+suffix=""
+
+# Actual work
+
+for parameter; do
+
+   if [ $args -gt 0 ]; then
+
+      eval "${varnames%%[[:blank:]]*}"="$(quote "$parameter")"
+      varnames="${varnames#*[[:blank:]]}"
+      args=$((args - 1))
+
+      optc=$((optc + 1))
+
+   else
+
+      case $parameter in
+
+         -d|--directory)   directory=1
+                           optc=$((optc + 1)) ;;
+
+         -u|--dry-run)     dry_run=1
+                           optc=$((optc + 1)) ;;
+
+         -q|--quiet)       quiet=1
+                           optc=$((optc + 1)) ;;
+
+         # suffix argument after =
+         --suffix=*) suffix="${parameter##--suffix=}"
+                     optc=$((optc + 1)) ;;
+
+         # suffix argument is next parameter
+         --suffix)   args=1
+                     varnames="suffix"
+                     optc=$((optc + 1)) ;; 
+
+         # tmpdir argument after =
+         --tmpdir=*) tmpdir=1
+                     tmpdir_val="${parameter##--tmpdir=}"
+                     optc=$((optc + 1)) ;;
+
+         # tmpdir argument is next parameter
+         -p)         tmpdir=1
+                     args=1
+                     varnames="tmpdir_val"
+                     optc=$((optc + 1)) ;;
+
+         # use default tmpdir
+         --tmpdir)   tmpdir=1
+                     tmpdir_val=""
+                     optc=$((optc + 1)) ;;
+
+                  -h|--help)  echo "$helptext"
+                     exit 0 ;;
+
+         *) break ;;
+
+      esac
+
+   fi
+
+done
+
+shift $optc
+
+# Be quiet?
+[ $quiet -eq 1 ] && redirect_quiet="2>/dev/null" || redirect_quiet=""
+
+# Get Template
+if [ -z "$1" ]; then
+   template="tmp.XXXXXXXXXX"
+   tmpdir=1
+else
+   template="$1"
+fi
+
+# Use tmp directory?
+if [ $tmpdir -eq 1 ]; then
+   if [ -z "$tmpdir_val" ]; then
+      [ -n "$TMPDIR" ] && tmpdir_val="$TMPDIR" || tmpdir_val="/tmp"
+   fi
+fi
+
+# Append suffix to template
+if [ -n "$suffix" -o "$(lastChar "$template")" != 'X' ]; then
+   template="$template$suffix"
+fi
+
+# Destination directory
+if [ $tmpdir -eq 1 ]; then
+   path="${tmpdir_val%/}"
+else
+   path="$PWD"
+fi
+
+# Filename
+nx="$(echo "$template" | awk '{ match($0, /X+$/); print RLENGTH }')"
+[ $nx -lt 3 ] && { echo "$0: too few X's in template '$template'"; exit 1; }
+filename="$(echo "$template" | sed -E 's/X+$//')$(random $nx)"
+
+wholename="$path/$filename"
+
+# Actually do the thing
+if [ $dry_run -ne 1 ]; then
+   if [ $directory -eq 1 ]; then
+      mkdir "$wholename" 2>/dev/null
+      ec="$?"
+   else
+      mkdir "$(dirname "$wholename")" 2>/dev/null
+      touch "$wholename" 2>/dev/null
+      ec="$?"
+   fi
+fi
+
+# Print output
+if [ $ec -ne 0 -a $quiet -ne 1 ]; then
+   echo "$0: failed to create file via template '$path/$template'"
+elif [ $ec -eq 0 ]; then
+   echo "$wholename"
+fi

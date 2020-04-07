@@ -2,8 +2,9 @@
 
 # Query filesystem with fd to compose playlist for mpv.
 #
-#  fdPlay [-r] ...
+#  fdPlay [-f] [-r] ...
 #
+# [-f]	 use fzf as another filter (fzf -m)
 # [-r]   randomize using sort -R (not strictly unix, but meh)
 # $@     args to fd
 #

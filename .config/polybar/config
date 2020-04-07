@@ -64,7 +64,7 @@ padding-left	= 1
 [bar/right]
 inherit		= bar/base
 monitor		= DP-2
-modules-right	= volume date_small
+modules-right	= battery volume date_small
 
 
 [bar/middle]

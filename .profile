@@ -34,11 +34,11 @@ export QT_AUTO_SCREEN_SCALE_FACTOR="True"
 export QT_SCALE_FACTOR=2
 
 # Locales for the Vim
-export LC_ALL="en_us.utf-8"
-export LC_LANG="en_us.utf-8"
-export LC_LOCALE="en_us.utf-8"
-export LANG="en_us.utf-8"
-export LOCALE="en_us.utf-8"
+export LC_LANG=en_US.UTF-8
+export LC_LOCALE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LOCALE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Mac specific stuff
 if [ $(uname -s) = "Darwin" ]; then

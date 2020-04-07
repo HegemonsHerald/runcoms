@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Using -d to keep xargs from unquoting filenames with bad characters
+
+xargs -d "\n" -I %file realpath "./%file"
