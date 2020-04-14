@@ -1,0 +1,20 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+   name = work
+   email = work@admins-MacBook-Pro.local
+
+[core]
+   fileMode
+
+[diff]
+   tool = vimdiff                  # use for difftool command
+
+[merge]
+   tool = vimdiff                  # use for mergetool command
+
+[mergetool]
+   keepBackup
+
+[credential]
+   helper = osxkeychain
