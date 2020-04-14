@@ -40,6 +40,9 @@ export LANG=en_US.UTF-8
 export LOCALE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# Limit width of man page display
+export MANWIDTH=100
+
 # Mac specific stuff
 if [ $(uname -s) = "Darwin" ]; then
 
