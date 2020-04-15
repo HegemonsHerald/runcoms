@@ -30,7 +30,7 @@ if [ $(uname -s) = "Darwin" ]; then
 fi
 
 # General Aliases
-alias fzf='fzf --multi --preview="highlight --force -O ansi {} | head -$LINES --silent"'
+alias fzf='fzf --multi'
 alias sxiv='sxiv -bos f'
 alias youtube-dl="youtube-dl --config-location '~/.config/youtube-dl.conf'"
 alias mpvp='mpv --playlist '
