@@ -1,0 +1,6 @@
+cdsearch () {
+   local tgt
+   tgt="$(glocate -d /Users/code/.searchdb -A -i "$@" | fzf +m -1)"
+   [ -d "$tgt" ] && cd "$tgt" || cd "$(dirname "$tgt")"
+   ls
+}
