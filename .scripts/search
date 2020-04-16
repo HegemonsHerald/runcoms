@@ -47,6 +47,6 @@
 # compresses it into a LOCATE02 database called `database_file`.
 
 
-glocate -0 -A -i -d '/Users/code/.searchdb' "$@"
+glocate -0 -A -i -d '/Users/code/.searchdb' "$@" |
 fzf --read0 --print0 -m |
 xargs -0 -I % open "%"
