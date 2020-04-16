@@ -1,5 +1,15 @@
 #!/bin/sh
 
+# TODO: make use of SEARCHDB_LOCATION environment variable
+
+# TODO: make use of FRCODE_LOCATION environment variable (for platform
+# independence)
+
+# TODO: option flags for specifying find options and including hidden files
+
+# TODO: update into a temporary location, mv the tempfile into the target file
+# on success; for better error handling
+
 cd "$HOME"
 
 echo "Updating database: ${1:-$HOME/.searchdb}"
