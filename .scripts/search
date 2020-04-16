@@ -1,9 +1,38 @@
 #!/bin/sh
 
-# The fourth row is lifted from my escape utility
+# GNU mlocate Usage
 
-glocate -A -r -d '/Users/code/work_locatedb' "$@" |
-sed '/\/\./d' |
-fzf -m |
-sed -E 's/([^-a-zA-Z0-9=+_:])/\\\1/g' |
-xargs -I % open "%"
+# A user of `locate` can only find files to which he has read permissions.
+#
+# Locate databases are usually generated using `updatedb`, which requires to be
+# run as root. By default this will only index completely public files, which
+# almost certainly doesn't include anything interesting. To make useful
+# databases use:
+#
+#   sudo updatedb --localuser='<>' --localpaths='<>' --output='<>'
+#
+# which creates a database in `output` starting at the `localpaths` with
+# permissions set for access by `localuser`.
+#
+#
+# This still has a limitation: `updatedb` will index ALL paths and you can only
+# specify concrete paths for pruning. You cannot use regex or globs to filter
+# the paths.
+#
+# This can be fixed. `updatedb` uses the internal utility `frcode` to create its
+# LOCATE02 type database -- a front compressed list of filenames. This utility
+# can be used directly to create a database without using `updatedb`.
+#
+# The installation location for `frcode` depends on the system. On macOS it's
+# installed through homebrew as part of the `findutils` package.
+#
+# E.g.
+#
+#   find . -regex '\.\(/[^.][^/]*\)*' | /usr/local/Cellar/findutils/4.7.0/libexec/gfrcode > database_file
+#
+# takes the output of `find`, which excludes all hidden files and folders, and
+# compresses it into a LOCATE02 database called `database_file`.
+
+glocate -0 -A -d '/Users/code/work_no_hidden_locatedb' "$@" |
+fzf --read0 --print0 -m |
+xargs -0 -I % open "%"
