@@ -10,8 +10,6 @@
 # TODO: update into a temporary location, mv the tempfile into the target file
 # on success; for better error handling
 
-cd "$HOME"
-
 echo "Updating database: ${1:-$HOME/.searchdb}"
 
-find . -regex '\.\(/[^.][^/]*\)*' | /usr/local/Cellar/findutils/4.7.0/libexec/gfrcode > "${1:-$HOME/.searchdb}"
+find "$HOME" -regex '\.\(/[^.][^/]*\)*' | /usr/local/Cellar/findutils/4.7.0/libexec/gfrcode > "${1:-$HOME/.searchdb}"
