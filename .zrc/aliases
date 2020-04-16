@@ -1,63 +1,32 @@
 # DEFINE ALIASES
 
-# Linux Specific
-if [ $(uname -s) = "Linux" ]; then
-
-        alias ls='ls --color=auto -h'
-        # alias ls='exa'
-
-        alias cdr='cd /home/work/Documents/github/HegemonsHerald/runcoms/'
-        alias cdrs='cd /home/work/Documents/github/HegemonsHerald/runcoms/.scripts/'
-
-fi
-
-# Mac Specific
-if [ $(uname -s) = "Darwin" ]; then
-
-        alias ls='exa'
-
-        # control xterm resolution under xQuartz (so you may use X11 on the mac)
-        alias xrandr_reset='xrandr -s 1680x1050'
-        alias xrandr_max='xrandr -s 2880x1800'
-
-        # fixes bug, where mpv can't open files under macOs for some reason
-        # I believe media keys are thing like "play" buttons
-        alias mpv='mpv --input-media-keys=no'
-
-        alias cdr='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/'
-        alias cdrs='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/.scripts/'
-
-fi
-
 # General Aliases
 alias fzf='fzf --multi'
 alias sxiv='sxiv -bos f'
-alias youtube-dl="youtube-dl --config-location '~/.config/youtube-dl.conf'"
-alias mpvp='mpv --playlist '
-alias p6='perl6'
+alias youtube-dl='youtube-dl --config-location "$HOME/.config/youtube-dl.conf"'
+alias mpvp='mpv --playlist'
 alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
 
-# Scripts as unix names
+# Functional style scripts as unix names
 alias fdplay='fdPlay'
 alias fdshow='fdShow'
 
 # File Management
 alias chmodx='chmod +x'
-alias ranger='ranger --choosedir=$HOME/.rangerdir; cd "$(cat $HOME/.rangerdir)"; ls;'
-alias ran='ranger'
 alias ls1='ls -1'
 alias lsl='ls -al'
+alias vi='vim'
 alias vifm='vifm --choose-dir "$HOME/.vifm_dir" && cd "$(cat $HOME/.vifm_dir)" && ls'
 alias v='vifm'
-alias vi='vim'
+alias ranger='ranger --choosedir="$HOME/.rangerdir"; cd "$(cat $HOME/.rangerdir)"; ls;'
+alias ran='ranger'
 
 # Session management
 alias :q='exit'
 alias Q='exit'
-# alias q='exit'
-alias sus='suspend.sh'
 
 # Git
+# These mostly just use the aliases I specified in git's own alias system.
 alias g='git'
 alias ga='git a'
 alias gaa='git aa'
@@ -89,3 +58,33 @@ alias cdoc='cargo doc'
 
 # Tmux
 alias ta='tmux a -t'
+
+# Linux Specific
+if [ $(uname -s) = "Linux" ]; then
+
+   alias cdr='cd /home/work/Documents/github/HegemonsHerald/runcoms/'
+   alias cdrs='cd /home/work/Documents/github/HegemonsHerald/runcoms/.scripts/'
+
+   alias sus='suspend.sh'
+
+   alias ls='ls --color=auto -h'
+
+fi
+
+# Mac Specific
+if [ $(uname -s) = "Darwin" ]; then
+
+   alias cdr='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/'
+   alias cdrs='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/.scripts/'
+
+   # Control xterm resolution under xQuartz (so you may use X11 on the mac)
+   alias xrandr_reset='xrandr -s 1680x1050'
+   alias xrandr_max='xrandr -s 2880x1800'
+
+   # Fix bug, where mpv can't open files under macOS
+   # I believe media keys are for example the "play" button
+   alias mpv='mpv --input-media-keys=no'
+
+   alias ls='exa'
+
+fi
