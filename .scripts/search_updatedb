@@ -12,4 +12,5 @@
 
 echo "Updating database: ${1:-$HOME/.searchdb}"
 
-find "$HOME" -regex '\(/[^.][^/]*\)*' | /usr/local/Cellar/findutils/4.7.0/libexec/gfrcode > "${1:-$HOME/.searchdb}"
+find "$HOME" -regex '\(/[^.][^/]*\)*' |
+/usr/local/Cellar/findutils/4.7.0/libexec/gfrcode > "${1:-$HOME/.searchdb}"
