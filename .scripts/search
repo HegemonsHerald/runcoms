@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # GNU mlocate Usage
-
+#
 # A user of `locate` can only find files to which he has read permissions.
 #
 # Locate databases are usually generated using `updatedb`, which requires to be
@@ -33,6 +33,17 @@
 # takes the output of `find`, which excludes all hidden files and folders, and
 # compresses it into a LOCATE02 database called `database_file`.
 
-glocate -0 -A -i -d '/Users/code/work_no_hidden_locatedb' "$@" |
+
+# Interpret args as regular expressions?
+[ "$1" = '-r' ] && regex='-r' && shift
+
+# Surround args with globbing asterisks for convenience
+[ -z "$regex" ] && \
+while [ $# -ne 0 ]; do
+   args="$args*$1* "
+   shift
+done || args="$@"
+
+glocate -0 -A -i -d '/Users/code/work_no_hidden_locatedb' $regex $args |
 fzf --read0 --print0 -m |
 xargs -0 -I % open "%"
