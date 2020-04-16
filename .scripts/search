@@ -33,6 +33,6 @@
 # takes the output of `find`, which excludes all hidden files and folders, and
 # compresses it into a LOCATE02 database called `database_file`.
 
-glocate -0 -A -d '/Users/code/work_no_hidden_locatedb' "$@" |
+glocate -0 -A -i -d '/Users/code/work_no_hidden_locatedb' "$@" |
 fzf --read0 --print0 -m |
 xargs -0 -I % open "%"
