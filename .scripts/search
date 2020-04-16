@@ -1,12 +1,16 @@
 #!/bin/sh
 
-# TODO: Make this a linux tool using dmenu. Possibly even with a command
-# history.
-
 # TODO: Make this and search_updatedb use a SEARCHDB_LOCATION environment
 # variable.
 
 # TODO: Add flag to handle custom database locations.
+
+# TODO: Under runcoms migration make the mac version the base version, because
+# fzf is more portable than dmenu. Derive linux version by replacing pipe
+# elements with dmenu.
+
+# TODO: MAYBE implement a search history and private mode. Previous searches are
+# presented when entering a new search string. INCOMPATIBLE WITH FZF.
 
 # TODO: MAYBE identify genuine globs and auto-surround those with *s. Note that
 # a non-glob string will by default be matched as though it was surrounded by
