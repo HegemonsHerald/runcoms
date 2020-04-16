@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# TODO: Make this a linux tool using dmenu. Possibly even with a command
+# history.
+
+# TODO: Make this and search_updatedb use a SEARCHDB_LOCATION environment
+# variable.
+
+# TODO: Add flag to handle custom database locations.
+
 # GNU mlocate Usage
 #
 # A user of `locate` can only find files to which he has read permissions.
@@ -44,6 +52,6 @@ while [ $# -ne 0 ]; do
    shift
 done || args="$@"
 
-glocate -0 -A -i -d '/Users/code/work_no_hidden_locatedb' $regex $args |
+glocate -0 -A -i -d '/Users/code/.searchdb' $regex $args |
 fzf --read0 --print0 -m |
 xargs -0 -I % open "%"
