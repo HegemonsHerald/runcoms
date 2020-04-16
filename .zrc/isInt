@@ -1,3 +1,0 @@
-#!/bin/sh
-
-[ ! -z "$(echo "$1" | sed -En '/^[0-9]+$/ p')" ] && exit 0 || exit 1

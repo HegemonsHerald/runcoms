@@ -1,5 +1,3 @@
 #!/bin/sh
 
-# POSIX shell has no guaranteed way of identifying integer argumen
-
-[ -n "$(echo "$1" | sed -En '/^[0-9]+$/ p')" ] && exit 0 || exit 1
+[ ! -z "$(echo "$1" | sed -En '/^[0-9]+$/ p')" ] && exit 0 || exit 1
