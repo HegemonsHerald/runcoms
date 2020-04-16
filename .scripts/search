@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # TODO: Make this and search_updatedb use a SEARCHDB_LOCATION environment
-# variable.
+# variable for the default db location.
 
 # TODO: Add flag to handle custom database locations.
 

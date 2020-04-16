@@ -1,11 +1,16 @@
 #!/bin/sh
 
-# TODO: make use of SEARCHDB_LOCATION environment variable
+# TODO: make use of SEARCHDB_LOCATION environment variable, fail if unset
 
 # TODO: make use of FRCODE_LOCATION environment variable (for platform
 # independence)
 
 # TODO: option flags for specifying find options and including hidden files
+# First argument is always db location, if set to "-" use SEARCHDB_LOCATION
+# Everything after that is options and arguments for find:
+#  CUSTOM: --hidden to include hidden files
+#  CUSTOM: -h, --help to print a user manual
+#  Everything else is expanded using "$@"; add the no-hidden regex to the end of the expression to make this possible
 
 # TODO: update into a temporary location, mv the tempfile into the target file
 # on success; for better error handling

@@ -1,3 +1,6 @@
+# TODO: create and make use of a directories-only mlocate database. Use
+# CDSEARCHDB_LOCATION to set the default location, fail if unset
+
 cdsearch () {
    local tgt
    tgt="$(glocate -d /Users/code/.searchdb -A -i "$@" | fzf +m -1)"
