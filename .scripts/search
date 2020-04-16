@@ -8,6 +8,11 @@
 
 # TODO: Add flag to handle custom database locations.
 
+# TODO: MAYBE identify genuine globs and auto-surround those with *s. Note that
+# a non-glob string will by default be matched as though it was surrounded by
+# *s... This isn't really a necessary feature. If your pattern is complex enough
+# to require globbing, you might as well use regex, or just bloody remember!
+
 # GNU mlocate Usage
 #
 # A user of `locate` can only find files to which he has read permissions.
@@ -42,16 +47,6 @@
 # compresses it into a LOCATE02 database called `database_file`.
 
 
-# Interpret args as regular expressions?
-[ "$1" = '-r' ] && regex='-r' && shift
-
-# Surround args with globbing asterisks for convenience
-[ -z "$regex" ] && \
-while [ $# -ne 0 ]; do
-   args="$args*$1* "
-   shift
-done || args="$@"
-
-glocate -0 -A -i -d '/Users/code/.searchdb' $regex $args |
+glocate -0 -A -i -d '/Users/code/.searchdb' "$@"
 fzf --read0 --print0 -m |
 xargs -0 -I % open "%"
