@@ -1,10 +1,26 @@
-# Lines configured by zsh-newuser-install
+# ENVIRONMENT VARIABLES ========================================================
+
+# History
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-setopt autocd extendedglob nomatch
-# End of lines configured by zsh-newuser-install
 
+# Set default editor to Vim
+EDITOR=/usr/bin/vim
+VISUAL=/usr/bin/vim
+
+
+# OPTIONS ======================================================================
+
+setopt autocd extendedglob nomatch
+set -o vi
+
+# Make v key open editor in zle command mode (kinda like with shell's vi-mode)
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# Completion
 # The completion doesn't want to work on the mac and I can't be asked to fix it
 if [ $(uname -s) = "Linux" ]
 then
@@ -15,8 +31,6 @@ then
 	compinit
 	# End of lines added by compinstall
 fi
-
-# == MY OWN CHANGES ===================================================
 
 # Zsh settings
 # make completion be case-insensitive
@@ -36,21 +50,10 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
 #  direction, the '+' adds this rule to the previous instead of
 #  overwriting it.
 
-# Set default editor to Vim
-EDITOR=/usr/bin/vim
-VISUAL=/usr/bin/vim
 
-# Make use Vi-like keybindings
-set -o vi
+# SOURCE SCRIPTS ===============================================================
 
-# Make v key open editor in zle command mode (kinda like with sh's vi-mode)
-autoload edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+source "$HOME/.zrc/aliases"
+source "$HOME/.zrc/prompt"
 
-# Ranger Config
-RANGER_LOAD_DEFAULT_RC=false
-
-# Source other things
-source ~/.zrc/aliases
-source ~/.zrc/prompt
+source "$HOME/.scripts/cdsearch"
