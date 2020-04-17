@@ -2,14 +2,18 @@
 
 # Command to remember new aliases more easily
 aliases () {
-   echo "mpvp\tmpv --playlist"
-   echo "fde\tls | ag"
    echo "g alias"
    echo "gcb\tgit change branch"
    echo "gaa\tgit add all (tracked and untracked)"
    echo "gdt\tgit difftool"
    echo "gm\tgit merge"
    echo "gmt\tgit mergetool (to resolve merge conflicts)"
+   echo ""
+   echo "mpvp\tmpv --playlist"
+   echo "fde\tls | ag"
+   echo ""
+   echo "cdu\tgo to Uni/.../semester-4"
+   echo "cdU\tgo to Uni/.../semester-4 in vifm"
 }
 
 # General Aliases
@@ -90,6 +94,8 @@ if [ $(uname -s) = "Darwin" ]; then
    # Bookmarks
    alias cdr='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/'
    alias cdrs='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/.scripts/'
+   alias cdu='cd /Users/code/Documents/University/Classes/semester-4/'
+   alias cdU='cdu; vifm'
 
    # Control xterm resolution under xQuartz (so you may use X11 on the mac)
    alias xrandr_reset='xrandr -s 1680x1050'
