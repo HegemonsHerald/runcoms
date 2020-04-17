@@ -18,17 +18,18 @@ alias sxiv='sxiv -bos f'
 alias youtube-dl='youtube-dl --config-location "$HOME/.config/youtube-dl.conf"'
 alias mpvp='mpv --playlist'
 alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
+alias vi='vim'
+alias ta='tmux a -t'
 
 # Functional style scripts as unix names
 alias fdplay='fdPlay'
 alias fdshow='fdShow'
 
 # File Management
-alias chmodx='chmod +x'
 alias ls1='ls -1'
 alias lsl='ls -al'
 alias fde='fd -d 1 -H'
-alias vi='vim'
+alias chmodx='chmod +x'
 alias vifm='vifm --choose-dir "$HOME/.vifm_dir" && cd "$(cat $HOME/.vifm_dir)" && ls'
 alias v='vifm'
 alias ranger='ranger --choosedir="$HOME/.rangerdir"; cd "$(cat $HOME/.rangerdir)"; ls;'
@@ -70,12 +71,10 @@ alias cr='cargo run'
 alias cb='cargo build'
 alias cdoc='cargo doc'
 
-# Tmux
-alias ta='tmux a -t'
-
 # Linux Specific
 if [ $(uname -s) = "Linux" ]; then
 
+   # Bookmarks
    alias cdr='cd /home/work/Documents/github/HegemonsHerald/runcoms/'
    alias cdrs='cd /home/work/Documents/github/HegemonsHerald/runcoms/.scripts/'
 
@@ -88,6 +87,7 @@ fi
 # Mac Specific
 if [ $(uname -s) = "Darwin" ]; then
 
+   # Bookmarks
    alias cdr='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/'
    alias cdrs='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/.scripts/'
 
