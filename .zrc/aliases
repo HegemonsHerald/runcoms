@@ -9,8 +9,8 @@ aliases () {
    echo "gm       git merge"
    echo "gmt      git mergetool (to resolve merge conflicts)"
    echo ""
-   echo "mpvp\tmpv --playlist"
-   echo "fde\tls | ag"
+   echo "mpvp        mpv --playlist -"
+   echo "mpvp <file> mpv --playlist <file>"
    echo ""
    echo "fde   ls | ag"
    echo ""
@@ -22,10 +22,10 @@ aliases () {
 alias fzf='fzf --multi'
 alias sxiv='sxiv -bos f'
 alias youtube-dl='youtube-dl --config-location "$HOME/.config/youtube-dl.conf"'
-alias mpvp='mpv --playlist'
 alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
 alias vi='vim'
 alias ta='tmux a -t'
+mpvp() { [ $# -eq 0 ] && mpv --playlist='-' || mpv --playlist="$1" }
 
 # Functional style scripts as unix names
 alias fdplay='fdPlay'
