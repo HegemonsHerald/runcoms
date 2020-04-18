@@ -30,6 +30,7 @@
    ca = commit --amend
    cm = commit -m
    d = diff
+   dc = diff --cached
    dt = difftool
    f = fetch
    f = fetch

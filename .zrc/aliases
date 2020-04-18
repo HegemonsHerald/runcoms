@@ -5,6 +5,7 @@ aliases () {
    echo "g alias  print git aliases"
    echo "gcb      git change branch"
    echo "gaa      git add all (tracked and untracked)"
+   echo "gdc      git diff --cached"
    echo "gdt      git difftool"
    echo "gm       git merge"
    echo "gmt      git mergetool (to resolve merge conflicts)"
@@ -57,6 +58,7 @@ alias gc='git c'
 alias gca='git ca'
 alias gcm='git cm'
 alias gd='git d'
+alias gdc='git dc'
 alias gdt='git dt'
 alias gf='git f'
 alias gh='git h'
