@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO: exclude contents of git repositories
+
 # TODO: make use of SEARCHDB_LOCATION environment variable, fail if unset
 
 # TODO: make use of FRCODE_LOCATION environment variable (for platform
@@ -9,6 +11,7 @@
 # First argument is always db location, if set to "-" use SEARCHDB_LOCATION
 # Everything after that is options and arguments for find:
 #  CUSTOM: --hidden to include hidden files
+#  CUSTOM: -g, --include-git to include git repositories
 #  CUSTOM: -h, --help to print a user manual
 #  Everything else is expanded using "$@"; add the no-hidden regex to the end of the expression to make this possible
 
