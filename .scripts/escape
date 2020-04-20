@@ -51,10 +51,18 @@
 
 sub='s#\([^][:cntrl:][:alnum:]/!+,-.:@^_{]\)#\\\1#g'
 
+# Read from stdin if no args or only -
 if [ $# -eq 0 -o $# -eq 1 -a "$1" = "-" ]; then
    sed "$sub"
+
+# Escape arguments
 else
+   output="$(echo "$1" | sed "$sub")"
+   shift
+
    for parameter; do
-      printf '%s' "$parameter" | sed "$sub"
+      output="$outs $(echo "$parameter" | sed "$sub")"
    done
+
+   printf '%s' "$output"
 fi
