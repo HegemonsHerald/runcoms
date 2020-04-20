@@ -1,15 +1,60 @@
 #!/bin/sh
 
-# Adds a backslash in front of every character except '-', 'a-z', 'A-Z', '0-9', '=', '+', '_', ':'.
+# Escape according to POSIX Standard requirements.
+# 
+# No arguments or a single '-' as argument make escape read from stdin.
+# Otherwise the positional arguments will be escaped.
 
-substitute () {
-   sed -E 's/([^-a-zA-Z0-9=+_:])/\\\1/g'
-}
+# The POSIX Standard's specification for quoting on the shell states, that the
+# following characters must be escaped.
+#
+#    |  &  ;  <  >  (  )  $  `  \  "  '  *  ?  [  #  ˜ =  %
+#    <space>  <tab>  <newline> 
+# 
+# These are punctuation and whitespace characters.
+#
+# The [:punct:] characters are:
+#
+#    ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+#
+# The [:space:] characters are:
+#
+#    <space>, <tab>, <newline>, <carriage return>, <line feed>, <vertical tab>
+#
+# The characters to escape include both " and ', which makes it difficult to
+# conveniently write a regex pattern matching them both in an invocation of
+# sed. With double quoting and escape quoting you have to escape all the above
+# characters manually, with single quoting you can't include the '.
+#
+# Instead we write a negated bracket expression, that matches against any
+# character except the alphanumeric characters, the control characters, and the
+# punctuation characters that shouldn't be escaped:
+#
+#    [^][:cntrl:][:alnum:]/!+,-.:@^_{]
+#      ^
+#      |
+#    In the first position after ^ the ] loses its special meaning within
+#    bracket expressions.
+#
+# This bracket expression includes the /, which is commonly used as separator
+# in sed. To avoid ambiguity we may use any other character except \ and
+# <newline> as delimiter.
+# To illustrate here are examles of delimiter use:
+#
+#    's|\([^][:cntrl:][:alnum:]/!+,-.:@^_{]\)|\\\1|g'
+#    's#\([^][:cntrl:][:alnum:]/!+,-.:@^_{]\)#\\\1#g'
+#    's;\([^][:cntrl:][:alnum:]/!+,-.:@^_{]\);\\\1;g'
+#    's \([^][:cntrl:][:alnum:]/!+,-.:@^_{]\) \\\1 g'
+#
+# (Yes! You can even use the space as delimiter, though of course then you
+# can't use it in the patterns anymore!)
 
-if [ $# -eq 0 -o "$1" = "-" ]; then
-   substitute
+sub='s#\([^][:cntrl:][:alnum:]/!+,-.:@^_{]\)#\\\1#g'
+
+if [ $# -eq 0 -o $# -eq 1 -a "$1" = "-" ]; then
+   sed "$sub"
 else
    for parameter; do
-      echo "$parameter" | substitute
+      printf '%s' "$parameter" | sed "$sub"
    done
 fi
