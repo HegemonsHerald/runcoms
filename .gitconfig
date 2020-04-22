@@ -20,11 +20,12 @@
    helper = osxkeychain
 
 [alias]
-   a = !git add . && git status
+   a = add
    aa = !git add . && git add -u . && git status
    ac = !git add . && git commit
    acm = !git add . && git commit -m
    alias = !git config --list | grep 'alias\\.' | sort -u | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/'
+   ap = add -p
    au = !git add -u . && git status
    c = commit
    ca = commit --amend

@@ -2,9 +2,9 @@
 
 # Command to remember new aliases more easily
 aliases () {
+   echo "gaa      git add all (tracked and untracked), DON'T USE ga .!!!"
+   echo "gap      git add --patch"
    echo "g alias  print git aliases"
-   echo "gcb      git change branch"
-   echo "gaa      git add all (tracked and untracked)"
    echo "gdc      git diff --cached"
    echo "gdt      git difftool"
    echo "gm       git merge"
@@ -56,6 +56,7 @@ alias ga='git a'
 alias gaa='git aa'
 alias gac='git ac'
 alias gacm='git acm'
+alias gai='git ai'
 alias gau='git au'
 alias gc='git c'
 alias gca='git ca'
