@@ -156,6 +156,8 @@ augroup filetype_lisp
 
 augroup END
 
+autocmd BufRead,BufNewFile *.java set sw=8
+
 autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
 
 autocmd BufRead,BufNewFile *.hs set et sts=2 sw=2
