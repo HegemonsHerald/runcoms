@@ -57,3 +57,4 @@ source "$HOME/.zrc/aliases"
 source "$HOME/.zrc/prompt"
 
 source "$HOME/.scripts/cdsearch"
+source "$HOME/.scripts/vsearch"
