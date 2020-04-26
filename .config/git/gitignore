@@ -1,0 +1,7 @@
+# Absolute paths and names
+.DS_STORE
+
+# Files by extension
+.swp
+.log
+.aux
