@@ -14,11 +14,6 @@
 # TODO: MAYBE implement a search history and private mode. Previous searches are
 # presented when entering a new search string. INCOMPATIBLE WITH FZF.
 
-# TODO: MAYBE identify genuine globs and auto-surround those with *s. Note that
-# a non-glob string will by default be matched as though it was surrounded by
-# *s... This isn't really a necessary feature. If your pattern is complex enough
-# to require globbing, you might as well use regex, or just bloody remember!
-
 # GNU mlocate Usage
 #
 # A user of `locate` can only find files to which he has read permissions.
