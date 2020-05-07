@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO: create a spec for the search utilities that includes the following TODOs
+
 # TODO: Make this and search_updatedb use a SEARCHDB_LOCATION environment
 # variable for the default db location.
 
