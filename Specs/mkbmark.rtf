@@ -1,10 +1,10 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
 {\fonttbl\f0\fnil\fcharset0 Monaco;}
-{\colortbl;\red255\green255\blue255;\red35\green255\blue6;\red0\green0\blue0;\red251\green0\blue7;
-\red255\green255\blue255;\red250\green0\blue7;}
-{\*\expandedcolortbl;;\cssrgb\c0\c100000\c0;\cssrgb\c0\c1\c1;\cssrgb\c100000\c12195\c0;
-\cssrgb\c100000\c100000\c100000\c0;\cssrgb\c99475\c11270\c0;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww19740\viewh19740\viewkind0
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red35\green255\blue6;\red0\green0\blue0;
+\red34\green255\blue6;\red251\green0\blue7;\red255\green255\blue255;\red250\green0\blue7;}
+{\*\expandedcolortbl;;\cssrgb\c0\c1\c1;\cssrgb\c0\c100000\c0;\cssrgb\c0\c0\c0;
+\cssrgb\c0\c99725\c0;\cssrgb\c100000\c12195\c0;\cssrgb\c100000\c100000\c100000\c0;\cssrgb\c99475\c11270\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17900\viewh19740\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 \ul \ulc0 NAME\ulnone \
@@ -15,27 +15,39 @@
 	The mkbmark utility shall generate bookmark aliases for the shell and vifm.\
 	Other applications may be added as targets in the future.\
 \
+	The utility shall read information from stdin. Empty lines and lines\
+	beginning with any character, that isn\'92t alphanumeric, will be ignored. The\
+	remaining lines are treated as input as follows.\
+\
 	The utility shall read pairs of Symbols and Paths from stdin, separated by\
-	<Tab> characters.\
+	a \'91|\'92 character.\
 \
 	The Symbols shall be made only of alphanumeric characters.\
 \
-	It is assumed, that each line only contains a single <Tab> character, as\
-	Paths \cf2 \ul \ulc2 may not contain them(?)\cf3 \ulnone .\
+	There may be white space between the Symbol and the \'91|\'92 character. This is\
+	done for readability purposes:\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 		<Symbol>      |<Path>\
+		<Long Symbol> |<Path>\
+		<Symbol>      |<Path>\
+\
+	Any text to the right of the \'91|\'92 character will be treated as part of the\
+	Path, including leading whitespace.\cf2 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 \cf0 \
 	It is left to the user to insure, that the Paths are escaped correctly for\
 	expansion within double quotes. Expansions, that are compatible with all\
-	target applications, ie shell and vifm, are allowed. However, it is\
+	target applications, ie shell and vifm, are allowed. However, it is highly\
 	discouraged to use anything except absolute paths.\
 \
 	For each line of input the utility shall compute the strings resulting from\
 	the following printf statements.\
 \
 		<n>		<statement>\
-		(1)		printf \'93alias cd%s=\\\'94cd %s\\\'94\'94           <Symbol>   <Path>\
-		(2)		printf \'93alias cc%s=\\\'94cd %s\\\'94; vifm .\'94 f(<Symbol>)  <Path>\
-		(3)		printf \'93\cf4 \'85\cf0 \'94 <Symbol> <Path>	\cf4 # IDK what the vifm bmark syntax is\ul \ulc4 \
+		(1)		printf \'91alias cd%s=\'94cd %s\'94\'92           <Symbol>   <Path>\
+		(2)		printf \'91alias cc%s=\'94cd %s\'94; vifm .\'92 f(<Symbol>)  <Path>\
+\cf4 		(3)		printf \'91bmark! \'93%s2$/\'93 %s\'92            <Symbol>   <Path>\cf6 \ul \ulc6 \
 \cf0 \ulnone \
 	The output of the nth statement shall be appended to the nth output file.\
 \
@@ -44,20 +56,23 @@
 	following defaults shall be used for that argument.\
 \
 		<n>		<file name>\
-		(1)		.bmark-cd\
-		(2)		.bmark-cd_vifm\
-		(3)		.bmark-vifm\
+		(1)		bmark-cd\
+		(2)		bmark-cd_vifm\
+		(3)		bmark-vifm\
 \
 	Note that all of these are paths in mkbmark\'92s working directory.\
 \
-\cf3 \cb5 \ul \ulc6 IMPLEMENTATION\cf0 \cb1 \ulc4 \
+\cf2 \cb7 \ul \ulc8 IMPLEMENTATION\cf0 \cb1 \ulc6 \
 \ulnone 	The utility shall be implemented as an awk program.\
 \
 	It shall compute the output file names in the BEGIN block.\
 	The file names shall be stored in an array, set initially to the defaults.\
 	Based on the provided arguments these defaults shall then be over-written.\
 \
-	The field separator shall be set to match \'91\\t\'92.\
+	The utility shall not use a field separator for splitting, but use the\
+	index() and substr() procedures to isolate the text before and after the\
+	\'91|\'92 character, and the sub() procedure to remove trailing whitespace from\
+	the symbol.\
 \
 	On each line the printf statements shall be executed as specified above,\
 	their output shall be redirected into the corresponding output file name\
@@ -73,10 +88,10 @@
 \ulnone 	Basic Usage\
 \
 		$> mkbmark . . VIFM_bookmarks <<END\
-		u		$HOME/Documents/University/classes/semester-4\
-		st		$HOME/Documents/University/classes/semester-4/softwaretechnik\
-		sts		$HOME/Documents/University/classes/semester-4/softwaretechnik/st-ss20-harder-heinen\
-		stm		$HOME/Documents/University/classes/semester-4/softwaretechnik/materialien\
+		u   #$HOME/Documents/University/classes/semester-4\
+		st  #$HOME/Documents/University/classes/semester-4/softwaretechnik\
+		sts #$HOME/Documents/University/classes/semester-4/softwaretechnik/st-ss20-harder-heinen\
+		stm #$HOME/Documents/University/classes/semester-4/softwaretechnik/materialien\
 		END\
 \
 	will create the following output files.\
