@@ -1,0 +1,113 @@
+mkbmark utility specification (draft)
+-------------------------------------
+
+Note that this utility classifies as a static automation (as opposed to an
+interactive automation) and thus shall not be implemented with platform-specific
+dependencies.
+
+
+In vifm type b to access the bookmark menu, where bookmarks are displayed as
+paths with their tags.
+In the bookmark menu type b again to toggle the special view for the bookmarks,
+where the bookmarks are displayed as though they were folders and can be
+navigated as such.
+
+
+---
+
+
+USAGE:
+
+   <> -h
+   <> [<base path>]
+
+<> will read bookmark specs from stdin in the format specified below.
+
+It will generate four output files:
+
+   .bmark_cd
+   .bmark_cd_vifm
+   .bmark_vifm
+   .bmark_vifm_mark
+
+If <base path> is provided the output files will be put into the folder <base
+path> specifies. The default is $HOME.
+
+>> Add a disclaimer not to edit them to the beginnig of the compilates.
+
+DESCRIPTION:
+
+The translator produces the following kinds of bookmark aliases:
+
+   cd           aliases to 'cd <bookmark>'
+
+   cd + vifm    aliases to 'cd <bookmark>; vifm .'
+
+   vifm         vifm bookmarks; accessed in vifm via :bmarks
+
+   vifm mark    vifm marks, can only be a single letters from [a-z][A-Z][0-9];
+                accessed in vifm via '<mark>
+
+
+The shell aliases are prefixed as follows:
+
+   cd          will be prefixed with "cd"
+   cd + vifm   will be prefixed with "v"
+
+
+Conditional binding of aliases can be specified with :<platform>: sections. The
+translator will output the bookmarks in conditional blocks, that check against
+<platform> using `uname -s`.
+
+In vifm that's:
+  system('uname -s') == 'Linux'
+  system('uname -s') == 'Darwin'
+
+
+Paths are expected to be correctly escaped. They will be surrounded with double
+quotes.
+
+Tabs are forbidden as grammatical whitespace.
+Leading whitespace is not allowed.
+
+
+Grammar:
+
+   Line              := Ignore | PlatformSpecifier | Assignment
+
+   Ignore            := Empty | Comment
+   Empty             := ^$                         # empty line
+   Comment           := ^#\s.*$                    # starts with # followed by a space
+
+   PlatformSpecifier := ^:.*:$                     # starts and ends with :, whitespcae will NOT be trimmed
+
+   Assignment        := Alias +Mark +Path          # alias, mark modifier, and path, separated by spaces
+   Alias             := ^[^ #][^ ]*                # aliases may not contain spaces, may not start with a #
+   Mark              := ~ | ε                      # either a tilde or nothing
+   Path              := [^ ].*$                    # a single non-space, then the rest to the end of the line
+
+
+Example:
+
+  # This is a comment which could perhaps
+  # explain the file's format....
+  
+  b ~ /bin
+  s $HOME/.scripts
+  
+  :Darwin:
+  r ~ $HOME/Documents/GitHub/HegemonsHerald/runcoms
+  rs  $HOME/Documents/GitHub/HegemonsHerald/runcoms/.scripts
+  rz  $HOME/Documents/GitHub/HegemonsHerald/runcoms/.zrc
+  U ~ $HOME/Documents/University/Classes/semester-4
+
+Translates to these aliases:
+
+  cd     cd+v  bmark mark
+  ----------------------------
+  cdb    vb    b     'b
+  cds    bs    s 
+  cdr    vr    r     'r
+  cdrs   vrs   rs
+  cdrz   vrz   rz
+  cdU    vU    U     'U
