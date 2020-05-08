@@ -1,0 +1,28 @@
+#!/usr/bin/awk
+
+# Compute output filenames
+BEGIN {
+
+   # Set default output locations
+   outputs[1] = "bmark-cd"
+   outputs[2] = "bmark-cd_vifm"
+   outputs[3] = "bmark-vifm"
+
+}
+
+# Ignore empty lines and lines not starting with alnum chars
+/^$/            { next; }
+!/^[a-zA-Z0-9]/ { next; }
+
+# Bookmark operations
+{
+   # Split and trim input
+   symbol = substr($0, 1, match($0, /[[:space:]]*\|/)-1)
+   path   = substr($0, index($0, "|")+1)
+   sub(/[[:space:]]*$/, "", symbol)
+
+   # The printf statements
+   printf "alias cd%s='cd \"%s\"'\n",         symbol, path >> outputs[1]
+   printf "alias cc%s='cd \"%s\"; vifm .'\n", symbol, path >> outputs[2]
+   printf "bmark! \"%s/\" %s\n",              path, symbol >> outputs[3]
+}
