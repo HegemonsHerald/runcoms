@@ -1,6 +1,6 @@
-oc |$HOME/Documents
-ow |$HOME/Downloads
-e  |$HOME/Desktop
+oc |/Users/code/Documents
+ow |/Users/code/Downloads
+e  |/Users/code/Desktop
 
 # Runcoms
 r  |/Users/code/Documents/GitHub/HegemonsHerald/runcoms
@@ -9,8 +9,8 @@ rb |/Users/code/Documents/GitHub/HegemonsHerald/runcoms/.bookmarks
 
 # Soho
 x  |/Users/code/Downloads/media/x
-xv |/Users/code/Downloads/media/x/arrival*/vid
-xf |/Users/code/Downloads/media/x/fun*
+xv |/Users/code/Downloads/media/x/arrival/vid
+xf |/Users/code/Downloads/media/x/fun
 xr |/Users/code/Downloads/media/x/rips
 
 # University
