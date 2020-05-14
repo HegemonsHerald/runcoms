@@ -58,3 +58,6 @@ source "$HOME/.zrc/prompt"
 
 source "$HOME/.scripts/cdsearch"
 source "$HOME/.scripts/vsearch"
+
+source "$HOME/.bookmarks/bmark-cd"
+source "$HOME/.bookmarks/bmark-cd_vifm"
