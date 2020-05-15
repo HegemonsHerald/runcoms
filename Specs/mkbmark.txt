@@ -55,10 +55,18 @@ DESCRIPTION
           (2)  bmark-cd_vifm
           (3)  bmark-vifm
 
-     Note that all of these are paths in mkbmark’s working directory.
+     Note, that all of these are paths in mkbmark’s working directory.
 
      No mechanic for overriding the output files is specified. Implementations
      may choose to provide one.
+
+USAGE WITH VIFM
+
+     Vifm seems not to like to use :source to read a bookmarks file from the
+     vifmrc. You may manunually source the bookmarks instead. Use
+
+	  :delbmarks!			     to remove all bookmarks
+	  :source ~/.bookmarks/bmark-vifm    to source the bookmarks
 
 MAIN IMPLEMENTATION
      The utility shall be implemented as an awk program.
