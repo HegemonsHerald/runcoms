@@ -26,9 +26,18 @@ DESCRIPTION
      Path, including leading whitespace.
 
      It is left to the user to insure, that the Paths are escaped correctly for
-     expansion within double quotes. Expansions, that are compatible with all
-     target applications, ie shell and vifm, are allowed. However, it is highly
-     discouraged to use anything except absolute paths.
+     use within double quotes in the outputs. Double quotes are used in the
+     output to insure compatibility with paths containing double quotes.
+
+     Note, that vifm does not perform expansion on strings. Note also, that
+     aliases are not expanded either, which means no shell expansion is
+     performed by the consumer programs.
+
+     Shell expansion shall not be performed by the utility, with the exception
+     that the literal string "$HOME" shall be expanded to the user's home
+     directory at execution. This is done to promote a sensible level of
+     platform independency. No other expansions are performed to keep
+     implementation complexity in check.
 
      For each line of input the utility shall compute the strings resulting from
      the following printf statements.
