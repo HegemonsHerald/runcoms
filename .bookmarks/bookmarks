@@ -1,24 +1,3 @@
-oc |/Users/code/Documents
-ow |/Users/code/Downloads
-e  |/Users/code/Desktop
-
-# Runcoms
-r  |/Users/code/Documents/GitHub/HegemonsHerald/runcoms
-rs |/Users/code/Documents/GitHub/HegemonsHerald/runcoms/.scripts
-rb |/Users/code/Documents/GitHub/HegemonsHerald/runcoms/.bookmarks
-
-# Soho
-x  |/Users/code/Downloads/media/x
-xv |/Users/code/Downloads/media/x/arrival/vid
-xf |/Users/code/Downloads/media/x/fun
-xr |/Users/code/Downloads/media/x/rips
-
-# University
-u    |/Users/code/Documents/University/Classes/semester-4
-us   |/Users/code/Documents/University/Classes/semester-4/Softwaretechnik
-usm  |/Users/code/Documents/University/Classes/semester-4/Softwaretechnik/materialien
-uss  |/Users/code/Documents/University/Classes/semester-4/Softwaretechnik/st-ss20-harder-heinen
-ua   |/Users/code/Documents/University/Classes/semester-4/AlgMetP
-ut   |/Users/code/Documents/University/Classes/semester-4/TGI
-uth  |/Users/code/Documents/University/Classes/semester-4/TGI/homework
-utt  |/Users/code/Documents/University/Classes/semester-4/TGI/tgi-ss20-heinen-tuchtenhagen
+oc |$HOME/Documents
+ow |$HOME/Downloads
+e  |$HOME/Desktop
