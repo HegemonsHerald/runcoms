@@ -3,10 +3,8 @@
 # Compute output filenames
 BEGIN {
 
-   # Set default output locations
-   outputs[1] = "bmark-cd"
-   outputs[2] = "bmark-cd_vifm"
-   outputs[3] = "bmark-vifm"
+   # Get user's home directory
+   home = ENVIRON["HOME"]
 
 }
 
@@ -20,6 +18,7 @@ BEGIN {
    symbol = substr($0, 1, match($0, /[[:space:]]*\|/)-1)
    path   = substr($0, index($0, "|")+1)
    sub(/[[:space:]]*$/, "", symbol)
+   gsub(/\$HOME/, home, path)
 
    # The printf statements
    printf "alias cd%s='cd \"%s\"'\n",         symbol, path >> outputs[1]
