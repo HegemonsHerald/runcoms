@@ -43,9 +43,9 @@ DESCRIPTION
      the following printf statements.
 
           <n>  <statement>
-          (1)  printf "alias cd%s='cd \"%s\"'\n",         <symbol>, <path>
-          (2)  printf "alias cc%s='cd \"%s\"; vifm .'\n", <symbol>, <path>
-          (3)  printf "bmark! \"%s/\" %s\n",              <path>, <symbol>
+          (1)  printf "alias cd%s=\"cd \\\"%s\"\"\n",         <symbol>, <path>
+          (2)  printf "alias cc%s=\"cd \\\"%s\"; vifm .\"\n", <symbol>, <path>
+          (3)  printf "bmark! \"%s/\" %s\n",                  <path>, <symbol>
 
      The output of the nth statement shall be appended to the nth output file,
      which are as follows:
