@@ -21,7 +21,7 @@ BEGIN {
    gsub(/\$HOME/, home, path)
 
    # The printf statements
-   printf "alias cd%s='cd \"%s\"'\n",         symbol, path >> outputs[1]
-   printf "alias cc%s='cd \"%s\"; vifm .'\n", symbol, path >> outputs[2]
-   printf "bmark! \"%s/\" %s\n",              path, symbol >> outputs[3]
+   printf "alias cd%s=\"cd \\\"%s\\\"\"\n",         symbol, path >> "bmark-cd"
+   printf "alias cc%s=\"cd \\\"%s\\\"; vifm .\"\n", symbol, path >> "bmark-cd_vifm"
+   printf "bmark! \"%s/\" %s\n",                    path, symbol >> "bmark-vifm"
 }
