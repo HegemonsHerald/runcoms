@@ -16,8 +16,7 @@ aliases () {
    echo ""
    echo "fde   ls | ag"
    echo ""
-   echo "cdu   go to Uni/.../semester-4"
-   echo "cdU   go to Uni/.../semester-4 in vifm"
+   echo "bms      list bookmarks"
 }
 
 # General Aliases
@@ -44,6 +43,7 @@ alias vifm='vifm --choose-dir "$HOME/.vifm_dir" && cd "$(cat $HOME/.vifm_dir)" &
 alias v='vifm'
 alias ranger='ranger --choosedir="$HOME/.rangerdir"; cd "$(cat $HOME/.rangerdir)"; ls;'
 alias ran='ranger'
+alias bms='cat "$HOME/.bookmarks/bookmarks" "$HOME/.bookmarks/bookmarks-mac" | sed -n "/^$/ n; /^[^a-zA-Z0-9]/ n; p"'
 
 # Session management
 alias :q='exit'
@@ -99,12 +99,6 @@ fi
 
 # Mac Specific
 if [ $(uname -s) = "Darwin" ]; then
-
-   # Bookmarks
-   alias cdr='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/'
-   alias cdrs='cd /Users/code/Documents/GitHub/HegemonsHerald/runcoms/.scripts/'
-   alias cdu='cd /Users/code/Documents/University/Classes/semester-4/'
-   alias cdU='cdu; vifm'
 
    # Control xterm resolution under xQuartz (so you may use X11 on the mac)
    alias xrandr_reset='xrandr -s 1680x1050'
