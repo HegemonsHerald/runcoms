@@ -47,12 +47,8 @@ DESCRIPTION
           (2)  printf "alias cc%s='cd \"%s\"; vifm .'\n", <symbol>, <path>
           (3)  printf "bmark! \"%s/\" %s\n",              <path>, <symbol>
 
-     The output of the nth statement shall be appended to the nth output file.
-
->TODO: Respecify output file name parameters as awk variable assignments
->    The names of the output files shall be passed as arguments to the utility
->    in the order of the printf statements. If no value or “.” is provided, the
->    following defaults shall be used for that argument.
+     The output of the nth statement shall be appended to the nth output file,
+     which are as follows:
 
           <n>  <file name>
           (1)  bmark-cd
@@ -61,21 +57,22 @@ DESCRIPTION
 
      Note that all of these are paths in mkbmark’s working directory.
 
-IMPLEMENTATION
-     The utility shall be implemented as an awk program.
+     No mechanic for overriding the output files is specified. Implementations
+     may choose to provide one.
 
-     It shall compute the output file names in the BEGIN block.
-     The file names shall be stored in an array, set initially to the defaults.
-     Based on the provided arguments these defaults shall then be over-written.
+MAIN IMPLEMENTATION
+     The utility shall be implemented as an awk program.
 
      The utility shall not use a field separator for splitting, but use the
      index() and substr() procedures to isolate the text before and after the
      ‘|’ character, and the sub() procedure to remove trailing whitespace from
      the symbol.
 
+     Further it shall perform the $HOME-substitution through the use of gsub().
+     The value of $HOME shall be read in the BEGIN block.
+
      On each line the printf statements shall be executed as specified above,
-     their output shall be redirected into the corresponding output file name
-     from the array.
+     their output shall be redirected into the corresponding output file.
 
 EXTENSIONS
      To extend the utility in the future, add a new printf statement and default
@@ -93,7 +90,7 @@ EXAMPLES
           stm |$HOME/Documents/University/classes/semester-4/softwaretechnik/materialien
           END
 
-     will create the following output files:
+     will create the following output files (where $HOME would be expanded):
 
           .bmark-cd:
 
