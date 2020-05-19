@@ -10,7 +10,6 @@ Plug 'neovimhaskell/haskell-vim'
 " Tiny things
 Plug 'markonm/traces.vim'
 Plug 'justinmk/vim-dirvish'
-Plug 'https://github.com/vifm/vifm.vim'
 
 " Colorschemes
 Plug 'flazz/vim-colorschemes'
