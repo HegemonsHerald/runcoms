@@ -1,3 +1,3 @@
-oc |$HOME/Documents
-ow |$HOME/Downloads
-e  |$HOME/Desktop
+oc $HOME/Documents
+ow $HOME/Downloads
+e  $HOME/Desktop
