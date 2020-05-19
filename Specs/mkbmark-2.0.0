@@ -1,0 +1,138 @@
+NAME
+  mkbmark -- generate bookmark aliases for shell and vifm
+
+
+DESCRIPTION
+  The mkbmark utility shall generate bookmark aliases for the shell and vifm.
+  Other applications may be added as targets in the future.
+
+  The utility shall read information from stdin. Empty lines and lines beginning
+  with any character, that isn’t alphanumeric, will be ignored. The remaining
+  lines are treated as input as follows.
+
+  The utility shall read pairs of Symbols and Paths from stdin.
+  
+  The Symbols shall be made only of alphanumeric characters.
+  
+  The Paths must denote a directory on the host filesystem. The Paths may be in
+  one of two forms:
+  
+    (1)	 Absolute Paths beginning with a '/'
+    (2)	 Home Paths beginning with '$HOME'
+
+  Paths in the first form shall be treated as absolute paths on the filesystem.
+
+  Paths in the second form shall be treated as relative to the user's home
+  directory. Specifically, the string '$HOME' at the beginning of the path shall
+  be replaced with the absolute path to the user's home directory.
+
+  This is the only expansion the utility shall commence.
+  
+  There may be white space between the Symbol and the Path. This is done for
+  readability purposes:
+  
+    <Symbol>        <Path>
+    <Long Symbol>   <Path>
+    <Symbol>        <Path>
+
+  The utility shall output an error message on stdout, if only a Symbol was
+  provided or if no Path could be recognized.
+  
+  It is left to the user to insure, that the Paths are escaped correctly for
+  use within double quotes in the outputs. Double quotes are used in the
+  output to insure compatibility with paths containing (escaped) double quotes.
+  
+  Note, that vifm does not perform expansion on strings. Note also, that
+  aliases are not expanded either, which means no shell expansion is
+  performed by the consumer programs.
+  
+  For each line of input the utility shall compute the strings resulting from
+  the following printf statements.
+  
+       <n>  <statement>
+       (1)  printf "alias cd%s=\"cd \\\"%s\"\"\n",         <symbol>, <path>
+       (2)  printf "alias cc%s=\"cd \\\"%s\"; vifm .\"\n", <symbol>, <path>
+       (3)  printf "bmark! \"%s/\" %s\n",                  <path>, <symbol>
+  
+  The output of the nth statement shall be appended to the nth output file,
+  which are as follows:
+  
+       <n>  <file name>
+       (1)  bmark-cd
+       (2)  bmark-cd_vifm
+       (3)  bmark-vifm
+  
+  Note, that all of these are paths in mkbmark’s working directory.
+  
+  No mechanic for overriding the output files is specified. Implementations
+  may choose to provide one.
+
+USAGE WITH VIFM
+
+     Vifm seems not to like to use :source to read a bookmarks file from the
+     vifmrc. You may manunually source the bookmarks instead. Use
+
+	  :delbmarks!			     to remove all bookmarks
+	  :source ~/.bookmarks/bmark-vifm    to source the bookmarks
+
+MAIN IMPLEMENTATION
+     The utility shall be implemented as an awk program.
+
+     The implementation shall get the user's home folder in the BEGIN block.
+
+     The implementation shall first skip comment lines.
+
+     The implementation shall match against valid input lines and handle them as
+     follows: perform the $HOME-substitution using gsub(), then use substr() and
+     index() functions to extract the symbol and trim it using sub(), and the
+     path for use with the specified printf statements.
+
+     The implementation shall catch all remaining lines and output an
+     appropriate error message.
+
+     On each line the printf statements shall be executed as specified above,
+     their output shall be redirected into the corresponding output file.
+
+EXTENSIONS
+     To extend the utility in the future, add a new printf statement and default
+     to the specification; then add the printf statement and default output file
+     to the implementation according to the IMPLEMENTATION specifications.
+
+EXAMPLES
+
+     Basic Usage
+
+          $> mkbmark . . VIFM_bookmarks <<END
+          u   $HOME/Documents/University/classes/semester-4
+          st  $HOME/Documents/University/classes/semester-4/softwaretechnik
+          sts $HOME/Documents/University/classes/semester-4/softwaretechnik/st-ss20-harder-heinen
+          stm $HOME/Documents/University/classes/semester-4/softwaretechnik/materialien
+          END
+
+     will create the following output files (where $HOME would be expanded):
+
+          .bmark-cd:
+
+               alias cdu="cd $HOME/Documents/University/classes/semester-4/"
+               alias cdst="cd $HOME/Documents/University/classes/semester-4/softwaretechnik/"
+               alias cdsts="cd $HOME/Documents/University/classes/semester-4/softwaretechnik/st-ss20-harder-heinen/"
+               alias cdstm="cd $HOME/Documents/University/classes/semester-4/softwaretechnik/materialien/"
+
+          .bmark-cd_vifm:
+
+               alias ccu="cd $HOME/Documents/University/classes/semester-4/; vifm ."
+               alias ccst="cd $HOME/Documents/University/classes/semester-4/softwaretechnik/; vifm ."
+               alias ccsts="cd $HOME/Documents/University/classes/semester-4/softwaretechnik/st-ss20-harder-heinen/; vifm ."
+               alias ccstm="cd $HOME/Documents/University/classes/semester-4/softwaretechnik/materialien/; vifm ."
+
+          VIFM_bookmarks:
+
+               bmark! "$HOME/Documents/University/classes/semester-4/" ccu
+               bmark! "$HOME/Documents/University/classes/semester-4/softwaretechnik/" ccst
+               bmark! "$HOME/Documents/University/classes/semester-4/softwaretechnik/st-ss20-harder-heinen/" ccsts
+               bmark! "$HOME/Documents/University/classes/semester-4/softwaretechnik/materialien/" ccstm
+
+     To manage bookmarks in an organized fashion, simply spread them into
+     several files:
+
+          $> cat general_bmarks.txt soho_locations.txt university.txt | mkbmark

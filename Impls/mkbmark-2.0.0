@@ -1,0 +1,51 @@
+#!/usr/bin/awk -f
+
+# Compliant with mkbmark-2.0.0
+
+BEGIN {
+
+  # Get user's home directory
+  home = ENVIRON["HOME"]
+
+}
+
+# Ignore empty lines and lines not starting with alnum chars
+/^$/ || !/^[a-zA-Z0-9]/ { next; }
+
+# Match lines beginning with a symbol, followed by any whitespace and a path
+/^[a-zA-Z0-9]+[[:space:]]*(\$HOME|\/)/ {
+
+  # Perform home folder substitution
+  gsub(/\$HOME/, home)
+
+  # Split input
+  idx    = index($0, "/")
+  symbol = substr($0, 1, idx-1)
+  path   = substr($0, idx)
+
+  # Trim symbol
+  sub(/[[:space:]]*$/, "", symbol)
+
+  # The printf statements
+  printf "alias cd%s=\"cd \\\"%s\\\"\"\n",         symbol, path >> "bmark-cd"
+  printf "alias cc%s=\"cd \\\"%s\\\"; vifm .\"\n", symbol, path >> "bmark-cd_vifm"
+  printf "bmark! \"%s/\" %s\n",                    path, symbol >> "bmark-vifm"
+
+  next;
+
+}
+
+# Handle bad lines
+{
+  error = 1
+  printf "Error on line %d: %s\n", NR, $0
+}
+
+END {
+  if(error == 1)
+    print "\
+Lines must have the format\
+  <symbol> <path>\
+where a symbol only contains alphanumeric characters\
+and a path begins with '/' or '$HOME'."
+}
