@@ -11,6 +11,12 @@ aliases () {
    echo "mpvp <file>    mpv --playlist <file>"
    echo "fftag <file>   print out <file>'s tag info"
    echo ""
+   echo "fde      ls | ag"
+   echo "xargs%   xargs -I %"
+   echo "xargs0%  xargs -0 -I %"
+   echo "xargs~   xargs -I ~        for use with printf directives (use $HOME for ~)"
+   echo "xargs0~  xargs -0 -I ~"
+   echo "         note, that \`xargs% printf 'hello %'\` Is valid, if no directives are used"
    echo ""
    echo "bms      list bookmarks"
 }
@@ -23,6 +29,10 @@ alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
 alias vi='vim'
 alias ta='tmux a -t'
 alias info='info --vi-keys'
+alias xargs%='xargs -I %'
+alias xargs0%='xargs -0 -I %'
+alias xargs~='xargs -I ~'
+alias xargs0~='xargs -0 -I ~'
 mpvp() { [ $# -eq 0 ] && mpv --playlist='-' || mpv --playlist="$1" }
 fftag() { ffprobe -show_entries 'format_tags=album_artist,artist,album,title,track,genre,date' "$1" 2>/dev/null | sed "/^\[/d; s/^TAG://; s/=/$(printf '\t')/" }
 
