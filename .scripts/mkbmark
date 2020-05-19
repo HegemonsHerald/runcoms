@@ -1,5 +1,7 @@
 #!/usr/bin/awk -f
 
+# Compliant with mkbmark-1.0.0
+
 # Compute output filenames
 BEGIN {
 
