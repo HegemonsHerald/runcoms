@@ -1,42 +1,29 @@
-" Vundle ===================================================================
-set nocompatible
-filetype off
+" PLUGINS
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
 
 " RUUUUUUST and HASKEEEEELLLL and LIIIIIISSSSSSP
-Plugin 'rust-lang/rust.vim'
-Plugin 'neovimhaskell/haskell-vim'
-" Plugin 'kovisoft/slimv'
+Plug 'rust-lang/rust.vim'
+Plug 'neovimhaskell/haskell-vim'
+" Plug 'kovisoft/slimv'
 
 " Tiny things
-Plugin 'markonm/traces.vim'
-Plugin 'https://github.com/vifm/vifm.vim'
+Plug 'markonm/traces.vim'
+Plug 'justinmk/vim-dirvish'
+Plug 'https://github.com/vifm/vifm.vim'
 
 " Colorschemes
-Plugin 'flazz/vim-colorschemes'
-Plugin 'ayu-theme/ayu-vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'ayu-theme/ayu-vim'
 
 " My things
-" Plugin 'hegemonsherald/vim-codegen'
-Plugin 'hegemonsherald/vim-dlx_syntax'
+" Plug 'hegemonsherald/vim-codegen'
+Plug 'hegemonsherald/vim-dlx_syntax'
 
-" Note: I removed Language Server and Deoplete Completion (and some other
-" things). Their old config is the diff of a commit from 19. August 2019
-" (2019.08.19) at 2:30-ish in the morning
+call plug#end()
 
-call vundle#end()
-filetype plugin indent on
-
-" Brief help
-" see :h vundle for more details or wiki for FAQ
-
-" Put your non-Plugin stuff after this line ================================
+" load filetype specific plugin and indent files
+" filetype plugin indent on
 
 
 " LOAD MY CUSTOM STUFF
