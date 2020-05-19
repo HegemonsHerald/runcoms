@@ -39,72 +39,82 @@ highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NON
 
 
 " SET BASIC OPTIONS
-set number			" nu
-set relativenumber		" rnu
-set hlsearch			" hls; use :noh to hide highlights
-set incsearch			" highlight searches incrementally
-set ignorecase			" ignore case in regex searches
-set smartcase			" only match case sensitively, if search pattern contains upper case letter; needs ignorecase to function
-set autowrite			" aw
-set matchpairs+=<:>		" brackets to matching symbols
-set showcmd			" shows commands on status-line, is on by default
-set ruler			" ru, is on by default
-set listchars=tab:»·,trail:\░,	" lcs, characters for whitespace listing; alternatively use ░ for trail
-set nolist			" disable whitespace listing
-set autoread			" ar, makes vim reread a file, if it changed
-set backspace+=start,eol,indent	" allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
-set autoindent
-set smartindent
-set smarttab			" make use of sts and sw for <tab>-insertion
-set nowrap
-set foldmethod=manual
-set colorcolumn=+0 		" cc, highlight the column to the right of textwidth
-set wildmenu			" wmnu, menu for command line completion
-set cursorline			" cul, see also cursorcolumn, cuc
-set textwidth=80		" tw
+set nocompatible                    " nocp  don't be vi-compatible
+
+set backspace+=start,eol,indent     " bs    allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
+
+set number                          " nu
+set relativenumber                  " rnu
+set ruler                           " ru    show cursor position on status line
+
+set showcmd                         " sc    show commands on status-line
+set wildmenu                        " wmnu  show a menu for command line completion
+
+set hlsearch                        " hls   use :noh to hide highlights
+set incsearch                       " is    highlight searches incrementally
+set ignorecase                      " ic
+set smartcase                       " scs
+
+set matchpairs+=<:>                 " mps   add brackets to matching symbols
+set listchars=tab:»·,trail:\░,      " lcs   characters for whitespace listing; alternatively use ░ for trail
+set nolist                          "       disable whitespace listing
+
+set autowrite                       " aw    write on commands, that jump the arglist
+
+set autoread                        " ar    reread a file, if it changed
+
+set foldmethod=manual               " fdm   don't auto create folds
+
+set textwidth=80                    " tw
+set nowrap                          "       don't wrap overlong lines
+set colorcolumn=+0                  " cc    highlight the column of textwidth
+set cursorline                      " cul   see also cursorcolumn, cuc
+
+set autoindent                      " ai
+set smartindent                     " si
+set smarttab                        " sta   make use of sts and sw for <tab>-insertion
+set tabstop=8                       " ts    display <tab>-characters as 8 spaces
+set softtabstop=3                   " sts   insert 3 spaces, when pressing <tab>
+set shiftwidth=3                    " sw    use 3 spaces for (auto)indenting
+
+set termguicolors                   " use gui colors for the terminal (truecolor)
+
 syntax on
-filetype plugin on		" load filetype specific plugins
 
-set sts=3
-set sw=3
+filetype plugin on                  " load filetype specific plugins
+filetype indent on                  " load filetype specific indent files
 
-" Fixes for weird color conditions
-
-set termguicolors		" make use of gui colors for the terminal <-- truecolor support
-
-" These two make termguicolors work with tmux
+" make termguicolors work with tmux
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-" Kitty Terminal fix background flickering
+" fix background flickering in kitty
 let &t_ut = ""
-
-" set guicursor=
 
 
 " MAPPINGS
 let mapleader = "\<C-j>" " see :h expr-quote for more on the backslash
 " Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
 
-nnoremap <Leader>l :set list!<Cr>	  " toggle list option
+nnoremap <Leader>l :set list!<Cr>         " toggle list option
 nnoremap <Leader>f :call ToggleFDC()<Cr>  " toggle foldcolumn
-nnoremap <Leader>n :noh<Cr>		  " disable search highlight
-nnoremap <Leader>c :set cursorline!<Cr>	  " toggle cursorline
-nnoremap <Leader>u YpVr-		  " underline current line
+nnoremap <Leader>n :noh<Cr>               " disable search highlight
+nnoremap <Leader>c :set cursorline!<Cr>   " toggle cursorline
+nnoremap <Leader>u YpVr-                  " underline current line
 
 " better motions for :set wrap
 nnoremap j gj
 nnoremap k gk
 
 " substitution mappings
-noremap s/	:s/\v/g<Left><Left>
-nnoremap s%	:%s/\v/g<Left><Left>
-nnoremap S	0D
+noremap  s/ :s/\v/g<Left><Left>
+nnoremap s% :%s/\v/g<Left><Left>
+nnoremap S  0D
 
 " indentation mappings
-nnoremap <Tab> >>
+nnoremap <Tab>   >>
 nnoremap <S-Tab> <<
-vnoremap <Tab> >>
+vnoremap <Tab>   >>
 vnoremap <S-Tab> <<
 
 
@@ -135,17 +145,11 @@ augroup END
 
 " FILETYPE SPECIFIC CONFIGS
 
-augroup filetype_lisp
-
-  autocmd BufRead,BufNewFile *.lisp set filetype=lisp
-
-  " In case the auto-formatting isn't enough =)
-
-augroup END
-
-autocmd BufRead,BufNewFile *.java set sw=8
+autocmd BufRead,BufNewFile *.lisp set filetype=lisp
 
 autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
+
+autocmd BufRead,BufNewFile *.java set sw=8
 
 autocmd BufRead,BufNewFile *.hs set et sts=2 sw=2
 
