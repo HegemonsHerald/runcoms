@@ -54,6 +54,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
 # SOURCE SCRIPTS ===============================================================
 
 source "$HOME/.zrc/aliases"
+source "$HOME/.zrc/impls"
 source "$HOME/.zrc/prompt"
 
 source "$HOME/.scripts/cdsearch"

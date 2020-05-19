@@ -1,0 +1,13 @@
+# Aliases to the implementations of utilities with specifications
+
+alias mkbmark='mkbmark-2.0.0'
+
+# Linux Specific
+if [ $(uname -s) = "Linux" ]; then
+
+fi
+
+# Mac Specific
+if [ $(uname -s) = "Darwin" ]; then
+
+fi

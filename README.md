@@ -1,3 +1,25 @@
+
+# `.scripts/`, specs, and impls
+
+Specification-less automations live in the `.scripts/` folder.
+
+Specifications live in the `Specs` folder, which should not be linked into the
+host system. The associated implementations live in the `Impls` folder, the
+contents of which should be linked to `.scripts/` in the host system.
+
+This means that all implementations are always available on the host-system.
+The specific implementation to use is chosen by providing an alias in the
+`.zrc/impls` file.
+
+As a side-effect, automations, that depend on specified utilities, can be made
+dependent on a specific version.
+
+
+
+
+
+# OLD STUFF I CAN'T BE BOTHERED WITH RIGHT NOW
+
 ### How I Roll
 
 For the most part this repository only contains configuration files, there are
