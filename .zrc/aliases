@@ -49,6 +49,8 @@ alias vifm='vifm --choose-dir "$HOME/.vifm_dir" && cd "$(cat $HOME/.vifm_dir)" &
 alias v='vifm'
 alias ranger='ranger --choosedir="$HOME/.rangerdir"; cd "$(cat $HOME/.rangerdir)"; ls;'
 alias ran='ranger'
+
+# mkbmark
 alias bms='cat "$HOME/.bookmarks/bookmarks" "$HOME/.bookmarks/bookmarks-mac" | sed -n "/^$/ n; /^[^a-zA-Z0-9]/ n; p"'
 
 # Session management
