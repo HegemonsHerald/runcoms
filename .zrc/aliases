@@ -52,6 +52,7 @@ alias ran='ranger'
 
 # mkbmark
 alias bms='cat "$HOME/.bookmarks/bookmarks" "$HOME/.bookmarks/bookmarks-mac" | sed -n "/^$/ n; /^[^a-zA-Z0-9]/ n; p"'
+alias rebmark='cd $HOME/.bookmarks; rm "$HOME/.bookmarks/bmark-cd" "$HOME/.bookmarks/bmark-cd_vifm" "$HOME/.bookmarks/bmark-vifm"; cat "$HOME/.bookmarks/bookmarks" "$HOME/.bookmarks/bookmarks-mac" | mkbmark; cd -'
 
 # Session management
 alias :q='exit'
