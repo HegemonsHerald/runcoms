@@ -1,0 +1,2 @@
+There are two impls here, one that only make use of /dev/urandom and is slower,
+and another that uses the rand crate.

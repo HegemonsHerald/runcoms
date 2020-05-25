@@ -1,0 +1,18 @@
+NAME 
+  random - A utility to output an n-digit random number.
+
+DESCRIPTION
+
+    random [n]
+
+  The utility shall take the magnitude n as argument. If no magnitude is
+  provided, n=10 shall be used.
+
+  The utility shall print a positive random integer x with the following range
+  on stdout.
+
+    10^n <= x < 10^(n+1)
+
+  That is, the utility shall output an n digit decimal integer.
+
+  The utility shall make use of /dev/urandom as its random source.
