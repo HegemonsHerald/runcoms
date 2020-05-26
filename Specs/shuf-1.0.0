@@ -1,0 +1,8 @@
+NAME
+  shuf - a utility that shuffles its input
+
+DESCRIPTION
+
+    shuf
+
+  The utility shall read lines on stdin and shuffle them to stdout.

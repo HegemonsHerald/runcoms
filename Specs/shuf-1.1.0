@@ -1,0 +1,11 @@
+NAME
+  shuf - a utility that shuffles its input
+
+DESCRIPTION
+
+    shuf [-0]
+
+  The utility shall read lines on stdin and shuffle them to stdout.
+
+  If the option `-0` is provided, the utility shall use \NUL as input separator
+  instead of \n.
