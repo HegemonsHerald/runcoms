@@ -5,9 +5,10 @@ int main(int argc, char* argv[]) {
    // Setup pseudo random number sequence
    FILE *random_source;
    random_source = fopen("/dev/urandom", "r");
-   int seed = getc(random_source);
+   if(random_source == NULL) { perror("Couldn't access /dev/urandom/\n"); exit(1); }
+
+   srandom(getc(random_source));
    fclose(random_source);
-   srandom(seed);
 
    // Get number of digits
    int digits;

@@ -13,9 +13,11 @@ int main(int argc, char** argv) {
 
    FILE *random_source;
    random_source = fopen("/dev/urandom", "r");
-   int seed = getc(random_source);
+   if(random_source == NULL) { perror("Couldn't access /dev/urandom/\n"); exit(1); }
+
+   srandom(getc(random_source));
+
    fclose(random_source);
-   srandom(seed);
 
    /* Read all the lines */
 
