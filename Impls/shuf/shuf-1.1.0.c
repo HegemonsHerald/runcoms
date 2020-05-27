@@ -22,8 +22,8 @@ int main(int argc, char** argv) {
    /* Read all the lines */
 
    // Initial guess at the number of lines
-   //size_t size_guess = 1000;
-   size_t size_guess = 10;
+   size_t size_guess = 100;
+   size_t size_step = 100;
 
    // Allocate buffer to hold the pointers to the lines
    // (needs to be heap, cause will use memcpy on it)
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
       if(++lines_count == size_guess) {
 
 	 // Allocate larger lines pointer buffer
-	 size_t new_guess = size_guess * 10;
+	 size_t new_guess = size_guess + (size_step += 25);
 	 char** new_lines = calloc(new_guess, sizeof(char*));
 	 if(new_lines == NULL) {
 	    perror("Failure to re-allocate for the lines\n");
