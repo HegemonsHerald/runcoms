@@ -1,0 +1,1 @@
+startup-with-shell off
