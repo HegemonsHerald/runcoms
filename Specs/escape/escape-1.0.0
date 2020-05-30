@@ -1,0 +1,60 @@
+NAME
+   escape -- escape the posix shell special characters with '\'
+
+DESCRIPTION
+
+      escape
+      escape -0
+      escape arg1 [ arg2 [ ... ] ]
+
+   To escape means prepending the following characters with a backslash:
+      
+      |  &  ;  <  >  (  )  $  `  \  "  '  *  ?  [  #  ˜ =  %
+      <space>  <tab>  <newline> 
+
+   In the first and second form the utility shall read records from stdin and
+   escape them according the the above rule. The record delimiter shall not be
+   escaped, even if it is a special character.
+
+   In the first form the utility shall expect lines as records, separated by
+   newline characters. The newline characters shall not be escaped.
+
+   In the second form the utility shall expect the records to be separated by
+   NUL characters. In this form the utility will escape newline characters as
+   normal.
+
+   In the third form the utility shall not read from stdin, but rather escape
+   each of the given arguments, outputting them separated by single unescaped
+   spaces on stdout.
+
+USAGE
+
+   Escape "bad" filenames:
+
+      find . | escape
+
+
+   Escape "bad" filenames, that contain newlines (somehow?!?):
+
+      find . --print0 | escape -0
+
+
+   Escape the contents of a file, including the newlines:
+
+      escape -0 < file
+
+   Note, that this assumes that there are no NUL characters in file, though that
+   is unlikely.
+
+
+   Escape arguments to other utilities:
+
+      utility $(escape 'This should be a "single" *argument*')
+
+   This is more useful for real situations, but I can't come up with an example
+   of the top of my head. Sry. :)
+
+   Note also, that the as-argument case is highly unlikely, because an
+   interactive shell will escape subshell expansions correctly for you.
+
+

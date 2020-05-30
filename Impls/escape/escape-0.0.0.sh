@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# THIS IMPLEMENTATION DOESN'T HANDLE ARGUMENTS CORRECTLY. Hence v0.0.0, rather
+# than v1.0.0.
+
 # Escape according to POSIX Standard requirements.
 # 
 # No arguments or a single '-' as argument make escape read from stdin.
