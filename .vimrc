@@ -90,6 +90,8 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " fix background flickering in kitty
 let &t_ut = ""
 
+let g:rustfmt_autosave = 1          " have rust be auto-formatted
+
 
 " MAPPINGS
 let mapleader = "\<C-j>" " see :h expr-quote for more on the backslash
