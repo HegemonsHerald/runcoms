@@ -2,6 +2,8 @@
 r  $HOME/Documents/GitHub/HegemonsHerald/runcoms
 rs $HOME/Documents/GitHub/HegemonsHerald/runcoms/.scripts
 rb $HOME/Documents/GitHub/HegemonsHerald/runcoms/.bookmarks
+rI $HOME/Documents/GitHub/HegemonsHerald/runcoms/Impls
+rS $HOME/Documents/GitHub/HegemonsHerald/runcoms/Specs/
 
 # Soho
 x  $HOME/Downloads/media/x
