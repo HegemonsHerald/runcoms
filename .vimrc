@@ -150,8 +150,6 @@ autocmd BufRead,BufNewFile *.lisp set filetype=lisp
 
 autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
 
-autocmd BufRead,BufNewFile *.java set sw=8
-
 autocmd BufRead,BufNewFile *.hs set et sts=2 sw=2
 
 autocmd BufRead,BufNewFile *.pl set filetype=prolog
