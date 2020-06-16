@@ -96,14 +96,31 @@ let g:rustfmt_autosave = 1          " have rust be auto-formatted
 
 
 " MAPPINGS
-let mapleader = "\<C-j>" " see :h expr-quote for more on the backslash
+let mapleader = "\<C-c>" " see :h expr-quote for more on the backslash
 " Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
 
-nnoremap <Leader>l :set list!<Cr>         " toggle list option
-nnoremap <Leader>f :call ToggleFDC()<Cr>  " toggle foldcolumn
-nnoremap <Leader>n :noh<Cr>               " disable search highlight
-nnoremap <Leader>c :set cursorline!<Cr>   " toggle cursorline
-nnoremap <Leader>u YpVr-                  " underline current line
+" NOTE: DO NOT PUT COMMENTS AT THE END OF MAPPING LINES. THEY WILL BE TREATED AS
+" PART OF THE MAPPING.
+
+" toggle showing whitespace
+nnoremap <Leader>l :set list!<Cr>
+
+" toggle foldcolumn
+nnoremap <Leader>f :call ToggleFDC()<Cr>
+
+" disable search highlight
+nnoremap <Leader>n :noh<Cr>
+
+" underline current line
+nnoremap <Leader>u YpVr-
+
+" toggle cursorline, cursorline
+nnoremap <Leader>c :set cursorline!<Cr>
+nnoremap <Leader>C :set cursorcolumn!<Cr>
+
+" edit anywhere
+nnoremap <Leader>e :set virtualedit=all<Cr>
+nnoremap <Leader>E :set virtualedit=<Cr>
 
 " better motions for :set wrap
 nnoremap j gj
