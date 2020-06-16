@@ -99,8 +99,9 @@ let g:rustfmt_autosave = 1          " have rust be auto-formatted
 let mapleader = "\<C-c>" " see :h expr-quote for more on the backslash
 " Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
 
-" NOTE: DO NOT PUT COMMENTS AT THE END OF MAPPING LINES. THEY WILL BE TREATED AS
-" PART OF THE MAPPING.
+" NOTE: DO NOT PUT COMMENTS AT THE END OF MAPPING LINES. THEY WILL BE TREATED AS PART OF THE MAPPING
+
+" Note: "noremap" means "non-recursive map", ie the expansion will not be further expanded
 
 " toggle showing whitespace
 nnoremap <Leader>l :set list!<Cr>
