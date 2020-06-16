@@ -188,7 +188,9 @@ autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
 
 autocmd BufRead,BufNewFile *.pl set filetype=prolog
 
-autocmd BufRead,BufNewFile *.java,*.c setlocal foldmethod=java
+autocmd BufRead,BufNewFile *.java setlocal syntax=java
+
+autocmd BufRead,BufNewFile *.java,*.c setlocal foldmethod=syntax
 
 " }}}
 
