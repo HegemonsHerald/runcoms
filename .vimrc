@@ -106,11 +106,12 @@ let g:rustfmt_autosave = 1          " have rust be auto-formatted
 " MAPPINGS {{{
 
 let mapleader = "\<C-c>" " see :h expr-quote for more on the backslash
+
 " Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
 
-" NOTE: DO NOT PUT COMMENTS AT THE END OF MAPPING LINES. THEY WILL BE TREATED AS PART OF THE MAPPING
-
 " Note: "noremap" means "non-recursive map", ie the expansion will not be further expanded
+
+" NOTE: DO NOT PUT COMMENTS AT THE END OF MAPPING LINES. THEY WILL BE TREATED AS PART OF THE MAPPING
 
 " toggle showing whitespace
 nnoremap <Leader>l :set list!<Cr>
@@ -166,8 +167,10 @@ endfunc
 
 " FOLDING {{{
 
+" Note: see foldmethod
+
 " automatically save and restore views (those contain data on custom folds)
-" note: the silent! keyword suppresses error messages from these commands
+" Note: the silent! keyword suppresses error messages from these commands
 augroup AutoSaveFolds
   autocmd!
   autocmd BufWinLeave * silent! mkview  " mkview saves the folds in a viewfile in ~/.vim/views/
