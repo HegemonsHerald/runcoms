@@ -27,14 +27,16 @@ call plug#end()
 
 " LOAD MY CUSTOM STUFF
 " These files are in ~/.vim/after
-runtime functionals.vim
-runtime colorschemes.vim
+" runtime functionals.vim
+" runtime colorschemes.vim
 
 
 " SYNTAX AND THEMING
 
 " use underlining when highlighting Search results
 highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
+
+colorscheme ayu
 
 
 " SET BASIC OPTIONS
@@ -84,8 +86,8 @@ filetype plugin on                  " load filetype specific plugins
 filetype indent on                  " load filetype specific indent files
 
 " make termguicolors work with tmux
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " fix background flickering in kitty
 let &t_ut = ""
