@@ -1,4 +1,4 @@
-" PLUGINS
+" PLUGINS {{{
 
 call plug#begin()
 
@@ -24,22 +24,29 @@ call plug#end()
 " load filetype specific plugin and indent files
 " filetype plugin indent on
 
+" }}}
 
-" LOAD MY CUSTOM STUFF
+" LOAD MY CUSTOM STUFF {{{
 " These files are in ~/.vim/after
 " runtime functionals.vim
 " runtime colorschemes.vim
 
+" }}}
 
-" SYNTAX AND THEMING
+" SYNTAX AND THEMING {{{
 
 " use underlining when highlighting Search results
 highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 
 colorscheme ayu
 
+" }}}
 
-" SET BASIC OPTIONS
+" SET BASIC OPTIONS {{{
+
+" Note: Options may be global or local to a buffer or both. In case of both, use
+" :setlocal to only set locally. The following are globally set options.
+
 set nocompatible                    " nocp  don't be vi-compatible
 
 set backspace+=start,eol,indent     " bs    allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
@@ -94,8 +101,10 @@ let &t_ut = ""
 
 let g:rustfmt_autosave = 1          " have rust be auto-formatted
 
+" }}}
 
-" MAPPINGS
+" MAPPINGS {{{
+
 let mapleader = "\<C-c>" " see :h expr-quote for more on the backslash
 " Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
 
@@ -138,8 +147,9 @@ nnoremap <S-Tab> <<
 vnoremap <Tab>   >>
 vnoremap <S-Tab> <<
 
+" }}}
 
-" BASIC FUNCTIONS
+" BASIC FUNCTIONS {{{
 
 " Toggles the foldcolumn
 func! ToggleFDC()
@@ -152,8 +162,9 @@ func! ToggleFDC()
 
 endfunc
 
+" }}}
 
-" FOLDING
+" FOLDING {{{
 
 " automatically save and restore views (those contain data on custom folds)
 " note: the silent! keyword suppresses error messages from these commands
@@ -163,8 +174,9 @@ augroup AutoSaveFolds
   autocmd BufWinEnter * silent! loadview  " loadview loads the appropriate viewfile
 augroup END
 
+" }}}
 
-" FILETYPE SPECIFIC CONFIGS
+" FILETYPE SPECIFIC CONFIGS {{{
 
 autocmd BufRead,BufNewFile *.lisp set filetype=lisp
 
@@ -174,5 +186,8 @@ autocmd BufRead,BufNewFile *.hs set et sts=2 sw=2
 
 autocmd BufRead,BufNewFile *.pl set filetype=prolog
 
+autocmd BufRead,BufNewFile *.java,*.c setlocal foldmethod=java
 
-" vim:sts=2:sw=2:noet
+" }}}
+
+" vim:sts=2:sw=2:et:foldmethod=marker
