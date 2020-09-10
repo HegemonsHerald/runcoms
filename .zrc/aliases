@@ -2,10 +2,7 @@
 
 # Command to remember new aliases more easily
 aliases () {
-   echo "gaa      git add all (tracked and untracked), DON'T USE ga .!!!"
-   echo "g alias  print git aliases"
-   echo "gdt      git difftool"
-   echo "gmt      git mergetool (to resolve merge conflicts)"
+   echo "kbind    open less with kitty bindings (mac-only)"
    echo ""
    echo "mpvp           mpv --playlist -"
    echo "mpvp <file>    mpv --playlist <file>"
@@ -121,5 +118,7 @@ if [ $(uname -s) = "Darwin" ]; then
    alias mpv='mpv --input-media-keys=no'
 
    alias ls='exa'
+
+   alias kbind='less /Users/code/Documents/Zettelkasten/Notes/kitty\ bindings.md'
 
 fi
