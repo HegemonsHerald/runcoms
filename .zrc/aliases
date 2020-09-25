@@ -32,8 +32,11 @@ alias xargs%='xargs -I %'
 alias xargs0%='xargs -0 -I %'
 alias xargs~='xargs -I ~'
 alias xargs0~='xargs -0 -I ~'
-mpvp() { [ $# -eq 0 ] && mpv --playlist='-' || mpv --playlist="$1" }
 fftag() { ffprobe -show_entries 'format_tags=album_artist,artist,album,title,track,genre,date' "$1" 2>/dev/null | sed "/^\[/d; s/^TAG://; s/=/$(printf '\t')/" }
+
+# If there are no args or $1 = '-' then read playlist from stdin.
+# Additional arguments are treated as flags to mpv.
+mpvp () { [ $# -eq 0 -o "$1" = - ] && mpv --playlist=- $@ || mpv --playlist="$1" $@ }
 
 # Functional style scripts as unix names
 alias fdplay='fdPlay'
