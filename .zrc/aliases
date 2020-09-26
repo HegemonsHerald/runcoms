@@ -36,7 +36,15 @@ fftag() { ffprobe -show_entries 'format_tags=album_artist,artist,album,title,tra
 
 # If there are no args or $1 = '-' then read playlist from stdin.
 # Additional arguments are treated as flags to mpv.
-mpvp () { [ $# -eq 0 -o "$1" = - ] && mpv --playlist=- $@ || mpv --playlist="$1" $@ }
+mpvp () {
+   if [ $# -eq 0 -o "$1" = - ]
+   then
+      shift 1
+      mpv --playlist=- $@
+   else
+      mpv --playlist="$1" $@
+   fi
+}
 
 # Functional style scripts as unix names
 alias fdplay='fdPlay'
