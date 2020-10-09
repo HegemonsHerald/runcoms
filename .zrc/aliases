@@ -39,7 +39,7 @@ fftag() { ffprobe -show_entries 'format_tags=album_artist,artist,album,title,tra
 mpvp () {
    if [ $# -eq 0 -o "$1" = - ]
    then
-      shift 1
+      [ "$1" = - ] && shift 1
       mpv --playlist=- $@
    else
       mpv --playlist="$1" $@
