@@ -22,7 +22,7 @@ aliases () {
 
 # General Aliases
 alias fzf='fzf --multi'
-alias sxiv='sxiv -bos f'
+alias sxiv='sxiv -abos f'
 alias youtube-dl='youtube-dl --config-location "$HOME/.config/youtube-dl.conf"'
 alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
 alias vi='vim'

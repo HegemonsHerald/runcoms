@@ -212,7 +212,7 @@ fileviewer *.[1-8] man ./%c | col -b
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in sxiv}
-        \ sxiv %f,
+        \ sxiv -abos f %f,
         \ {View in gpicview}
         \ gpicview %c,
         \ {View in shotwell}
