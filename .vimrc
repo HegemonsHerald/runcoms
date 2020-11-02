@@ -18,7 +18,7 @@ Plug 'markonm/traces.vim'
 Plug 'justinmk/vim-dirvish'
 
 " Markdown Syntax an Folding
-Plug 'https://github.com/plasticboy'
+Plug 'plasticboy/vim-markdown'
 
 " Colorschemes
 Plug 'flazz/vim-colorschemes'
