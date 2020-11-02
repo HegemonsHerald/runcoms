@@ -2,14 +2,23 @@
 
 call plug#begin()
 
-" RUUUUUUST and HASKEEEEELLLL and LIIIIIISSSSSSP
+" RUUUUUUST
 Plug 'rust-lang/rust.vim'
+
+" HASKEEEEELLLL
 Plug 'neovimhaskell/haskell-vim'
+
+" Lisp
 " Plug 'kovisoft/slimv'
 
-" Tiny things
+" Preview substitutions
 Plug 'markonm/traces.vim'
+
+" Better file navigation
 Plug 'justinmk/vim-dirvish'
+
+" Markdown Syntax an Folding
+Plug 'https://github.com/plasticboy'
 
 " Colorschemes
 Plug 'flazz/vim-colorschemes'
