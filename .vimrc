@@ -97,6 +97,7 @@ set shiftwidth=2                    " sw    use 3 spaces for (auto)indenting
 set termguicolors                   " use gui colors for the terminal (truecolor)
 
 syntax on
+set conceallevel=2                  " cole  syntax elements can be hidden
 
 filetype plugin on                  " load filetype specific plugins
 filetype indent on                  " load filetype specific indent files
@@ -109,6 +110,9 @@ filetype indent on                  " load filetype specific indent files
 let &t_ut = ""
 
 let g:rustfmt_autosave = 1          " have rust be auto-formatted
+
+" have the markdown plugin add the right kind of folding
+let g:vim_markdown_folding_style_pythonic = 1
 
 " }}}
 
