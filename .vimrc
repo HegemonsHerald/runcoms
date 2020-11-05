@@ -93,6 +93,7 @@ set smarttab                        " sta   make use of sts and sw for <tab>-ins
 set tabstop=8                       " ts    display <tab>-characters as 8 spaces
 set softtabstop=2                   " sts   insert 3 spaces, when pressing <tab>
 set shiftwidth=2                    " sw    use 3 spaces for (auto)indenting
+set expandtab                       " et    expand tabs to spaces
 
 set termguicolors                   " use gui colors for the terminal (truecolor)
 
