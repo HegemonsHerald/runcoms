@@ -144,8 +144,7 @@ nnoremap <Leader>c :set cursorline!<Cr>
 nnoremap <Leader>C :set cursorcolumn!<Cr>
 
 " edit anywhere
-nnoremap <Leader>e :set virtualedit=all<Cr>
-nnoremap <Leader>E :set virtualedit=<Cr>
+nnoremap <Leader>e :call ToggleVirtualEdit()<Cr>
 
 " better motions for :set wrap
 nnoremap j gj
@@ -178,6 +177,18 @@ func! ToggleFDC()
 
 endfunc
 
+func! ToggleVirtualEdit()
+
+  if &virtualedit == 'all'
+    set virtualedit=
+  else
+    set virtualedit=all
+  endif
+
+  " Print new state
+  set virtualedit
+
+endfunc
 " }}}
 
 " FOLDING {{{
