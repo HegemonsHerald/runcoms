@@ -144,8 +144,10 @@ nnoremap <Leader>c :set cursorline!<Cr>
 nnoremap <Leader>C :set cursorcolumn!<Cr>
 
 " edit anywhere
-nnoremap <Leader>e :set virtualedit=all<Cr>
-nnoremap <Leader>E :set virtualedit=<Cr>
+nnoremap <Leader>e :call ToggleVirtualEditAll()<Cr>
+
+" number lines from visual selection
+vnoremap <Leader>N :'<,'> call NumberLines()<Cr>
 
 " better motions for :set wrap
 nnoremap j gj
@@ -175,6 +177,30 @@ func! ToggleFDC()
   else
     set foldcolumn=0
   endif
+
+endfunc
+
+" Toggles virtualedit between all and nothing
+func! ToggleVirtualEditAll()
+
+  if &virtualedit == 'all'
+    set virtualedit=
+  else
+    set virtualedit=all
+  endif
+
+  " Print the new state
+  set virtualedit
+
+endfunc
+
+" Adds 0-padded line numbers using POSIX nl
+func! NumberLines() range
+
+  let lineCount = a:lastline - a:firstline + 1
+  let width = floor(log10(lineCount)) + 1
+
+  exe printf(" %d,%d ! nl -n rz -s ' ' -w %s ", a:firstline, a:lastline, float2nr(width))
 
 endfunc
 
