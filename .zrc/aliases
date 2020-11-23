@@ -2,6 +2,8 @@
 
 # Command to remember new aliases more easily
 aliases () {
+   echo "f        fg"
+   echo ""
    echo "kbind    open less with kitty bindings (mac-only)"
    echo ""
    echo "mpvp           mpv --playlist -"
@@ -21,6 +23,7 @@ aliases () {
 }
 
 # General Aliases
+alias f='fg'
 alias fzf='fzf --multi'
 alias sxiv='sxiv -abos f'
 alias youtube-dl='youtube-dl --config-location "$HOME/.config/youtube-dl.conf"'
