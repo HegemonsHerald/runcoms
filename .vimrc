@@ -146,6 +146,9 @@ nnoremap <Leader>C :set cursorcolumn!<Cr>
 " edit anywhere
 nnoremap <Leader>e :call ToggleVirtualEdit()<Cr>
 
+" add line numbers to visually selected range
+vnoremap <Leader>N :'<,'> call NumberLines()<Cr>
+
 " better motions for :set wrap
 nnoremap j gj
 nnoremap k gk
@@ -189,6 +192,17 @@ func! ToggleVirtualEdit()
   set virtualedit
 
 endfunc
+
+" Adds line numbers to the provided range using POSIX nl
+func! NumberLines() range
+
+  let lineCount = a:lastline - a:firstline + 1
+  let width = floor(log10(lineCount)) + 1
+
+  exe printf(" %d,%d ! nl -n rz -s ' ' -w %d ", a:firstline, a:lastline, float2nr(width))
+
+endfunc
+
 " }}}
 
 " FOLDING {{{
