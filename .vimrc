@@ -143,6 +143,11 @@ nnoremap <Leader>u YpVr-
 nnoremap <Leader>c :set cursorline!<Cr>
 nnoremap <Leader>C :set cursorcolumn!<Cr>
 
+" align text relative to text width
+nnoremap <Leader><Left>  :left   &textwidth<Cr>
+nnoremap <Leader><Right> :right  &textwidth<Cr>
+nnoremap <Leader><Down>  :center &textwidth<Cr>
+
 " edit anywhere
 nnoremap <Leader>e :call ToggleVirtualEdit()<Cr>
 
