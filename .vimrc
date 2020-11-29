@@ -226,6 +226,8 @@ augroup END
 
 " FILETYPE SPECIFIC CONFIGS {{{
 
+autocmd BufRead,BufNewFile *.tex set conceallevel=0
+
 autocmd BufRead,BufNewFile *.lisp set filetype=lisp
 
 autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
