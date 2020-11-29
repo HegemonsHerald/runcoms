@@ -2,12 +2,10 @@
 
 # Command to remember new aliases more easily
 aliases () {
-   echo "f        fg"
+   echo "dolatex <file>  (mac) fswatch file to recompile and open in Preview"
    echo ""
    echo "kbind    open less with kitty bindings (mac-only)"
    echo ""
-   echo "mpvp           mpv --playlist -"
-   echo "mpvp <file>    mpv --playlist <file>"
    echo "fftag <file>   print out <file>'s tag info"
    echo ""
    echo "fde      ls | ag"
@@ -16,8 +14,6 @@ aliases () {
    echo "xargs~   xargs -I ~        for use with printf directives (use $HOME for ~)"
    echo "xargs0~  xargs -0 -I ~"
    echo "         note, that \`xargs% printf 'hello %'\` Is valid, if no directives are used"
-   echo ""
-   echo "bms      list bookmarks"
    echo ""
    echo "s        search \"\$PWD\""
 }
@@ -134,5 +130,12 @@ if [ $(uname -s) = "Darwin" ]; then
    alias ls='exa'
 
    alias kbind='less /Users/code/Documents/Zettelkasten/Notes/kitty\ bindings.md'
+
+   dolatex () {
+      fswatch "$1" | while read -r r; do
+        pdflatex "$1"
+        open "${1%.tex}.pdf"
+     done
+   }
 
 fi
