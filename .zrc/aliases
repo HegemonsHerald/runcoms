@@ -6,6 +6,7 @@ aliases () {
    echo ""
    echo "kbind    open less with kitty bindings (mac-only)"
    echo ""
+   echo "mpvl           mpv --loop"
    echo "fftag <file>   print out <file>'s tag info"
    echo ""
    echo "fde      ls | ag"
@@ -31,6 +32,7 @@ alias xargs%='xargs -I %'
 alias xargs0%='xargs -0 -I %'
 alias xargs~='xargs -I ~'
 alias xargs0~='xargs -0 -I ~'
+alias mpvl='mpv --loop'
 fftag() { ffprobe -show_entries 'format_tags=album_artist,artist,album,title,track,genre,date' "$1" 2>/dev/null | sed "/^\[/d; s/^TAG://; s/=/$(printf '\t')/" }
 
 # If there are no args or $1 = '-' then read playlist from stdin.
