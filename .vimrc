@@ -246,59 +246,37 @@ autocmd BufRead,BufNewFile *.java,*.c setlocal foldmethod=syntax
 
 " BIGGER FUNCTIONS {{{
 
-" Helper for LogInf.
+" LatexMathExpand()
 "
-" Simpler notation for latex logic operators in LogInf (including my custom
-" definitions).
+" The LatexMathExpand function implements abbreviations of common LaTeX
+" math-mode macros. Invoking the function changes the current line or visual
+" range by replacing the abbreviations with their expansions.
 "
-" In order of substitution:
+" THE ABBREVIATIONS MUST HAVE WHITESPACE BEFORE AND AFTER THEM.
 "
-"   x7       X_7
-"   X7       X_7
-"   Xm       X_m
+" You could use abbrev or map for this, but those will expand immediately.
+" LatexMathExpand allows you to write math text with abbreviations, which make
+" the text easier to read and write.
 "
-"   <->      \leftrightarrow
-"   ->       \rightarrow
-"   <-       \leftarrow
-"   <=       \leq
-"   >=       \geq
+" There is a special abbreviation for logical variables in the form X_n:
 "
-"   and      \land
-"   or       \lor
-"   not      \lnot
-"   xor      \xor
-"   bigand   \bigland
-"   bigor    \biglor
-"   eqv      \eqv
-"   eval     \eval
-"   bigeval  \bigeval
-"   bigland  \bigland
-"   biglor   \biglor
-"   bigxor   \bigxor
-"   parity   \parity
-"   leq      \leq
-"   geq      \geq
-"   phi      \phi
-"   psi      \psi
+"   x7  ->  X_7
+"   X3  ->  X_3
+"   xm  ->  X_m
 "
-" If the index needs multiple characters, eg X_{i-1}, you have to write it
-" manually.
+" Indexes with more than one alphanumeric character won't be expanded.
 "
-" THESE ARE EXPECTED TO BE SURROUNDED BY WHITESPACE.
-" That means you have to separate any sub- and superscripts from the word, ie
+" Example of the abbreviations:
 "
-"   bigxor _{xyz}
+"      phi _{i + 7} = bigor ( x1 , not x2 , x2 and x3 ) xor ( x1 and x2 <-> x3 )
+"  =>
+"      \phi _{i + 7} = \biglor ( X_1 , \lnot X_2 , X_2 \land X_3 ) \xor ( X_1 \land X_2 \leftrightarrow X_3 )
 "
-" or it won't recognize. This avoids substituting occurences within words.
-
-func! LogicPreProc()
-
-  " These are all separate commands, cause otherwise overlapping matches won't
-  " expand in one invocation of LogicPreProc.
+func! LatexMathExpand()
 
   " The e flag suppresses no-match errors
 
-  " variables
+  " Variables
   :s/\v(\s)[Xx]([a-zA-Z0-9])(\s)/\1X_\2\3/ge
 
   let substitutions = {
@@ -330,12 +308,12 @@ func! LogicPreProc()
     " Regex is no-magic ('\V'), so that I only have to escape '\' and '?'
     let match = escape(key, '\?')
     let subst = escape(get(substitutions, key, 'default'), '\?')
-    exe ':s/\V\(\s\)' . match . '\(\s\)/\1' . subst . '\2/ge'
+    exe ':s/\V\(\s\|\^\)' . match . '\(\s\|\$\)/\1' . subst . '\2/ge'
   endfor
 
 endfunc
 
-noremap <Leader>l :call LogicPreProc()<Cr>
+noremap <Leader>l :call LatexMathExpand()<Cr>
 
 " }}}
 
