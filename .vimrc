@@ -244,4 +244,99 @@ autocmd BufRead,BufNewFile *.java,*.c setlocal foldmethod=syntax
 
 " }}}
 
+" BIGGER FUNCTIONS {{{
+
+" Helper for LogInf.
+"
+" Simpler notation for latex logic operators in LogInf (including my custom
+" definitions).
+"
+" In order of substitution:
+"
+"   x7       X_7
+"   X7       X_7
+"   Xm       X_m
+"
+"   <->      \leftrightarrow
+"   ->       \rightarrow
+"   <-       \leftarrow
+"   <=       \leq
+"   >=       \geq
+"
+"   and      \land
+"   or       \lor
+"   not      \lnot
+"   xor      \xor
+"   bigand   \bigland
+"   bigor    \biglor
+"   eqv      \eqv
+"   eval     \eval
+"   bigeval  \bigeval
+"   bigland  \bigland
+"   biglor   \biglor
+"   bigxor   \bigxor
+"   parity   \parity
+"   leq      \leq
+"   geq      \geq
+"   phi      \phi
+"   psi      \psi
+"
+" If the index needs multiple characters, eg X_{i-1}, you have to write it
+" manually.
+"
+" THESE ARE EXPECTED TO BE SURROUNDED BY WHITESPACE.
+" That means you have to separate any sub- and superscripts from the word, ie
+"
+"   bigxor _{xyz}
+"
+" or it won't recognize. This avoids substituting occurences within words.
+
+func! LogicPreProc()
+
+  " These are all separate commands, cause otherwise overlapping matches won't
+  " expand in one invocation of LogicPreProc.
+
+  " The e flag suppresses no-match errors
+
+  " variables
+  :s/\v(\s)[Xx]([a-zA-Z0-9])(\s)/\1X_\2\3/ge
+
+  let substitutions = {
+        \  '<->':      '\leftrightarrow'
+        \, '->':       '\rightarrow'
+        \, '<-':       '\leftarrow'
+        \, '<=':       '\leq'
+        \, '>=':       '\geq'
+        \, 'and':      '\land'
+        \, 'or':       '\lor'
+        \, 'not':      '\lnot'
+        \, 'xor':      '\xor'
+        \, 'bigand':   '\bigland'
+        \, 'bigor':    '\biglor'
+        \, 'eqv':      '\eqv'
+        \, 'eval':     '\eval'
+        \, 'bigeval':  '\bigeval'
+        \, 'bigland':  '\bigland'
+        \, 'biglor':   '\biglor'
+        \, 'bigxor':   '\bigxor'
+        \, 'parity':   '\parity'
+        \, 'leq':      '\leq'
+        \, 'geq':      '\geq'
+        \, 'phi':      '\phi'
+        \, 'psi':      '\psi'
+        \ }
+
+  for key in keys(substitutions)
+    " Regex is no-magic ('\V'), so that I only have to escape '\' and '?'
+    let match = escape(key, '\?')
+    let subst = escape(get(substitutions, key, 'default'), '\?')
+    exe ':s/\V\(\s\)' . match . '\(\s\)/\1' . subst . '\2/ge'
+  endfor
+
+endfunc
+
+noremap <Leader>l :call LogicPreProc()<Cr>
+
+" }}}
+
 " vim:sts=2:sw=2:et:foldmethod=marker
