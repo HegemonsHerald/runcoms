@@ -47,6 +47,7 @@ call plug#end()
 " use underlining when highlighting Search results
 highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 
+let ayucolor='dark'
 colorscheme ayu
 
 " }}}
