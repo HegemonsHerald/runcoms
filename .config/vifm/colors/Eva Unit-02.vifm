@@ -21,21 +21,21 @@ highlight clear
 
 highlight Win           ctermfg=default  ctermbg=default  cterm=none                                  " color of all windows (views, dialogs, menus) and default color for their content (e.g. regular files in views)
 highlight AuxWin        ctermfg=default  ctermbg=default  cterm=none                                  " color of auxiliary areas of windows
-highlight Border        ctermfg=default  ctermbg=black    cterm=none                                  " color of vertical parts of the border
+highlight Border        ctermfg=default  ctermbg=default  cterm=none                                  " color of vertical parts of the border
                                                                                                       
-highlight TabLine       ctermfg=red      ctermbg=black    cterm=none                                  " tab line color
-highlight TabLineSel    ctermfg=red      ctermbg=black    cterm=bold                                  " color of the tip of selected tab
-highlight TopLineSel    ctermfg=red      ctermbg=black    cterm=bold                                  " top line color of the current pane
-highlight TopLine       ctermfg=red      ctermbg=black    cterm=none                                  " top line color of the other pane
-highlight StatusLine    ctermfg=red      ctermbg=black    cterm=none                                  " color of the line above the status bar
+highlight TabLineSel    ctermfg=yellow   ctermbg=default  cterm=bold                                  " color of the tip of selected tab
+highlight TabLine       ctermfg=11       ctermbg=default  cterm=none                                  " tab line color
+highlight TopLineSel    ctermfg=yellow   ctermbg=default  cterm=bold                                  " top line color of the current pane
+highlight TopLine       ctermfg=11       ctermbg=default  cterm=none                                  " top line color of the other pane
+highlight StatusLine    ctermfg=yellow   ctermbg=default  cterm=bold                                  " color of the line above the status bar
 highlight ErrorMsg      ctermfg=white    ctermbg=red      cterm=bold                                  " color of error messages in the status bar
 highlight JobLine       ctermfg=red      ctermbg=black    cterm=none                                  " color of job line that appears above the status line
 highlight CmdLine       ctermfg=default  ctermbg=default  cterm=none                                  " the command line/status bar color
                                                                                                       
 highlight SuggestBox    ctermfg=yellow   ctermbg=default  cterm=bold                                  " color of key suggestion box
                                                                                                       
-highlight CurrLine      ctermfg=yellow   ctermbg=default  cterm=reverse,bold                          " line at cursor position in active view
-highlight OtherLine     ctermfg=yellow   ctermbg=default  cterm=bold                                  " line at cursor position in inactive view
+highlight CurrLine      ctermfg=black    ctermbg=cyan     cterm=bold                                  " line at cursor position in active view
+highlight OtherLine     ctermfg=cyan     ctermbg=default  cterm=bold                                  " line at cursor position in inactive view
                                                                                                       
 highlight Selected      ctermfg=11       ctermbg=default  cterm=reverse,bold                          " color of selected files
                                                                                                       
