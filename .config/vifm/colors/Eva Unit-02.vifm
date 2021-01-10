@@ -1,0 +1,48 @@
+" Eva Unit-02 Theme
+
+" Default  = -1 = None, can be used for transparency or default color
+" Black    =  0  8
+" Red      =  1  9
+" Green    =  2 10
+" Yellow   =  3 11
+" Blue     =  4 12
+" Magenta  =  5 13
+" Cyan     =  6 14
+" White    =  7 15
+
+" STYLES
+" bold
+" underline
+" reverse or inverse
+" standout
+" none
+
+highlight clear
+
+highlight Win           ctermfg=default  ctermbg=default  cterm=none                                  " color of all windows (views, dialogs, menus) and default color for their content (e.g. regular files in views)
+highlight AuxWin        ctermfg=default  ctermbg=default  cterm=none                                  " color of auxiliary areas of windows
+highlight Border        ctermfg=default  ctermbg=black    cterm=none                                  " color of vertical parts of the border
+                                                                                                      
+highlight TabLine       ctermfg=red      ctermbg=black    cterm=none                                  " tab line color
+highlight TabLineSel    ctermfg=red      ctermbg=black    cterm=bold                                  " color of the tip of selected tab
+highlight TopLineSel    ctermfg=red      ctermbg=black    cterm=bold                                  " top line color of the current pane
+highlight TopLine       ctermfg=red      ctermbg=black    cterm=none                                  " top line color of the other pane
+highlight StatusLine    ctermfg=red      ctermbg=black    cterm=none                                  " color of the line above the status bar
+highlight ErrorMsg      ctermfg=white    ctermbg=red      cterm=bold                                  " color of error messages in the status bar
+highlight JobLine       ctermfg=red      ctermbg=black    cterm=none                                  " color of job line that appears above the status line
+highlight CmdLine       ctermfg=default  ctermbg=default  cterm=none                                  " the command line/status bar color
+                                                                                                      
+highlight SuggestBox    ctermfg=yellow   ctermbg=default  cterm=bold                                  " color of key suggestion box
+                                                                                                      
+highlight CurrLine      ctermfg=yellow   ctermbg=default  cterm=reverse,bold                          " line at cursor position in active view
+highlight OtherLine     ctermfg=yellow   ctermbg=default  cterm=bold                                  " line at cursor position in inactive view
+                                                                                                      
+highlight Selected      ctermfg=11       ctermbg=default  cterm=reverse,bold                          " color of selected files
+                                                                                                      
+highlight Directory     ctermfg=red      ctermbg=default  cterm=bold                                  " color of directories
+highlight Executable    ctermfg=green    ctermbg=default  cterm=none                                  " color of executable files
+highlight Link          ctermfg=blue     ctermbg=default  cterm=none                                  " color of symbolic links in the views
+highlight BrokenLink    ctermfg=cyan     ctermbg=default  cterm=none                                  " color of broken symbolic links
+highlight Socket        ctermfg=magenta  ctermbg=default  cterm=none                                  " color of sockets
+highlight Device        ctermfg=magenta  ctermbg=default  cterm=none                                  " color of block and character devices
+highlight Fifo          ctermfg=magenta  ctermbg=default  cterm=none                                  " color of fifo pipes

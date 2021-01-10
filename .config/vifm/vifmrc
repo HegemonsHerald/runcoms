@@ -40,7 +40,7 @@ set novimhelp
 set norunexec
 
 " Selected color scheme
-colorscheme Default
+colorscheme "Eva Unit-02"
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
