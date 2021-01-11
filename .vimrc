@@ -21,8 +21,9 @@ Plug 'justinmk/vim-dirvish'
 Plug 'plasticboy/vim-markdown'
 
 " Colorschemes
-Plug 'flazz/vim-colorschemes'
 Plug 'ayu-theme/ayu-vim'
+" Plug 'flazz/vim-colorschemes'
+" Plug 'lifepillar/vim-colortemplate'
 
 " My things
 " Plug 'hegemonsherald/vim-codegen'
@@ -39,16 +40,6 @@ call plug#end()
 " These files are in ~/.vim/after
 " runtime functionals.vim
 " runtime colorschemes.vim
-
-" }}}
-
-" SYNTAX AND THEMING {{{
-
-" use underlining when highlighting Search results
-highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
-
-let ayucolor='dark'
-colorscheme ayu
 
 " }}}
 
@@ -96,13 +87,23 @@ set softtabstop=2                   " sts   insert 3 spaces, when pressing <tab>
 set shiftwidth=2                    " sw    use 3 spaces for (auto)indenting
 set expandtab                       " et    expand tabs to spaces
 
-set termguicolors                   " use gui colors for the terminal (truecolor)
-
-syntax on
-set conceallevel=2                  " cole  syntax elements can be hidden
-
 filetype plugin on                  " load filetype specific plugins
 filetype indent on                  " load filetype specific indent files
+
+let g:rustfmt_autosave = 1          " have rust be auto-formatted
+
+" have the markdown plugin add the right kind of folding
+let g:vim_markdown_folding_style_pythonic = 1
+
+" }}}
+
+" SYNTAX AND THEMING {{{
+
+syntax on
+
+set termguicolors                   " use gui colors for the terminal (truecolor)
+
+set conceallevel=2                  " cole  syntax elements can be hidden
 
 " make termguicolors work with tmux
 " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -111,10 +112,13 @@ filetype indent on                  " load filetype specific indent files
 " fix background flickering in kitty
 let &t_ut = ""
 
-let g:rustfmt_autosave = 1          " have rust be auto-formatted
+" use underlining when highlighting Search results
+highlight Search term=reverse cterm=underline gui=underline guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 
-" have the markdown plugin add the right kind of folding
-let g:vim_markdown_folding_style_pythonic = 1
+" let ayucolor='dark'
+" colorscheme ayu
+
+colorscheme Eva_Unit-02
 
 " }}}
 
