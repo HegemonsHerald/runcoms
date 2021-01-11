@@ -216,4 +216,15 @@ call s:Highlight('SpellRare',       'yellow',     'bg',         'none')
 
 " }}}
 
+" Terminal colors: {{{
+
+let g:terminal_ansi_colors = [ s:palette.black.gui,  s:palette.red.gui,
+      \ s:palette.green.gui, s:palette.yellow.gui, s:palette.blue.gui,
+      \ s:palette.magenta.gui, s:palette.cyan.gui, s:palette.white.gui,
+      \ s:palette.black2.gui, s:palette.red2.gui, s:palette.green2.gui,
+      \ s:palette.yellow2.gui, s:palette.blue2.gui,  s:palette.magenta2.gui,
+      \ s:palette.cyan2.gui, s:palette.white2.gui ]
+
+" }}}
+
 " vim:foldmethod=marker
