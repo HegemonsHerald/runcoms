@@ -81,7 +81,7 @@ let s:palette.red5          = { 'cterm':'08',   'gui':'#3e0200' }  " extra from 
 
 " The Highlight function runs the highlight command on the group called
 " groupName, with the colors selected from the palette for both cterm and gui.
-func Highlight(groupName, fg, bg, opts)
+func! s:Highlight(groupName, fg, bg, opts)
   let ctermfg = s:palette[a:fg]['cterm']
   let   guifg = s:palette[a:fg]['gui']
   let ctermbg = s:palette[a:bg]['cterm']
@@ -96,123 +96,123 @@ endfunc
 " --------------------------------
 " Editor settings
 " --------------------------------
-call Highlight('Normal',          'fg',         'bg',         'none')
-call Highlight('Cursor',          'fg',         'bg',         'none')
-call Highlight('LineNr',          'yellow2',    'bg',         'none')
-call Highlight('CursorLineNR',    'yellow',     'bg',         'bold')
-call Highlight('CursorLine',      'none',       'red5',       'none')
-call Highlight('CursorColumn',    'none',       'red5',       'none')
+call s:Highlight('Normal',          'fg',         'bg',         'none')
+call s:Highlight('Cursor',          'fg',         'bg',         'none')
+call s:Highlight('LineNr',          'yellow2',    'bg',         'none')
+call s:Highlight('CursorLineNR',    'yellow',     'bg',         'bold')
+call s:Highlight('CursorLine',      'none',       'red5',       'none')
+call s:Highlight('CursorColumn',    'none',       'red5',       'none')
 
 " - Number column -
-call Highlight('FoldColumn',      'yellow',     'bg',         'none')
-call Highlight('SignColumn',      'yellow',     'bg',         'none')
-call Highlight('Folded',          'red2',       'red5',       'none')
+call s:Highlight('FoldColumn',      'yellow',     'bg',         'none')
+call s:Highlight('SignColumn',      'yellow',     'bg',         'none')
+call s:Highlight('Folded',          'red2',       'red5',       'none')
 
 " - Window/Tab delimiters - 
-call Highlight('VertSplit',       'bg',         'bg',         'none')
-call Highlight('ColorColumn',     'fg',         'red5',       'none')
-call Highlight('TabLine',         'yellow2',    'bg',         'none')
-call Highlight('TabLineFill',     'yellow2',    'bg',         'none')
-call Highlight('TabLineSel',      'yellow',     'bg',         'bold')
+call s:Highlight('VertSplit',       'bg',         'bg',         'none')
+call s:Highlight('ColorColumn',     'none',       'red5',       'none')
+call s:Highlight('TabLine',         'yellow2',    'bg',         'none')
+call s:Highlight('TabLineFill',     'yellow2',    'bg',         'none')
+call s:Highlight('TabLineSel',      'yellow',     'bg',         'bold')
 
 set fillchars=vert:\ ,stl:\ ,stlnc:\ 
 
 " - File Navigation / Searcnone -
-call Highlight('Directory',       'red',        'bg',         'bold')
-call Highlight('Search',          'bg',         'yellow',     'none')
-call Highlight('IncSearch',       'bg',         'yellow',     'none')
+call s:Highlight('Directory',       'red',        'bg',         'bold')
+call s:Highlight('Search',          'bg',         'yellow',     'none')
+call s:Highlight('IncSearch',       'bg',         'yellow',     'none')
 
 " - Prompt/Status -
-call Highlight('StatusLine',      'yellow',     'bg',         'bold')
-call Highlight('StatusLineNC',    'yellow2',    'bg',         'none')
-call Highlight('WildMenu',        'bg',         'green',      'bold')
-call Highlight('Question',        'fg',         'bg',         'none')
-call Highlight('Title',           'fg',         'bg',         'none')
-call Highlight('ModeMsg',         'yellow',     'bg',         'none')
-call Highlight('MoreMsg',         'yellow',     'bg',         'none')
+call s:Highlight('StatusLine',      'yellow',     'bg',         'bold')
+call s:Highlight('StatusLineNC',    'yellow2',    'bg',         'none')
+call s:Highlight('WildMenu',        'bg',         'green',      'bold')
+call s:Highlight('Question',        'fg',         'bg',         'none')
+call s:Highlight('Title',           'fg',         'bg',         'none')
+call s:Highlight('ModeMsg',         'yellow',     'bg',         'none')
+call s:Highlight('MoreMsg',         'yellow',     'bg',         'none')
 
 " - Visual aid -
-call Highlight('MatchParen',      'fg',         'bg',         'reverse')
-call Highlight('Visual',          'none',       'yellow2',    'none')
-call Highlight('VisualNOS',       'fg',         'bg',         'none')
-call Highlight('NonText',         'bg',         'bg',         'none')
+call s:Highlight('MatchParen',      'fg',         'bg',         'reverse')
+call s:Highlight('Visual',          'none',       'yellow2',    'none')
+call s:Highlight('VisualNOS',       'fg',         'bg',         'none')
+call s:Highlight('NonText',         'bg',         'bg',         'none')
 
-call Highlight('Todo',            'cyan',       'bg',         'bold')
-call Highlight('Underlined',      'green',      'bg',         'none')
-call Highlight('Error',           'white',      'red',        'none')
-call Highlight('ErrorMsg',        'white',      'red',        'none')
-call Highlight('WarningMsg',      'red',        'bg',         'none')
-call Highlight('Ignore',          'red2',       'bg',         'none')
-call Highlight('SpecialKey',      'red2',       'bg',         'none')
+call s:Highlight('Todo',            'cyan',       'bg',         'bold')
+call s:Highlight('Underlined',      'green',      'bg',         'none')
+call s:Highlight('Error',           'white',      'red',        'none')
+call s:Highlight('ErrorMsg',        'white',      'red',        'none')
+call s:Highlight('WarningMsg',      'red',        'bg',         'none')
+call s:Highlight('Ignore',          'red2',       'bg',         'none')
+call s:Highlight('SpecialKey',      'red2',       'bg',         'none')
 
 " --------------------------------
 " Variable types
 " --------------------------------
-call Highlight('Constant',        'green',      'bg',         'none')
-call Highlight('Number',          'green',      'bg',         'none')
-call Highlight('Boolean',         'green',      'bg',         'none')
-call Highlight('Float',           'green',      'bg',         'none')
-call Highlight('Character',       'magenta',    'bg',         'none')
-call Highlight('String',          'magenta',    'bg',         'none')
-call Highlight('StringDelimiter', 'magenta',    'bg',         'none')
+call s:Highlight('Constant',        'green',      'bg',         'none')
+call s:Highlight('Number',          'green',      'bg',         'none')
+call s:Highlight('Boolean',         'green',      'bg',         'none')
+call s:Highlight('Float',           'green',      'bg',         'none')
+call s:Highlight('Character',       'magenta',    'bg',         'none')
+call s:Highlight('String',          'magenta',    'bg',         'none')
+call s:Highlight('StringDelimiter', 'magenta',    'bg',         'none')
 
-call Highlight('Identifier',      'cyan',       'bg',         'none')
-call Highlight('Function',        'red',        'bg',         'none')
+call s:Highlight('Identifier',      'cyan',       'bg',         'none')
+call s:Highlight('Function',        'red',        'bg',         'none')
 
 " --------------------------------
 " Language constructs
 " --------------------------------
-call Highlight('Statement',       'yellow',     'bg',         'none')
-call Highlight('Conditional',     'yellow',     'bg',         'none')
-call Highlight('Repeat',          'yellow',     'bg',         'none')
-call Highlight('Label',           'yellow',     'bg',         'none')
-call Highlight('Operator',        'yellow',     'bg',         'none')
-call Highlight('Keyword',         'yellow',     'bg',         'none')
-call Highlight('Exception',       'yellow',     'bg',         'none')
-call Highlight('Comment',         'cyan2',      'bg',         'none')
+call s:Highlight('Statement',       'yellow',     'bg',         'none')
+call s:Highlight('Conditional',     'yellow',     'bg',         'none')
+call s:Highlight('Repeat',          'yellow',     'bg',         'none')
+call s:Highlight('Label',           'yellow',     'bg',         'none')
+call s:Highlight('Operator',        'yellow',     'bg',         'none')
+call s:Highlight('Keyword',         'yellow',     'bg',         'none')
+call s:Highlight('Exception',       'yellow',     'bg',         'none')
+call s:Highlight('Comment',         'cyan2',      'bg',         'none')
 
-call Highlight('Special',         'yellow',     'bg',         'none')
-call Highlight('SpecialChar',     'cyan',       'bg',         'none')
-call Highlight('Tag',             'cyan',       'bg',         'none')
-call Highlight('Delimiter',       'yellow',     'bg',         'none')
-call Highlight('SpecialComment',  'yellow',     'bg',         'none')
-call Highlight('Debug',           'cyan',       'bg',         'none')
+call s:Highlight('Special',         'yellow',     'bg',         'none')
+call s:Highlight('SpecialChar',     'cyan',       'bg',         'none')
+call s:Highlight('Tag',             'cyan',       'bg',         'none')
+call s:Highlight('Delimiter',       'yellow',     'bg',         'none')
+call s:Highlight('SpecialComment',  'yellow',     'bg',         'none')
+call s:Highlight('Debug',           'cyan',       'bg',         'none')
 
 " - C like -
-call Highlight('PreProc',         'blue',       'bg',         'none')
-call Highlight('Include',         'blue',       'bg',         'none')
-call Highlight('Define',          'blue',       'bg',         'none')
-call Highlight('Macro',           'blue',       'bg',         'none')
-call Highlight('PreCondit',       'blue',       'bg',         'none')
+call s:Highlight('PreProc',         'blue',       'bg',         'none')
+call s:Highlight('Include',         'blue',       'bg',         'none')
+call s:Highlight('Define',          'blue',       'bg',         'none')
+call s:Highlight('Macro',           'blue',       'bg',         'none')
+call s:Highlight('PreCondit',       'blue',       'bg',         'none')
 
-call Highlight('Type',            'red',        'bg',         'none')
-call Highlight('StorageClass',    'red',        'bg',         'none')
-call Highlight('Structure',       'red',        'bg',         'none')
-call Highlight('Typedef',         'red',        'bg',         'none')
+call s:Highlight('Type',            'red',        'bg',         'none')
+call s:Highlight('StorageClass',    'red',        'bg',         'none')
+call s:Highlight('Structure',       'red',        'bg',         'none')
+call s:Highlight('Typedef',         'red',        'bg',         'none')
 
 " --------------------------------
 " Diff
 " --------------------------------
-call Highlight('DiffAdd',         'cyan',       'bg',         'none')
-call Highlight('DiffChange',      'yellow',     'bg',         'none')
-call Highlight('DiffDelete',      'green',      'bg',         'none')
-call Highlight('DiffText',        'fg',         'bg',         'none')
+call s:Highlight('DiffAdd',         'cyan',       'bg',         'none')
+call s:Highlight('DiffChange',      'yellow',     'bg',         'none')
+call s:Highlight('DiffDelete',      'green',      'bg',         'none')
+call s:Highlight('DiffText',        'fg',         'bg',         'none')
 
 " --------------------------------
 " Completion menu
 " --------------------------------
-call Highlight('Pmenu',           'fg',         'red4',       'none')
-call Highlight('PmenuSel',        'bg',         'yellow',     'none')
-call Highlight('PmenuSbar',       'fg',         'red4',       'none')
-call Highlight('PmenuThumb',      'fg',         'red2',       'none')
+call s:Highlight('Pmenu',           'fg',         'red4',       'none')
+call s:Highlight('PmenuSel',        'bg',         'yellow',     'none')
+call s:Highlight('PmenuSbar',       'fg',         'red4',       'none')
+call s:Highlight('PmenuThumb',      'fg',         'red2',       'none')
 
 " --------------------------------
 " Spelling
 " --------------------------------
-call Highlight('SpellBad',        'cyan',       'bg',         'none')
-call Highlight('SpellCap',        'magenta',    'bg',         'none')
-call Highlight('SpellLocal',      'blue',       'bg',         'none')
-call Highlight('SpellRare',       'yellow',     'bg',         'none')
+call s:Highlight('SpellBad',        'cyan',       'bg',         'none')
+call s:Highlight('SpellCap',        'magenta',    'bg',         'none')
+call s:Highlight('SpellLocal',      'blue',       'bg',         'none')
+call s:Highlight('SpellRare',       'yellow',     'bg',         'none')
 
 " }}}
 
