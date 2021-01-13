@@ -6,6 +6,7 @@ aliases () {
    echo ""
    echo "kbind    open less with kitty bindings (mac-only)"
    echo ""
+   echo "playm          play music by folder"
    echo "mpvl           mpv --loop"
    echo "fftag <file>   print out <file>'s tag info"
    echo ""
@@ -45,6 +46,13 @@ mpvp () {
    else
       mpv --playlist="$1" $@
    fi
+}
+
+playm () {
+   target="$(find "$HOME/Music" -type d | fzf --query="!music/audio !music/itunes !asmr " --no-multi)"
+
+   # Check if target is empty, cause I might not select anything
+   [ $target ] && { cd "$target" && find . -type f | sort | mpv --playlist=- --no-audio-display }
 }
 
 # Functional style scripts as unix names
