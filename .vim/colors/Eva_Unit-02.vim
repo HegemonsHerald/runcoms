@@ -218,6 +218,10 @@ call s:Highlight('SpellRare',       'yellow',     'bg',         'none')
 
 " Terminal colors: {{{
 
+" Reverse of regular StatusLine to show Terminal as a special buffer.
+call s:Highlight('StatusLineTerm',  'yellow',     'bg',         'bold,reverse')
+call s:Highlight('StatusLineTermNC','yellow2',    'bg',         'reverse')
+
 let g:terminal_ansi_colors = [ s:palette.black.gui,  s:palette.red.gui,
       \ s:palette.green.gui, s:palette.yellow.gui, s:palette.blue.gui,
       \ s:palette.magenta.gui, s:palette.cyan.gui, s:palette.white.gui,
