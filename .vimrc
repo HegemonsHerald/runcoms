@@ -318,7 +318,7 @@ func! LatexMathExpand()
 
 endfunc
 
-noremap <Leader>l :call LatexMathExpand()<Cr>
+noremap <Leader>L :call LatexMathExpand()<Cr>
 
 " }}}
 
