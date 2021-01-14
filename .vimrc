@@ -64,6 +64,8 @@ set smartcase                       " scs
 set matchpairs+=<:>                 " mps   add brackets to matching symbols
 set listchars=tab:»·,trail:\░,      " lcs   characters for whitespace listing; alternatively use ░ for trail
 set nolist                          "       disable whitespace listing
+set fillchars=stl:\ ,stlnc:\        " fcs   characters to fill statusline and vertical separators
+set fillchars+=fold:\ 
 
 set autowrite                       " aw    write on commands, that jump the arglist
 
