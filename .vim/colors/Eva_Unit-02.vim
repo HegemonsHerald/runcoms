@@ -93,9 +93,8 @@ endfunc
 
 " Highlight definitions: {{{
 
-" --------------------------------
 " Editor settings
-" --------------------------------
+" ---------------
 call s:Highlight('Normal',          'fg',         'bg',         'none')
 call s:Highlight('Cursor',          'fg',         'bg',         'none')
 call s:Highlight('LineNr',          'yellow2',    'bg',         'none')
@@ -103,26 +102,24 @@ call s:Highlight('CursorLineNR',    'yellow',     'bg',         'bold')
 call s:Highlight('CursorLine',      'none',       'red5',       'none')
 call s:Highlight('CursorColumn',    'none',       'red5',       'none')
 
-" - Number column -
+" Number column
 call s:Highlight('FoldColumn',      'yellow',     'bg',         'none')
 call s:Highlight('SignColumn',      'yellow',     'bg',         'none')
 call s:Highlight('Folded',          'red2',       'red5',       'none')
 
-" - Window/Tab delimiters - 
+" Window/Tab delimiters
 call s:Highlight('VertSplit',       'bg',         'bg',         'none')
 call s:Highlight('ColorColumn',     'none',       'red5',       'none')
 call s:Highlight('TabLine',         'yellow2',    'bg',         'none')
 call s:Highlight('TabLineFill',     'yellow2',    'bg',         'none')
 call s:Highlight('TabLineSel',      'yellow',     'bg',         'bold')
 
-set fillchars=vert:\ ,stl:\ ,stlnc:\ 
-
-" - File Navigation / Searcnone -
+" File Navigation / Searcnone
 call s:Highlight('Directory',       'red',        'bg',         'bold')
 call s:Highlight('Search',          'bg',         'yellow',     'none')
 call s:Highlight('IncSearch',       'bg',         'yellow',     'none')
 
-" - Prompt/Status -
+" Prompt/Status
 call s:Highlight('StatusLine',      'yellow',     'bg',         'bold')
 call s:Highlight('StatusLineNC',    'yellow2',    'bg',         'none')
 call s:Highlight('WildMenu',        'bg',         'green',      'bold')
@@ -131,7 +128,7 @@ call s:Highlight('Title',           'fg',         'bg',         'none')
 call s:Highlight('ModeMsg',         'yellow',     'bg',         'none')
 call s:Highlight('MoreMsg',         'yellow',     'bg',         'none')
 
-" - Visual aid -
+" Visual aid
 call s:Highlight('MatchParen',      'fg',         'bg',         'reverse')
 call s:Highlight('Visual',          'none',       'yellow2',    'none')
 call s:Highlight('VisualNOS',       'fg',         'bg',         'none')
@@ -145,9 +142,8 @@ call s:Highlight('WarningMsg',      'red',        'bg',         'none')
 call s:Highlight('Ignore',          'red2',       'bg',         'none')
 call s:Highlight('SpecialKey',      'red2',       'bg',         'none')
 
-" --------------------------------
 " Variable types
-" --------------------------------
+" --------------
 call s:Highlight('Constant',        'green',      'bg',         'none')
 call s:Highlight('Number',          'green',      'bg',         'none')
 call s:Highlight('Boolean',         'green',      'bg',         'none')
@@ -159,9 +155,8 @@ call s:Highlight('StringDelimiter', 'magenta',    'bg',         'none')
 call s:Highlight('Identifier',      'cyan',       'bg',         'none')
 call s:Highlight('Function',        'red',        'bg',         'none')
 
-" --------------------------------
 " Language constructs
-" --------------------------------
+" -------------------
 call s:Highlight('Statement',       'yellow',     'bg',         'none')
 call s:Highlight('Conditional',     'yellow',     'bg',         'none')
 call s:Highlight('Repeat',          'yellow',     'bg',         'none')
@@ -178,7 +173,7 @@ call s:Highlight('Delimiter',       'yellow',     'bg',         'none')
 call s:Highlight('SpecialComment',  'yellow',     'bg',         'none')
 call s:Highlight('Debug',           'cyan',       'bg',         'none')
 
-" - C like -
+" C like
 call s:Highlight('PreProc',         'blue',       'bg',         'none')
 call s:Highlight('Include',         'blue',       'bg',         'none')
 call s:Highlight('Define',          'blue',       'bg',         'none')
@@ -190,34 +185,31 @@ call s:Highlight('StorageClass',    'red',        'bg',         'none')
 call s:Highlight('Structure',       'red',        'bg',         'none')
 call s:Highlight('Typedef',         'red',        'bg',         'none')
 
-" --------------------------------
 " Diff
-" --------------------------------
+" ----
 call s:Highlight('DiffAdd',         'cyan',       'bg',         'none')
 call s:Highlight('DiffChange',      'yellow',     'bg',         'none')
 call s:Highlight('DiffDelete',      'green',      'bg',         'none')
 call s:Highlight('DiffText',        'fg',         'bg',         'none')
 
-" --------------------------------
 " Completion menu
-" --------------------------------
+" ---------------
 call s:Highlight('Pmenu',           'fg',         'red4',       'none')
 call s:Highlight('PmenuSel',        'bg',         'yellow',     'none')
 call s:Highlight('PmenuSbar',       'fg',         'red4',       'none')
 call s:Highlight('PmenuThumb',      'fg',         'red2',       'none')
 
-" --------------------------------
 " Spelling
-" --------------------------------
+" --------
 call s:Highlight('SpellBad',        'cyan',       'bg',         'none')
 call s:Highlight('SpellCap',        'magenta',    'bg',         'none')
 call s:Highlight('SpellLocal',      'blue',       'bg',         'none')
 call s:Highlight('SpellRare',       'yellow',     'bg',         'none')
 
-" --------------------------------
 " Extras
-" --------------------------------
+" ------
 
+" Custom Highlight group for my FocusMode feature
 call s:Highlight('FocusModeHL',     'red3',       'bg',         'none')
 
 " }}}
