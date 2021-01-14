@@ -258,32 +258,36 @@ endfunc
 " highlighted in a single hl-group. Thus only the current line has colored
 " syntax highlighting.
 "
-" FocusMode is set per buffer. A buffer-local variable, b:focusModeMatch, is
-" used to store the FocusMode's state. FocusMode is considered active, if this
-" variable exists.
+" FocusMode is set per window. A buffer can have several windows.
 "
-" A buffer-local autocmd is used to update the state.
+" The first time FocusMode is activated for any window of the buffer, a
+" buffer-local variable counting the number of activated windows,
+" b:focusModeActiveWindowsCount, is created. Additionally a buffer-local autocmd
+" is added to update the highlighting in all activated windows.
 "
-" Call FocusModeStart() to begin FocusMode for the current buffer.
-" Call FocusModeStop()  to   end FocusMode for the current buffer.
+" Each activated window gets a window-local variable, w:focusModeWindowState,
+" added. When this variable exists, FocusMode is considered active in the
+" window.
+"
+" When FocusMode is stopped in a window, w:focusModeWindowState is removed.
+" When FocusMode is stopped for all windows of a buffer, the autocmd and
+" b:focusModeActiveWindowsCount are removed as well.
+"
+" Call FocusModeStart() to begin FocusMode for the current window.
+" Call FocusModeStop()  to   end FocusMode for the current window.
 "
 " You can configure FocusMode with the following variables:
 "
-"   g:focusModeHighlightGroup     The hl-group used for all but the cursor
-"                                 line. Defaults to Comment.
+"   g:focusModeHighlightGroup     The hl-group used for all but the cursor line.
+"   Defaults to Comment.
 "
 "   g:focusModeRange              The number of lines around the cursor to
-"                                 highlight. Defaults to 0.
-"
-" Note: there are some error with interactions with buffer-editing plugins. Eg
-" FocusMode pairs badly with dirvish. I won't bother fixing that, I prefer
-" simplicity to 100% coverage of all weird edge cases, when the edge cases don't
-" matter much.
+"   highlight. Defaults to 0.
 
 " FocusModeToggle() {{{
 func! FocusModeToggle()
 
-  if exists('b:focusModeMatch')
+  if exists('w:focusModeWindowState')
     call FocusModeStop()
   else
     call FocusModeStart()
@@ -295,18 +299,27 @@ endfunc!
 " FocusModeStart() {{{
 func! FocusModeStart()
 
-  " Stop FocusMode so there won't be trouble, if you call FocusModeStart() twice
-  call FocusModeStop()
+  " If FocusMode is already active in this window, there's nothing to do.
+  if !exists('w:focusModeWindowState')
 
-  " Create buffer-local variable for the current highlight state.
-  " This begins FocusMode.
-  let b:focusModeMatch = ''
+    " First activation of FocusMode on any window of this buffer
+    if !exists('b:focusModeActiveWindowsCount')
+      let b:focusModeActiveWindowsCount = 1
+      autocmd CursorMoved,CursorMovedI <buffer> FocusModeStep
 
-  " Add buffer-local autocmd to update highlighting
-  autocmd CursorMoved,CursorMovedI <buffer> FocusModeStep
+    " Subsequent activation of FocusMode on a window of this buffer
+    else
+      let b:focusModeActiveWindowsCount += 1
 
-  " Start highlighting
-  FocusModeStep
+    endif
+
+    " Create window state. This activates FocusMode for the current window.
+    let w:focusModeWindowState = ''
+
+    " Start highlighting
+    FocusModeStep
+
+  endif
 
 endfunc!
 " }}}
@@ -314,17 +327,28 @@ endfunc!
 " FocusModeStop() {{{
 func! FocusModeStop()
 
-  " If FocusMode is active...
-  if exists("b:focusModeMatch")
+  " If FocusMode isn't active, there's nothing to do.
+  if exists("w:focusModeWindowState")
+
+    if !exists('b:focusModeActiveWindowsCount')
+      echo "FocusMode Invalid State"
+
+    else
+      let b:focusModeActiveWindowsCount -= 1
+
+      " This window is the last active window
+      if b:focusModeActiveWindowsCount == 0
+        autocmd! CursorMoved,CursorMovedI <buffer>
+        unlet b:focusModeActiveWindowsCount
+      endif
+
+    endif
 
     " Remove previous highlighting
-    call matchdelete(b:focusModeMatch)
+    call matchdelete(w:focusModeWindowState)
 
-    " Remove autocmd
-    autocmd! CursorMoved,CursorMovedI <buffer>
-
-    " Delete FocusMode's state. This ends FocusMode.
-    unlet b:focusModeMatch
+    " Delete window state. This ends FocusMode for the current window.
+    unlet w:focusModeWindowState
 
   endif
 
@@ -335,11 +359,11 @@ endfunc
 func! FocusModeStepFunction()
 
   " If FocusMode is active...
-  if exists("b:focusModeMatch")
+  if exists("w:focusModeWindowState")
 
     " Remove previous highlighting, if there was previous highlighting
-    if b:focusModeMatch != ''
-      call matchdelete(b:focusModeMatch)
+    if w:focusModeWindowState != ''
+      call matchdelete(w:focusModeWindowState)
     endif
 
     " hl-group to use for the non-cursor lines
@@ -354,7 +378,7 @@ func! FocusModeStepFunction()
     " Set new highlighting
     " \%<23l   Matches above line 23 (lower line number).
     " \%>23l   Matches below line 23 (higher line number).
-    let b:focusModeMatch = matchadd(hlGroup, '\%<' . start . 'l\|\%>' . end . 'l')
+    let w:focusModeWindowState = matchadd(hlGroup, '\%<' . start . 'l\|\%>' . end . 'l')
 
   endif
 
