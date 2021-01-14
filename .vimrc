@@ -2,14 +2,11 @@
 
 call plug#begin()
 
-" RUUUUUUST
+" Language Plugins
 Plug 'rust-lang/rust.vim'
-
-" HASKEEEEELLLL
 Plug 'neovimhaskell/haskell-vim'
-
-" Lisp
 " Plug 'kovisoft/slimv'
+Plug 'plasticboy/vim-markdown'
 
 " Preview substitutions
 Plug 'markonm/traces.vim'
@@ -17,13 +14,12 @@ Plug 'markonm/traces.vim'
 " Better file navigation
 Plug 'justinmk/vim-dirvish'
 
-" Markdown Syntax an Folding
-Plug 'plasticboy/vim-markdown'
-
-" Colorschemes
+" Colorschemes and Theming stuff
 Plug 'ayu-theme/ayu-vim'
 " Plug 'flazz/vim-colorschemes'
 " Plug 'lifepillar/vim-colortemplate'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim'
 
 " My things
 " Plug 'hegemonsherald/vim-codegen'
@@ -37,13 +33,14 @@ call plug#end()
 " }}}
 
 " LOAD MY CUSTOM STUFF {{{
+
 " These files are in ~/.vim/after
 " runtime functionals.vim
 " runtime colorschemes.vim
 
 " }}}
 
-" SET BASIC OPTIONS {{{
+" SET OPTIONS {{{
 
 " Note: Options may be global or local to a buffer or both. In case of both, use
 " :setlocal to only set locally. The following are globally set options.
@@ -92,7 +89,7 @@ filetype indent on                  " load filetype specific indent files
 
 let g:rustfmt_autosave = 1          " have rust be auto-formatted
 
-" have the markdown plugin add the right kind of folding
+" Have the markdown plugin add the right kind of folding
 let g:vim_markdown_folding_style_pythonic = 1
 
 " }}}
@@ -122,61 +119,7 @@ colorscheme Eva_Unit-02
 
 " }}}
 
-" MAPPINGS {{{
-
-let mapleader = "\<C-c>" " see :h expr-quote for more on the backslash
-
-" Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
-
-" Note: "noremap" means "non-recursive map", ie the expansion will not be further expanded
-
-" NOTE: DO NOT PUT COMMENTS AT THE END OF MAPPING LINES. THEY WILL BE TREATED AS PART OF THE MAPPING
-
-" toggle showing whitespace
-nnoremap <Leader>l :set list!<Cr>
-
-" toggle foldcolumn
-nnoremap <Leader>f :call ToggleFDC()<Cr>
-
-" disable search highlight
-nnoremap <Leader>n :noh<Cr>
-
-" underline current line
-nnoremap <Leader>u YpVr-
-
-" toggle cursorline, cursorline
-nnoremap <Leader>c :set cursorline!<Cr>
-nnoremap <Leader>C :set cursorcolumn!<Cr>
-
-" align text relative to text width
-nnoremap <Leader><Left>  :left   &textwidth<Cr>
-nnoremap <Leader><Right> :right  &textwidth<Cr>
-nnoremap <Leader><Down>  :center &textwidth<Cr>
-
-" edit anywhere
-nnoremap <Leader>e :call ToggleVirtualEdit()<Cr>
-
-" add line numbers to visually selected range
-vnoremap <Leader>N :'<,'> call NumberLines()<Cr>
-
-" better motions for :set wrap
-nnoremap j gj
-nnoremap k gk
-
-" substitution mappings
-noremap  s/ :s/\v/g<Left><Left>
-nnoremap s% :%s/\v/g<Left><Left>
-nnoremap S  0D
-
-" indentation mappings
-nnoremap <Tab>   >>
-nnoremap <S-Tab> <<
-vnoremap <Tab>   >>
-vnoremap <S-Tab> <<
-
-" }}}
-
-" BASIC FUNCTIONS {{{
+" FUNCTIONS {{{
 
 " Toggles the foldcolumn
 func! ToggleFDC()
@@ -190,6 +133,7 @@ func! ToggleFDC()
 
 endfunc
 
+" Toggles the virtualedit=all option
 func! ToggleVirtualEdit()
 
   if &virtualedit == 'all'
@@ -212,44 +156,6 @@ func! NumberLines() range
   exe printf(" %d,%d ! nl -n rz -s ' ' -w %d ", a:firstline, a:lastline, float2nr(width))
 
 endfunc
-
-" }}}
-
-" FOLDING {{{
-
-" Note: see foldmethod
-
-" automatically save and restore views (those contain data on custom folds)
-" Note: the silent! keyword suppresses error messages from these commands
-augroup AutoSaveFolds
-  autocmd!
-  autocmd BufWinLeave * silent! mkview  " mkview saves the folds in a viewfile in ~/.vim/views/
-  autocmd BufWinEnter * silent! loadview  " loadview loads the appropriate viewfile
-augroup END
-
-" }}}
-
-" FILETYPE SPECIFIC CONFIGS {{{
-
-autocmd BufRead,BufNewFile *.tex set conceallevel=0
-
-autocmd BufRead,BufNewFile *.lisp set filetype=lisp
-
-autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
-
-autocmd BufRead,BufNewFile *.pl set filetype=prolog
-
-autocmd BufRead,BufNewFile *.java setlocal syntax=java
-autocmd BufRead,BufNewFile *.java inoreabbrev <buffer> sysp System.out.println(
-autocmd BufRead,BufNewFile *.java inoreabbrev <buffer> sysf System.out.println(String.format(
-autocmd BufRead,BufNewFile *.java inoreabbrev <buffer> sysP System.out.print(
-autocmd BufRead,BufNewFile *.java inoreabbrev <buffer> sysF System.out.print(String.format(
-
-autocmd BufRead,BufNewFile *.java,*.c setlocal foldmethod=syntax
-
-" }}}
-
-" BIGGER FUNCTIONS {{{
 
 " LatexMathExpand()
 "
@@ -318,7 +224,96 @@ func! LatexMathExpand()
 
 endfunc
 
+" }}}
+
+" MAPPINGS {{{
+
+let mapleader = "\<C-c>" " see :h expr-quote for more on the backslash
+
+" Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
+
+" Note: "noremap" means "non-recursive map", ie the expansion will not be further expanded
+
+" NOTE: DO NOT PUT COMMENTS AT THE END OF MAPPING LINES. THEY WILL BE TREATED AS PART OF THE MAPPING
+
+" toggle highlighting whitespace
+nnoremap <Leader>l :set list!<Cr>
+
+" toggle foldcolumn
+nnoremap <Leader>f :call ToggleFDC()<Cr>
+
+" LatexMathExpand()
 noremap <Leader>L :call LatexMathExpand()<Cr>
+
+" disable search highlight
+nnoremap <Leader>n :noh<Cr>
+
+" underline current line
+nnoremap <Leader>u YpVr-
+
+" toggle cursorline, cursorcolumn
+nnoremap <Leader>c :set cursorline!<Cr>
+nnoremap <Leader>C :set cursorcolumn!<Cr>
+
+" align text relative to text width
+nnoremap <Leader><Left>  :left   &textwidth<Cr>
+nnoremap <Leader><Right> :right  &textwidth<Cr>
+nnoremap <Leader><Down>  :center &textwidth<Cr>
+
+" edit anywhere
+nnoremap <Leader>e :call ToggleVirtualEdit()<Cr>
+
+" add line numbers to visually selected range
+vnoremap <Leader>N :'<,'> call NumberLines()<Cr>
+
+" better motions for :set wrap
+nnoremap j gj
+nnoremap k gk
+
+" substitution mappings
+noremap  s/ :s/\v/g<Left><Left>
+nnoremap s% :%s/\v/g<Left><Left>
+nnoremap S  0D
+
+" indentation mappings
+nnoremap <Tab>   >>
+nnoremap <S-Tab> <<
+vnoremap <Tab>   >>
+vnoremap <S-Tab> <<
+
+" }}}
+
+" FOLDING {{{
+
+" Note: see foldmethod
+
+" automatically save and restore views (those contain data on custom folds)
+" Note: the silent! keyword suppresses error messages from these commands
+augroup AutoSaveFolds
+  autocmd!
+  autocmd BufWinLeave * silent! mkview  " mkview saves the folds in a viewfile in ~/.vim/views/
+  autocmd BufWinEnter * silent! loadview  " loadview loads the appropriate viewfile
+augroup END
+
+" }}}
+
+" FILETYPE SPECIFIC CONFIGS {{{
+
+autocmd BufRead,BufNewFile *.tex set conceallevel=0
+
+autocmd BufRead,BufNewFile *.lisp set filetype=lisp
+
+autocmd BufRead,BufNewFile *.sls,*.scm set filetype=scheme
+
+autocmd BufRead,BufNewFile *.pl set filetype=prolog
+
+autocmd BufRead,BufNewFile *.java setlocal syntax=java
+autocmd BufRead,BufNewFile *.java inoreabbrev <buffer> sysp System.out.println(
+autocmd BufRead,BufNewFile *.java inoreabbrev <buffer> sysf System.out.println(String.format(
+autocmd BufRead,BufNewFile *.java inoreabbrev <buffer> sysP System.out.print(
+autocmd BufRead,BufNewFile *.java inoreabbrev <buffer> sysF System.out.print(String.format(
+
+autocmd BufRead,BufNewFile *.java,*.c setlocal foldmethod=syntax
 
 " }}}
 
