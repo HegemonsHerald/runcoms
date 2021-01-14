@@ -274,6 +274,11 @@ endfunc
 "
 "   g:focusModeRange              The number of lines around the cursor to
 "                                 highlight. Defaults to 0.
+"
+" Note: there are some error with interactions with buffer-editing plugins. Eg
+" FocusMode pairs badly with dirvish. I won't bother fixing that, I prefer
+" simplicity to 100% coverage of all weird edge cases, when the edge cases don't
+" matter much.
 
 " FocusModeToggle() {{{
 func! FocusModeToggle()
@@ -360,6 +365,24 @@ command! FocusModeStep :call FocusModeStepFunction()
 
 " }}}
 
+" GoyoEnter, GoyoLeave {{{
+" Add typewriter and FocusMode to Goyo automatically.
+
+func! GoyoEnter()
+  setlocal scrolloff=999
+  call FocusModeStart()
+  norm M
+endfunc
+
+func! GoyoLeave()
+  setlocal scrolloff=-1
+  silent! call FocusModeStop()
+endfunc
+
+autocmd User GoyoEnter nested call GoyoEnter()
+autocmd User GoyoLeave nested call GoyoLeave()
+" }}}
+
 " }}}
 
 " MAPPINGS {{{
@@ -384,6 +407,9 @@ nnoremap <Leader>f :call ToggleFDC()<Cr>
 " toggle FocusMode
 nnoremap <Leader>F :call FocusModeToggle()<Cr>
 
+" toggle Typewriter mode
+nnoremap <Leader>T :call ToggleTypewriterMode()<Cr>
+
 " disable search highlight
 nnoremap <Leader>n :noh<Cr>
 
@@ -396,9 +422,6 @@ nnoremap <Leader>u YpVr-
 " toggle cursorline, cursorcolumn
 nnoremap <Leader>c :set cursorline!<Cr>
 nnoremap <Leader>C :set cursorcolumn!<Cr>
-
-" toggle typewriter mode
-nnoremap <Leader>T :call ToggleTypewriterMode()<Cr>
 
 " align text relative to text width
 nnoremap <Leader><Left>  :left   &textwidth<Cr>
