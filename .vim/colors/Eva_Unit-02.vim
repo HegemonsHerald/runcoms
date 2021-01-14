@@ -214,6 +214,12 @@ call s:Highlight('SpellCap',        'magenta',    'bg',         'none')
 call s:Highlight('SpellLocal',      'blue',       'bg',         'none')
 call s:Highlight('SpellRare',       'yellow',     'bg',         'none')
 
+" --------------------------------
+" Extras
+" --------------------------------
+
+call s:Highlight('FocusModeHL',     'red3',       'bg',         'none')
+
 " }}}
 
 " Terminal colors: {{{
