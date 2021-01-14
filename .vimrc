@@ -158,6 +158,21 @@ func! ToggleVirtualEdit()
 endfunc
 " }}}
 
+" Toggles scrolloff=999 {{{
+func! ToggleTypewriterMode()
+
+  " Set scrolloff for the current buffer
+  if &scrolloff == 999
+    setlocal scrolloff=-1
+  else
+    setlocal scrolloff=999
+  endif
+
+  " Print new state
+  setlocal scrolloff
+endfunc
+" }}}
+
 " Adds line numbers to the provided range using POSIX nl {{{
 func! NumberLines() range
 
@@ -381,6 +396,9 @@ nnoremap <Leader>u YpVr-
 " toggle cursorline, cursorcolumn
 nnoremap <Leader>c :set cursorline!<Cr>
 nnoremap <Leader>C :set cursorcolumn!<Cr>
+
+" toggle typewriter mode
+nnoremap <Leader>T :call ToggleTypewriterMode()<Cr>
 
 " align text relative to text width
 nnoremap <Leader><Left>  :left   &textwidth<Cr>
