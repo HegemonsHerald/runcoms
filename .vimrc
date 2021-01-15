@@ -432,13 +432,13 @@ nnoremap <Leader>l :set list!<Cr>
 noremap  <Leader>L :call LatexMathExpand()<Cr>
 
 " toggle foldcolumn
-nnoremap <Leader>f :call ToggleFDC()<Cr>
+nnoremap <Leader>F :call ToggleFDC()<Cr>
 
 " toggle FocusMode
-nnoremap <Leader>F :call FocusModeToggle()<Cr>
+nnoremap <Leader>f :call FocusModeToggle()<Cr>
 
 " toggle Typewriter mode
-nnoremap <Leader>T :call ToggleTypewriterMode()<Cr>
+nnoremap <Leader>t :call ToggleTypewriterMode()<Cr>
 
 " disable search highlight
 nnoremap <Leader>n :noh<Cr>
@@ -448,6 +448,7 @@ vnoremap <Leader>N :'<,'> call NumberLines()<Cr>
 
 " underline current line
 nnoremap <Leader>u YpVr-
+nnoremap <Leader>U YpVr=
 
 " toggle cursorline, cursorcolumn
 nnoremap <Leader>c :set cursorline!<Cr>
