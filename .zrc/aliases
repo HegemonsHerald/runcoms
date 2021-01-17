@@ -22,7 +22,7 @@ aliases () {
 
 # General Aliases
 alias f='fg'
-alias fzf='fzf --multi'
+alias fzf='fzf --multi --bind="ctrl-w:backward-kill-word,alt-d:clear-query,alt-h:backward-char,alt-b:backward-word,alt-l:forward-char,alt-w:forward-word,ctrl-f:page-down,ctrl-b:page-up,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-space:toggle-all"'
 alias sxiv='sxiv -abos f'
 alias youtube-dl='youtube-dl --config-location "$HOME/.config/youtube-dl.conf"'
 alias dpdt='figlet "De-De-De-POMME-DE-TERRE" | lolcat'
