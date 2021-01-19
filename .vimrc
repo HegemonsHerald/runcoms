@@ -290,23 +290,25 @@ endfunc
 "   g:focusModeRange              The number of lines around the cursor to
 "   highlight. Defaults to 0.
 
-" FocusModeToggle() {{{
-func! FocusModeToggle()
+func! FocusModeIsActive() " {{{
+  return exists('w:focusModeWindowState')
+endfunc " }}}
 
-  if exists('w:focusModeWindowState')
+func! FocusModeToggle() " {{{
+
+  if FocusModeIsActive()
     call FocusModeStop()
   else
     call FocusModeStart()
   endif
 
-endfunc!
-" }}}
+endfunc " }}}
 
-" FocusModeStart() {{{
-func! FocusModeStart()
+func! FocusModeStart() " {{{
 
-  " If FocusMode is already active in this window, there's nothing to do.
-  if !exists('w:focusModeWindowState')
+  if FocusModeIsActive()
+    return
+  else
 
     " First activation of FocusMode on any window of this buffer
     if !exists('b:focusModeActiveWindowsCount')
@@ -327,14 +329,12 @@ func! FocusModeStart()
 
   endif
 
-endfunc!
-" }}}
+endfunc " }}}
 
-" FocusModeStop() {{{
-func! FocusModeStop()
+func! FocusModeStop() " {{{
 
   " If FocusMode isn't active, there's nothing to do.
-  if exists("w:focusModeWindowState")
+  if FocusModeIsActive()
 
     if !exists('b:focusModeActiveWindowsCount')
       echo "FocusMode Invalid State"
@@ -358,14 +358,11 @@ func! FocusModeStop()
 
   endif
 
-endfunc
-" }}}
+endfunc " }}}
 
-" FocusModeStepFunction() {{{
-func! FocusModeStepFunction()
+func! FocusModeStep() " {{{
 
-  " If FocusMode is active...
-  if exists("w:focusModeWindowState")
+  if FocusModeIsActive()
 
     " Remove previous highlighting, if there was previous highlighting
     if w:focusModeWindowState != ''
@@ -388,10 +385,9 @@ func! FocusModeStepFunction()
 
   endif
 
-endfunc
-" }}}
+endfunc " }}}
 
-command! FocusModeStep :call FocusModeStepFunction()
+command! FocusModeStep :call FocusModeStep()
 
 " }}}
 
