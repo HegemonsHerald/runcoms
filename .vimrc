@@ -51,6 +51,8 @@ call plug#end()
 
 set nocompatible                    " nocp  don't be vi-compatible
 
+set modeline                        " ml    execute modelines in files
+
 set backspace+=start,eol,indent     " bs    allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
 
 set number                          " nu
@@ -89,6 +91,11 @@ set tabstop=8                       " ts    display <tab>-characters as 8 spaces
 set softtabstop=2                   " sts   insert 3 spaces, when pressing <tab>
 set shiftwidth=2                    " sw    use 3 spaces for (auto)indenting
 set expandtab                       " et    expand tabs to spaces
+
+set viewoptions=folds               " vop   only save fold data when using :mkview
+" I use views to save manual folds, but I want to leave file-specific options up
+" to modelines, which are more convenient. Options would be saved by default.
+" See FOLDING below.
 
 filetype plugin on                  " load filetype specific plugins
 filetype indent on                  " load filetype specific indent files
@@ -483,7 +490,7 @@ vnoremap <S-Tab> <<
 " Note: the silent! keyword suppresses error messages from these commands
 augroup AutoSaveFolds
   autocmd!
-  autocmd BufWinLeave * silent! mkview  " mkview saves the folds in a viewfile in ~/.vim/views/
+  autocmd BufWinLeave * silent! mkview    " mkview saves the folds in a viewfile in ~/.vim/views/
   autocmd BufWinEnter * silent! loadview  " loadview loads the appropriate viewfile
 augroup END
 
