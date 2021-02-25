@@ -48,11 +48,14 @@ mpvp () {
    fi
 }
 
+# Provides an fzf prompt with subdirectories of ~/Music, so you can select an
+# Album to listen to.  Any arguments will be treated as queries to fzf, so you
+# can select straight, if you're looking for sth specific.
 playm () {
-   target="$(find "$HOME/Music" -type d | fzf --query="!music/audio !music/itunes !asmr " --no-multi)"
+   target="$(find "$HOME/Music" -type d | fzf --query="!music/audio !music/itunes !asmr $@" --no-multi)"
 
    # Check if target is empty, cause I might not select anything
-   [ $target ] && { cd "$target" && find . -type f | sort | mpv --playlist=- --no-audio-display }
+   [ $target ] && { cd "$target" && find . -type f -not -iname \*karaoke\* | sort | mpv --playlist=- --no-audio-display }
 }
 
 # Functional style scripts as unix names
