@@ -53,6 +53,8 @@ set nocompatible                    " nocp  don't be vi-compatible
 
 set modeline                        " ml    execute modelines in files
 
+set timeoutlen=50                   " tm    how long vim waits for binding sequences
+
 set backspace+=start,eol,indent     " bs    allow backspacing over the position, where insert mode was started; end-of-lines; autoindent's indentation
 
 set number                          " nu
