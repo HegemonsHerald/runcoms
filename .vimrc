@@ -124,7 +124,7 @@ syntax on
 
 set termguicolors                   " use gui colors for the terminal (truecolor)
 
-set conceallevel=2                  " cole  syntax elements can be hidden
+set conceallevel=0                  " cole  syntax elements can't be hidden
 
 " make termguicolors work with tmux
 " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
