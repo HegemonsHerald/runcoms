@@ -72,6 +72,7 @@ set listchars=tab:»·,trail:\░,      " lcs   characters for whitespace listin
 set nolist                          "       disable whitespace listing
 set fillchars=stl:\ ,stlnc:\        " fcs   characters to fill statusline and vertical separators
 set fillchars+=fold:\ 
+set formatoptions+=j                " fo    how to auto-format, see :h fo-table
 
 set autowrite                       " aw    write on commands, that jump the arglist
 
