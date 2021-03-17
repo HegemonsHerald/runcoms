@@ -2,15 +2,18 @@
 
 # Work User Prompt
 if [ $(whoami) = "work" ]; then
-	# PROMPT="%F{blue}%1~%f %F{yellow}%T%f %F{green}»%f "
-	# RPROMPT="%(?.%F{green}%?%f.%F{red}%?%f"
-	PROMPT="%F{yellow}%1~%f %F{red}%T%f %F{green}»%f "
-	RPROMPT="%(?.%F{magenta}%?%f.%F{red}%?%f"
+  # Neon
+  # PROMPT="%F{blue}%1~%f %F{yellow}%T%f %F{green}»%f "
+  # RPROMPT="%(?.%F{green}%?%f.%F{red}%?%f"
+
+  # Eva Unit-02
+  PROMPT="%F{yellow}%1~%f %F{red}%T%f %F{green}»%f "
+  RPROMPT="%(?.%F{magenta}%?%f.%F{red}%?%f"
 fi
 
 # Admin User Prompt
 # Root User Prompt
 
 # Aliases
-alias dp='PROMPT="%F{green}» %f"'
+alias dp='PROMPT="%F{yellow}» %f"'
 alias qdp='source ~/.zshrc'
