@@ -16,7 +16,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'ddrscott/vim-side-search'
 
 " Window management
-Plug 'spolu/dwm.vim'
+" Plug 'spolu/dwm.vim'
 
 " Colorschemes and Theming stuff
 Plug 'ayu-theme/ayu-vim'
