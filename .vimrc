@@ -421,7 +421,7 @@ autocmd User GoyoLeave nested call GoyoLeave()
 
 " MAPPINGS {{{
 
-let mapleader = "\<C-c>" " see :h expr-quote for more on the backslash
+let mapleader = "\<C-h>" " see :h expr-quote for more on the backslash
 
 " Note: to make multiple mapleaders, simply redefine the mapleader variable right before defining the mappings
 
