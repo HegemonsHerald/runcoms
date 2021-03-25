@@ -478,8 +478,8 @@ nnoremap S  0D
 " indentation mappings
 nnoremap <Tab>   >>
 nnoremap <S-Tab> <<
-vnoremap <Tab>   >>
-vnoremap <S-Tab> <<
+vnoremap <Tab>   >
+vnoremap <S-Tab> <
 
 " }}}
 
