@@ -109,7 +109,12 @@ alias gp='git p'
 alias gpu='git pu'
 alias gpur='git pur'
 alias gs='git s'
-alias gcb='git branch | fzf +m -1 | cut -c 3- | xargs git checkout'
+
+# gcb - git change branch - prompts you with a list of branches to checkout.
+# As a shortcut you can type in a search query as cli parameter.
+gcb() {
+  git branch | fzf +m -1 --query="$@" | cut -c 3- | xargs git checkout
+}
 
 # Cargo
 alias cr='cargo run'
