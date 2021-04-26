@@ -12,10 +12,9 @@ xf $HOME/Downloads/media/x/fun
 xr $HOME/Downloads/media/x/rips
 
 # University
-u    $HOME/Documents/University/Classes/semester-5
-ud   $HOME/Documents/University/Classes/semester-5/DPS
-ue   $HOME/Documents/University/Classes/semester-5/Etit-101
-uf   $HOME/Documents/University/Classes/semester-5/FortProg HiWi
-ul   $HOME/Documents/University/Classes/semester-5/LogInf
-up   $HOME/Documents/University/Classes/semester-5/Projektmanagement
-us   $HOME/Documents/University/Classes/semester-5/Softwareprojekt/
+u    $HOME/Documents/University/Classes/semester-6
+ua   $HOME/Documents/University/Classes/semester-6/Aes
+ue   $HOME/Documents/University/Classes/semester-6/Etit-102
+ue1  $HOME/Documents/University/Classes/semester-5/Etit-101
+uf   $HOME/Documents/University/Classes/semester-6/FP
+uw   $HOME/Documents/University/Classes/semester-6/WissArb
